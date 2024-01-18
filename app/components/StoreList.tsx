@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import Link from "next/link";
 
 const StoreList = () => {
   return (
@@ -7,7 +10,9 @@ const StoreList = () => {
         <tbody>
           <tr>
             <td>Image</td>
-            <td>Store Name</td>
+            <td>
+              <Link href="/store"> Store Name</Link>
+            </td>
           </tr>
         </tbody>
       </table>
