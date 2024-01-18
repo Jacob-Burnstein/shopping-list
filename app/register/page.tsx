@@ -7,6 +7,7 @@ const RegisterPage = () => {
     <>
       <main>
         <h1>Create Account</h1>
+        <h2>Form here (create another component)</h2>
       </main>
       <footer>
         <LoginButton />
