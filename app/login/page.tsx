@@ -1,10 +1,18 @@
 import React from "react";
+import RegisterLink from "../components/footerLinks/RegisterLink";
+import HomeLink from "../components/footerLinks/HomeLink";
 
 const LoginPage = () => {
   return (
-    <div>
-      <h1>Log In Page</h1>
-    </div>
+    <>
+      <main>
+        <h1>Log In Page</h1>
+      </main>
+      <footer>
+        <RegisterLink />
+        <HomeLink />
+      </footer>
+    </>
   );
 };
 

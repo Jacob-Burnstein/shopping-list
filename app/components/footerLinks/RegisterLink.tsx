@@ -2,14 +2,14 @@
 import React from "react";
 import Link from "next/link";
 
-const RegisterButton = () => {
+const RegisterLink = () => {
   return (
     <div>
       <Link href="./register">
-        <button onClick={() => console.log("click")}>Register</button>
+        <button>Create Account</button>
       </Link>
     </div>
   );
 };
 
-export default RegisterButton;
+export default RegisterLink;

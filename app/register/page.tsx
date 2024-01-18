@@ -1,10 +1,18 @@
 import React from "react";
+import LoginButton from "../components/footerLinks/LoginLink";
+import HomeButton from "../components/footerLinks/HomeLink";
 
 const RegisterPage = () => {
   return (
-    <div>
-      <h1>Register Page</h1>
-    </div>
+    <>
+      <main>
+        <h1>Create Account</h1>
+      </main>
+      <footer>
+        <LoginButton />
+        <HomeButton />
+      </footer>
+    </>
   );
 };
 

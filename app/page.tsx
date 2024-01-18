@@ -1,13 +1,17 @@
 import React from "react";
-import LoginButton from "./components/homePageButtons/LoginButton";
-import RegisterButton from "./components/homePageButtons/RegisterButton";
+import LoginLink from "./components/footerLinks/LoginLink";
+import RegisterLink from "./components/footerLinks/RegisterLink";
 
 export default function Home() {
   return (
-    <main>
-      <h1>Shopping List</h1>
-      <LoginButton />
-      <RegisterButton />
-    </main>
+    <>
+      <main>
+        <h1>App Title</h1>
+      </main>
+      <footer>
+        <LoginLink />
+        <RegisterLink />
+      </footer>
+    </>
   );
 }
