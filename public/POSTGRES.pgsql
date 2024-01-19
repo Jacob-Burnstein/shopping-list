@@ -19,4 +19,4 @@ CREATE TABLE ShoppingList (
 );
 
 INSERT INTO Users (UserName, password)
-VALUES ('Jacob', 'testPassword');
+VALUES ('Nancy', 'testPassword2');
