@@ -1,6 +1,6 @@
 import React from "react";
-import RegisterLink from "../components/footerLinks/RegisterLink";
-import HomeLink from "../components/footerLinks/HomeLink";
+import RegisterLink from "../../components/footerLinks/RegisterLink";
+import HomeLink from "../../components/footerLinks/HomeLink";
 
 const LoginPage = () => {
   return (

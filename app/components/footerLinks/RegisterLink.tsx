@@ -5,7 +5,7 @@ import Link from "next/link";
 const RegisterLink = () => {
   return (
     <div>
-      <Link href="./register">
+      <Link href="../pages/register">
         <button>Create Account</button>
       </Link>
     </div>

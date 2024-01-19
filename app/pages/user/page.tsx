@@ -1,6 +1,6 @@
 import React from "react";
-import LogOutLink from "../components/footerLinks/LogOutLink";
-import StoreList from "../components/StoreList";
+import LogOutLink from "../../components/footerLinks/LogOutLink";
+import StoreList from "../../components/StoreList";
 
 const UserPage = () => {
   return (

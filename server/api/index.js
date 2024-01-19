@@ -48,7 +48,7 @@ router.get("/list", async (req, res) => {
     );
     res.json(list.rows);
   } catch (err) {
-    console.error(er);
+    console.error(err);
   }
 });
 
