@@ -11,7 +11,7 @@ CREATE TABLE Stores (
   StoreName VARCHAR(50)
 )
 
-CREATE TABLE ShoppingList (
+CREATE TABLE ItemList (
   Id SERIAL PRIMARY KEY,
   StoreId INT REFERENCES Stores(StoreId),
   ItemName VARCHAR(30),
@@ -20,3 +20,5 @@ CREATE TABLE ShoppingList (
 
 INSERT INTO Users (UserName, password)
 VALUES ('Nancy', 'testPassword2');
+
+ALTER TABLE ShoppingList RENAME TO ItemList;

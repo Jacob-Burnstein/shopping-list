@@ -9,6 +9,8 @@ interface ListItem {
 }
 const ItemList = () => {
   const [listItems, setListItems] = useState<ListItem[] | undefined>(undefined);
+  const [checked, setChecked] = useState(false);
+
   useEffect(() => {
     const getList = async () => {
       try {
@@ -20,6 +22,22 @@ const ItemList = () => {
       }
     };
     getList();
+  }, []);
+
+  useEffect(() => {
+    const setToChecked = async () => {
+      try {
+        await fetch("/list", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    setToChecked();
   }, []);
 
   return (

@@ -52,6 +52,16 @@ router.get("/list", async (req, res) => {
   }
 });
 
-router.post("/ShoppingList");
+router.post("/list", async (req, res) => {
+  try {
+    await db.query(
+      "UPDATE ItemList SET checked = TRUE WHERE UserId = 2 AND StoreId = 1 AND Id = 1"
+    );
+    res.status(200).send("ItemList updated successfully");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error updating ItemList");
+  }
+});
 
 module.exports = router;
