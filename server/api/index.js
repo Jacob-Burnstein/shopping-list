@@ -43,10 +43,10 @@ router.get("/users/stores", async (req, res) => {
 // Gets list by store
 router.get("/list", async (req, res) => {
   try {
-    const list = await db.query(
+    const itemList = await db.query(
       "SELECT * FROM ShoppingList WHERE UserId = 2 AND StoreId = 1"
     );
-    res.json(list.rows);
+    res.json(itemList.rows);
   } catch (err) {
     console.error(err);
   }

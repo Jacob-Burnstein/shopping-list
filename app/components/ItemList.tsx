@@ -7,7 +7,7 @@ interface ListItem {
   itemname: string;
   checked: boolean;
 }
-const ShoppingList = () => {
+const ItemList = () => {
   const [listItems, setListItems] = useState<ListItem[] | undefined>(undefined);
   useEffect(() => {
     const getList = async () => {
@@ -34,4 +34,4 @@ const ShoppingList = () => {
   );
 };
 
-export default ShoppingList;
+export default ItemList;
