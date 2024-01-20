@@ -27,7 +27,7 @@ const ItemList = () => {
   useEffect(() => {
     const setToChecked = async () => {
       try {
-        await fetch("/list", {
+        await fetch("/lischeck", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
