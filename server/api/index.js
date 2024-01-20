@@ -44,12 +44,14 @@ router.get("/users/stores", async (req, res) => {
 router.get("/list", async (req, res) => {
   try {
     const itemList = await db.query(
-      "SELECT * FROM ShoppingList WHERE UserId = 2 AND StoreId = 1"
+      "SELECT * FROM ItemList WHERE UserId = 2 AND StoreId = 1"
     );
     res.json(itemList.rows);
   } catch (err) {
     console.error(err);
   }
 });
+
+router.post("/ShoppingList");
 
 module.exports = router;
