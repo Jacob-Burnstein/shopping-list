@@ -75,10 +75,21 @@ router.post("/list/check", async (req, res) => {
 router.post("/list", async (req, res) => {
   // const { storeid, userid } = req.body;
   try {
-    const newItem = await db.query(
+    newItem = await db.query(
       "INSERT INTO ItemList (ItemName, StoreId, UserId) VALUES ('Veggies', 1, 2)"
     );
-    res.json(newItem.rows[0]);
+    res.status(200).send("Item added successfully");
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+router.delete("/list", async (req, res) => {
+  const { id } = req.body;
+
+  try {
+    await db.query(" DELETE FROM ItemList WHERE Id = $1", [id]);
+    res.status(200).send("Item deleted successfully");
   } catch (err) {
     console.error(err);
   }
