@@ -16,13 +16,23 @@ const ItemList = () => {
     if (item.checked === false) {
       const setToChecked = async () => {
         try {
-          await fetch("http://localhost:3000/api/list/check", {
+          const response = await fetch("http://localhost:3000/api/list/check", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(item),
           });
+          if (response.status === 200) {
+            setListItems((prevList) =>
+              prevList?.map((prevItem) =>
+                prevItem.id === item.id
+                  ? { ...prevItem, checked: !item.checked }
+                  : prevItem
+              )
+            );
+            console.log("List Items: ", listItems);
+          }
         } catch (err) {
           console.error(err);
         }
@@ -31,13 +41,26 @@ const ItemList = () => {
     } else {
       const setToUnchecked = async () => {
         try {
-          await fetch("http://localhost:3000/api/list/uncheck", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(item),
-          });
+          const response = await fetch(
+            "http://localhost:3000/api/list/uncheck",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(item),
+            }
+          );
+          if (response.status === 200) {
+            setListItems((prevList) =>
+              prevList?.map((prevItem) =>
+                prevItem.id === item.id
+                  ? { ...prevItem, checked: !item.checked }
+                  : prevItem
+              )
+            );
+            console.log("List Items: ", listItems);
+          }
         } catch (err) {
           console.error(err);
         }
@@ -65,9 +88,9 @@ const ItemList = () => {
         <div key={item.id} className="listItemCard">
           <input
             type="checkbox"
+            checked={item.checked}
             onChange={() => {
               handleCheckBoxChange(item);
-              console.log("item:", item);
             }}
           />
           <p>{item.itemname}</p>
