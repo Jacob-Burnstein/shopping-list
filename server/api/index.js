@@ -53,25 +53,23 @@ router.get("/list", async (req, res) => {
 });
 
 router.post("/list/check", async (req, res) => {
-  const { id } = req.body;
-  try {
-    await db.query(" UPDATE ItemList SET checked = TRUE WHERE Id = $1", [id]);
-    res.status(200).send("ItemList updated successfully");
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Error updating ItemList");
-  }
-});
-
-router.post("/list/uncheck", async (req, res) => {
-  const { id } = req.body;
-  try {
-    await db.query("UPDATE ItemList SET checked = FALSE WHERE Id = $1", [id]);
-    res.status(200).send("ItemList updated successfully");
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Error updating ItemList");
-  }
+  const { id, checked } = req.body;
+  if (!checked) {
+    try {
+      await db.query(" UPDATE ItemList SET checked = TRUE WHERE Id = $1", [id]);
+      res.status(200).send("ItemList updated successfully");
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Error updating ItemList");
+    }
+  } else
+    try {
+      await db.query("UPDATE ItemList SET checked = FALSE WHERE Id = $1", [id]);
+      res.status(200).send("ItemList updated successfully");
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Error updating ItemList");
+    }
 });
 
 module.exports = router;

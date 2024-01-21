@@ -13,60 +13,30 @@ const ItemList = () => {
   const [listItems, setListItems] = useState<ListItem[] | undefined>(undefined);
 
   const handleCheckBoxChange = (item: ListItem) => {
-    if (item.checked === false) {
-      const setToChecked = async () => {
-        try {
-          const response = await fetch("http://localhost:3000/api/list/check", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(item),
-          });
-          if (response.status === 200) {
-            setListItems((prevList) =>
-              prevList?.map((prevItem) =>
-                prevItem.id === item.id
-                  ? { ...prevItem, checked: !item.checked }
-                  : prevItem
-              )
-            );
-            console.log("List Items: ", listItems);
-          }
-        } catch (err) {
-          console.error(err);
-        }
-      };
-      setToChecked();
-    } else {
-      const setToUnchecked = async () => {
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/list/uncheck",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(item),
-            }
+    const setChecked = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/list/check", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(item),
+        });
+        if (response.status === 200) {
+          setListItems((prevList) =>
+            prevList?.map((prevItem) =>
+              prevItem.id === item.id
+                ? { ...prevItem, checked: !item.checked }
+                : prevItem
+            )
           );
-          if (response.status === 200) {
-            setListItems((prevList) =>
-              prevList?.map((prevItem) =>
-                prevItem.id === item.id
-                  ? { ...prevItem, checked: !item.checked }
-                  : prevItem
-              )
-            );
-            console.log("List Items: ", listItems);
-          }
-        } catch (err) {
-          console.error(err);
+          console.log("List Items: ", listItems);
         }
-      };
-      setToUnchecked();
-    }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    setChecked();
   };
 
   useEffect(() => {
