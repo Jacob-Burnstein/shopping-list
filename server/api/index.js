@@ -53,10 +53,9 @@ router.get("/list", async (req, res) => {
 });
 
 router.post("/list/check", async (req, res) => {
+  const { id } = req.body;
   try {
-    await db.query(
-      "UPDATE ItemList SET checked = TRUE WHERE UserId = 2 AND StoreId = 1 AND Id = 4"
-    );
+    await db.query(" UPDATE ItemList SET checked = TRUE WHERE Id = $1", [id]);
     res.status(200).send("ItemList updated successfully");
   } catch (err) {
     console.error(err);
@@ -65,10 +64,9 @@ router.post("/list/check", async (req, res) => {
 });
 
 router.post("/list/uncheck", async (req, res) => {
+  const { id } = req.body;
   try {
-    await db.query(
-      "UPDATE ItemList SET checked = FALSE WHERE UserId = 2 AND StoreId = 1 AND Id = 4"
-    );
+    await db.query("UPDATE ItemList SET checked = FALSE WHERE Id = $1", [id]);
     res.status(200).send("ItemList updated successfully");
   } catch (err) {
     console.error(err);

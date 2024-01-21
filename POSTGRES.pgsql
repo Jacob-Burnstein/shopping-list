@@ -22,3 +22,5 @@ INSERT INTO Users (UserName, password)
 VALUES ('Nancy', 'testPassword2');
 
 ALTER TABLE ShoppingList RENAME TO ItemList;
+
+UPDATE ItemList SET checked = TRUE WHERE UserId = 2 AND StoreId = 1 AND Id = 4

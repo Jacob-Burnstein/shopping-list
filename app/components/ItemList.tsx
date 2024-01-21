@@ -6,14 +6,14 @@ interface ListItem {
   id: number;
   itemname: string;
   checked: boolean;
+  storeId: number;
+  userId: number;
 }
 const ItemList = () => {
   const [listItems, setListItems] = useState<ListItem[] | undefined>(undefined);
-  const [checked, setChecked] = useState(false);
-  console.log(checked);
 
-  const handleCheckBoxChange = () => {
-    if (checked === false) {
+  const handleCheckBoxChange = (item: ListItem) => {
+    if (item.checked === false) {
       const setToChecked = async () => {
         try {
           await fetch("http://localhost:3000/api/list/check", {
@@ -21,30 +21,28 @@ const ItemList = () => {
             headers: {
               "Content-Type": "application/json",
             },
+            body: JSON.stringify(item),
           });
-          setChecked(true);
         } catch (err) {
           console.error(err);
         }
       };
       setToChecked();
     } else {
-      {
-        const setToUnchecked = async () => {
-          try {
-            await fetch("http://localhost:3000/api/list/uncheck", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            });
-            setChecked(false);
-          } catch (err) {
-            console.error(err);
-          }
-        };
-        setToUnchecked();
-      }
+      const setToUnchecked = async () => {
+        try {
+          await fetch("http://localhost:3000/api/list/uncheck", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(item),
+          });
+        } catch (err) {
+          console.error(err);
+        }
+      };
+      setToUnchecked();
     }
   };
 
@@ -68,12 +66,13 @@ const ItemList = () => {
           <input
             type="checkbox"
             onChange={() => {
-              handleCheckBoxChange();
+              handleCheckBoxChange(item);
+              console.log("item:", item);
             }}
           />
           <p>{item.itemname}</p>
         </div>
-      ))}{" "}
+      ))}
     </>
   );
 };
