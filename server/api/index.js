@@ -72,4 +72,16 @@ router.post("/list/check", async (req, res) => {
     }
 });
 
+router.post("/list", async (req, res) => {
+  // const { storeid, userid } = req.body;
+  try {
+    const newItem = await db.query(
+      "INSERT INTO ItemList (ItemName, StoreId, UserId) VALUES ('Veggies', 1, 2)"
+    );
+    res.json(newItem.rows[0]);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
 module.exports = router;
