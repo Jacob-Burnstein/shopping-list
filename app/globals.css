@@ -16,3 +16,7 @@ body {
   color: rgb(var(--foreground-rgb));
   padding: 1rem;
 }
+
+.listItemCard {
+  display: flex;
+}

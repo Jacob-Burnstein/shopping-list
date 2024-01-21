@@ -84,18 +84,34 @@ const ItemList = () => {
 
   return (
     <>
-      {listItems?.map((item: ListItem) => (
-        <div key={item.id} className="listItemCard">
-          <input
-            type="checkbox"
-            checked={item.checked}
-            onChange={() => {
-              handleCheckBoxChange(item);
-            }}
-          />
-          <p>{item.itemname}</p>
-        </div>
-      ))}
+      {listItems?.map((item: ListItem) =>
+        !item.checked ? (
+          <div key={item.id} className="listItemCard">
+            <input
+              type="checkbox"
+              checked={item.checked}
+              onChange={() => {
+                handleCheckBoxChange(item);
+              }}
+            />
+            <p>{item.itemname}</p>
+          </div>
+        ) : null
+      )}
+      {listItems?.map((item: ListItem) =>
+        item.checked ? (
+          <div key={item.id} className="listItemCard">
+            <input
+              type="checkbox"
+              checked={item.checked}
+              onChange={() => {
+                handleCheckBoxChange(item);
+              }}
+            />
+            <p>{item.itemname}</p>
+          </div>
+        ) : null
+      )}
     </>
   );
 };
