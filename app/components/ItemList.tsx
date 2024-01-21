@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useEffect, useState } from "react";
+import DeleteButton from "./DeleteButton";
 
 interface ListItem {
   id: number;
@@ -56,30 +57,36 @@ const ItemList = () => {
     <>
       {listItems?.map((item: ListItem) =>
         !item.checked ? (
-          <div key={item.id} className="listItemCard">
-            <input
-              type="checkbox"
-              checked={item.checked}
-              onChange={() => {
-                handleCheckBoxChange(item);
-              }}
-            />
-            <p>{item.itemname}</p>
-          </div>
+          <>
+            <div key={item.id} className="listItemCard">
+              <input
+                type="checkbox"
+                checked={item.checked}
+                onChange={() => {
+                  handleCheckBoxChange(item);
+                }}
+              />
+              <p>{item.itemname}</p>
+            </div>
+            <DeleteButton id={item.id} />
+          </>
         ) : null
       )}
       {listItems?.map((item: ListItem) =>
         item.checked ? (
-          <div key={item.id} className="listItemCard">
-            <input
-              type="checkbox"
-              checked={item.checked}
-              onChange={() => {
-                handleCheckBoxChange(item);
-              }}
-            />
-            <p>{item.itemname}</p>
-          </div>
+          <>
+            <div key={item.id} className="listItemCard">
+              <input
+                type="checkbox"
+                checked={item.checked}
+                onChange={() => {
+                  handleCheckBoxChange(item);
+                }}
+              />
+              <p>{item.itemname}</p>
+            </div>
+            <DeleteButton id={item.id} />
+          </>
         ) : null
       )}
     </>
