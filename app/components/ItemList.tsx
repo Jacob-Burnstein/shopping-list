@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import DeleteButton from "./DeleteButton";
 
 interface ListItem {
-  id: number;
-  itemname: string;
-  checked: boolean;
-  storeId: number;
-  userId: number;
+  Id: number;
+  ItemName: string;
+  Checked: boolean;
+  StoreId: number;
+  UserId: number;
 }
 const ItemList = () => {
   const [listItems, setListItems] = useState<ListItem[] | undefined>(undefined);
@@ -26,8 +26,8 @@ const ItemList = () => {
         if (response.status === 200) {
           setListItems((prevList) =>
             prevList?.map((prevItem) =>
-              prevItem.id === item.id
-                ? { ...prevItem, checked: !item.checked }
+              prevItem.Id === item.Id
+                ? { ...prevItem, checked: !item.Checked }
                 : prevItem
             )
           );
@@ -56,37 +56,37 @@ const ItemList = () => {
   return (
     <>
       {listItems?.map((item: ListItem) =>
-        !item.checked ? (
-          <>
-            <div key={item.id} className="listItemCard">
+        !item.Checked ? (
+          <section key={item.Id}>
+            <div className="listItemCard">
               <input
                 type="checkbox"
-                checked={item.checked}
+                checked={item.Checked}
                 onChange={() => {
                   handleCheckBoxChange(item);
                 }}
               />
-              <p>{item.itemname}</p>
-              <DeleteButton id={item.id} />
+              <p>{item.ItemName}</p>
+              <DeleteButton id={item.Id} />
             </div>
-          </>
+          </section>
         ) : null
       )}
       {listItems?.map((item: ListItem) =>
-        item.checked ? (
-          <>
-            <div key={item.id} className="listItemCard">
+        item.Checked ? (
+          <section key={item.Id}>
+            <div className="listItemCard">
               <input
                 type="checkbox"
-                checked={item.checked}
+                checked={item.Checked}
                 onChange={() => {
                   handleCheckBoxChange(item);
                 }}
               />
-              <p>{item.itemname}</p>
-              <DeleteButton id={item.id} />
+              <p>{item.ItemName}</p>
+              <DeleteButton id={item.Id} />
             </div>
-          </>
+          </section>
         ) : null
       )}
     </>
