@@ -28,9 +28,10 @@ router.get("/users/stores", async (req, res) => {
 
 // Gets list by store
 router.get("/list", async (req, res) => {
+  const { UserId, StoreId } = req.body;
   try {
     const itemList = await prisma.itemList.findMany({
-      where: { UserId: 1, StoreId: 1 },
+      where: { UserId: { UserId }, StoreId: { StoreId } },
     });
     res.json(itemList);
   } catch (err) {

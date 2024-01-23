@@ -33,6 +33,7 @@ model ItemList {
   Id Int @id @default(autoincrement())
   ItemName String
   StoreId Int
+  Checked Boolean @default(false)
   User User @relation(fields: [UserId], references: [Id])
   UserId Int
   Store Store @relation(fields: [StoreId], references: [Id])

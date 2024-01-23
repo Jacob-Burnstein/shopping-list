@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 interface StoreList {
-  storeid: number;
-  storename: string;
+  Id: number;
+  StoreName: string;
   userId: number;
 }
 
@@ -29,7 +29,7 @@ const StoreList = () => {
   return (
     <div>
       {stores?.map((store: StoreList) => (
-        <p key={store.storeid}>{store.storename}</p>
+        <p key={store.Id}>{store.StoreName}</p>
       ))}
 
       {/* <Link href="/store"> Store Name</Link> */}

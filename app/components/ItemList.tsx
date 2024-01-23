@@ -52,7 +52,7 @@ const ItemList = () => {
     };
     getList();
   }, []);
-
+  console.log("listItems: ", listItems);
   return (
     <>
       {listItems?.map((item: ListItem) =>
