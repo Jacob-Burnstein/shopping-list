@@ -39,25 +39,35 @@ router.get("/list", async (req, res) => {
   }
 });
 
-// router.post("/list/check", async (req, res) => {
-//   const { id, checked } = req.body;
-//   if (!checked) {
-//     try {
-//       await db.query(" UPDATE ItemList SET checked = TRUE WHERE Id = $1", [id]);
-//       res.status(200).send("ItemList updated successfully");
-//     } catch (err) {
-//       console.error(err);
-//       res.status(500).send("Error updating ItemList");
-//     }
-//   } else
-//     try {
-//       await db.query("UPDATE ItemList SET checked = FALSE WHERE Id = $1", [id]);
-//       res.status(200).send("ItemList updated successfully");
-//     } catch (err) {
-//       console.error(err);
-//       res.status(500).send("Error updating ItemList");
-//     }
-// });
+router.post("/list/check", async (req, res) => {
+  const { Id, Checked } = req.body;
+  if (!Checked) {
+    try {
+      await prisma.itemList.update({
+        where: {
+          Id: Id,
+        },
+        data: { Checked: true },
+      });
+      res.status(200).send("ItemList updated successfully");
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Error updating ItemList");
+    }
+  } else
+    try {
+      await prisma.itemList.update({
+        where: {
+          Id: Id,
+        },
+        data: { Checked: false },
+      });
+      res.status(200).send("ItemList updated successfully");
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Error updating ItemList");
+    }
+});
 
 // router.post("/list", async (req, res) => {
 //   // const { storeid, userid } = req.body;
