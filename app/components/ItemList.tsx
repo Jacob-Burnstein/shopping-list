@@ -27,11 +27,10 @@ const ItemList = () => {
           setListItems((prevList) =>
             prevList?.map((prevItem) =>
               prevItem.Id === item.Id
-                ? { ...prevItem, checked: !item.Checked }
+                ? { ...prevItem, Checked: !item.Checked }
                 : prevItem
             )
           );
-          console.log("List Items: ", listItems);
         }
       } catch (err) {
         console.error(err);
@@ -52,7 +51,7 @@ const ItemList = () => {
     };
     getList();
   }, []);
-  console.log("listItems: ", listItems);
+
   return (
     <>
       {listItems?.map((item: ListItem) =>
