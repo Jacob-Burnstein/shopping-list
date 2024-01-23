@@ -67,8 +67,8 @@ const ItemList = () => {
                 }}
               />
               <p>{item.itemname}</p>
+              <DeleteButton id={item.id} />
             </div>
-            <DeleteButton id={item.id} />
           </>
         ) : null
       )}
@@ -84,8 +84,8 @@ const ItemList = () => {
                 }}
               />
               <p>{item.itemname}</p>
+              <DeleteButton id={item.id} />
             </div>
-            <DeleteButton id={item.id} />
           </>
         ) : null
       )}
