@@ -14,7 +14,7 @@ router.get("/users", async (req, res) => {
   }
 });
 
-// // Gets all stores for one user
+// // Gets stores by UserId
 router.get("/users/stores", async (req, res) => {
   try {
     const stores = await prisma.store.findMany({
@@ -26,17 +26,17 @@ router.get("/users/stores", async (req, res) => {
   }
 });
 
-// // Gets list by store
-// router.get("/list", async (req, res) => {
-//   try {
-//     const itemList = await db.query(
-//       "SELECT * FROM ItemList WHERE UserId = 2 AND StoreId = 1"
-//     );
-//     res.json(itemList.rows);
-//   } catch (err) {
-//     console.error(err);
-//   }
-// });
+// Gets list by store
+router.get("/list", async (req, res) => {
+  try {
+    const itemList = await prisma.itemList.findMany({
+      where: { UserId: 1, StoreId: 1 },
+    });
+    res.json(itemList);
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 // router.post("/list/check", async (req, res) => {
 //   const { id, checked } = req.body;
