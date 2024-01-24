@@ -24,8 +24,9 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (formData.password != formData.confirmedPassword) {
+    if (formData.password !== formData.confirmedPassword) {
       setMessage("Your passwords do not match");
+      // add barrier if all fields not filled out
     } else {
       try {
         const response = await fetch("http://localhost:3000/api/users", {
@@ -34,7 +35,7 @@ const RegisterForm = () => {
           body: JSON.stringify(formData),
         });
         if (response.ok) {
-          setMessage("success!");
+          setMessage("Success!");
         } else setMessage(await response.text());
       } catch (err) {
         console.error(err);
@@ -66,7 +67,7 @@ const RegisterForm = () => {
         onChange={handleChange}
       />
       {message && <p>{message}</p>}
-      <button onClick={handleSubmit}>Submit</button>
+      <button onClick={handleSubmit}>Create Account</button>
     </form>
   );
 };

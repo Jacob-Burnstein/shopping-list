@@ -1,7 +1,7 @@
 import React from "react";
 import LoginButton from "../../components/footerLinks/LoginLink";
 import HomeButton from "../../components/footerLinks/HomeLink";
-import RegisterForm from "@/app/components/RegisterForm";
+import RegisterForm from "../../components/RegisterForm";
 
 const RegisterPage = () => {
   return (

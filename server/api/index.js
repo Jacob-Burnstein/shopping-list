@@ -155,4 +155,33 @@ router.post("/users", async (req, res) => {
   }
 });
 
+// User login
+router.post("/users/login", async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const userExists = await prisma.user.findUnique({
+      where: {
+        UserName: username,
+      },
+    });
+    const correctPassword = await prisma.user.findUnique({
+      where: {
+        UserName: username,
+        Password: password,
+      },
+    });
+    if (!userExists) {
+      res.status(404).send("Username not found");
+    }
+    if (!correctPassword) {
+      res.status(401).send("Incorrect password");
+    } else {
+      res.status(200).send("Login successful!");
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal server error.");
+  }
+});
+
 module.exports = router;
