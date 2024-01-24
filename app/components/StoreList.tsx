@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import AddStore from "./AddStore";
+import DeleteStore from "./DeleteStore";
 
 export interface Store {
   Id: number;
@@ -14,6 +15,10 @@ const StoreList = () => {
 
   const addNewStore = (newStore: Store) => {
     setStores((prevStores) => [...(prevStores || []), newStore]);
+  };
+
+  const deleteStore = (storeId: number) => {
+    setStores((prevList) => prevList?.filter((store) => storeId != store.Id));
   };
 
   useEffect(() => {
@@ -33,7 +38,10 @@ const StoreList = () => {
     <>
       <div>
         {stores?.map((store: Store) => (
-          <p key={store.Id}>{store.StoreName}</p>
+          <section className="storeCard">
+            <p key={store.Id}>{store.StoreName}</p>
+            <DeleteStore id={store.Id} deleteStore={deleteStore} />
+          </section>
         ))}
       </div>
       <AddStore addNewStore={addNewStore} />

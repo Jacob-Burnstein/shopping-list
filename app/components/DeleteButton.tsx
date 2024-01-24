@@ -4,14 +4,14 @@ import React from "react";
 
 interface DeleteButtonProps {
   id: number;
-  deleteItem: (itemId: number) => void;
+  deleteItem: (id: number) => void;
 }
 
 const DeleteButton: React.FC<DeleteButtonProps> = ({ id, deleteItem }) => {
   const handleDelete = async () => {
     deleteItem(id);
     try {
-      await fetch("http://localhost:3000/api/list", {
+      await fetch(`http://localhost:3000/api/list/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

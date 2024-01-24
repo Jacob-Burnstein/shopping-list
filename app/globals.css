@@ -20,3 +20,7 @@ body {
 .listItemCard {
   display: flex;
 }
+
+.storeCard {
+  display: flex;
+}

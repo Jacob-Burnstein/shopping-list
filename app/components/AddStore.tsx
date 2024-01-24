@@ -36,7 +36,7 @@ const AddStore: React.FC<AddStoreProps> = ({ addNewStore }) => {
   return (
     <>
       <form onSubmit={() => handleSubmit()}>
-        <label>Add Item:</label>
+        <label>Add Store:</label>
         <input type="text" value={storeName || ""} onChange={handleChange} />
       </form>
     </>

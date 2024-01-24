@@ -97,8 +97,9 @@ router.post("/users/store", async (req, res) => {
   }
 });
 
-router.delete("/list", async (req, res) => {
-  const { id } = req.body;
+//Deletes item from list
+router.delete("/list/:id", async (req, res) => {
+  const { id } = +req.params;
 
   try {
     await prisma.itemList.delete({
@@ -107,6 +108,22 @@ router.delete("/list", async (req, res) => {
       },
     });
     res.status(200).send("Item deleted successfully");
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+// Deletes store from list
+router.delete("/store/:id", async (req, res) => {
+  const { id } = req.params;
+  const storeId = parseInt(id);
+  try {
+    await prisma.store.delete({
+      where: {
+        Id: storeId,
+      },
+    });
+    res.status(200).send("Store deleted successfully");
   } catch (err) {
     console.error(err);
   }
