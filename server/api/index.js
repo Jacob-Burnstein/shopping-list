@@ -39,6 +39,7 @@ router.get("/list", async (req, res) => {
   }
 });
 
+// Checks or unchecks items
 router.post("/list/check", async (req, res) => {
   const { Id, Checked } = req.body;
   if (!Checked) {
@@ -69,17 +70,18 @@ router.post("/list/check", async (req, res) => {
     }
 });
 
-// router.post("/list", async (req, res) => {
-//   // const { storeid, userid } = req.body;
-//   try {
-//     newItem = await db.query(
-//       "INSERT INTO ItemList (ItemName, StoreId, UserId) VALUES ('Veggies', 1, 2)"
-//     );
-//     res.status(200).send("Item added successfully");
-//   } catch (err) {
-//     console.error(err);
-//   }
-// });
+// Adds item to list
+router.post("/list", async (req, res) => {
+  const { StoreId, UserId, ItemName } = req.body;
+  try {
+    await prisma.itemList.create({
+      data: { ItemName: ItemName, StoreId: StoreId, UserId: UserId },
+    });
+    res.status(200).send("Item added successfully");
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 // router.delete("/list", async (req, res) => {
 //   const { id } = req.body;
