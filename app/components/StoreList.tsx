@@ -1,16 +1,21 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
+import AddStore from "./AddStore";
 
-interface StoreList {
+export interface Store {
   Id: number;
   StoreName: string;
-  userId: number;
+  UserId: number;
 }
 
 const StoreList = () => {
-  const [stores, setStores] = useState<StoreList[] | undefined>(undefined);
+  const [stores, setStores] = useState<Store[] | undefined>(undefined);
+
+  const addNewStore = (newStore: Store) => {
+    setStores((prevStores) => [...(prevStores || []), newStore]);
+  };
+
   useEffect(() => {
     const getStores = async () => {
       try {
@@ -24,16 +29,15 @@ const StoreList = () => {
     getStores();
   }, []);
 
-  console.log("stores: ", stores);
-
   return (
-    <div>
-      {stores?.map((store: StoreList) => (
-        <p key={store.Id}>{store.StoreName}</p>
-      ))}
-
-      {/* <Link href="/store"> Store Name</Link> */}
-    </div>
+    <>
+      <div>
+        {stores?.map((store: Store) => (
+          <p key={store.Id}>{store.StoreName}</p>
+        ))}
+      </div>
+      <AddStore addNewStore={addNewStore} />
+    </>
   );
 };
 

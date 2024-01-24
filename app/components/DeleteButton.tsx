@@ -2,9 +2,14 @@
 
 import React from "react";
 
-const DeleteButton = ({ id }: { id: number }) => {
+interface DeleteButtonProps {
+  id: number;
+  deleteItem: (itemId: number) => void;
+}
+
+const DeleteButton: React.FC<DeleteButtonProps> = ({ id, deleteItem }) => {
   const handleDelete = async () => {
-    console.log("delete button");
+    deleteItem(id);
     try {
       await fetch("http://localhost:3000/api/list", {
         method: "DELETE",

@@ -84,15 +84,32 @@ router.post("/list", async (req, res) => {
   }
 });
 
-// router.delete("/list", async (req, res) => {
-//   const { id } = req.body;
+// Adds store to list
+router.post("/users/store", async (req, res) => {
+  const { UserId, StoreName } = req.body;
+  try {
+    await prisma.store.create({
+      data: { StoreName: StoreName, UserId: UserId },
+    });
+    res.status(200).send("Store added successfully");
+  } catch (err) {
+    console.error(err);
+  }
+});
 
-//   try {
-//     await db.query(" DELETE FROM ItemList WHERE Id = $1", [id]);
-//     res.status(200).send("Item deleted successfully");
-//   } catch (err) {
-//     console.error(err);
-//   }
-// });
+router.delete("/list", async (req, res) => {
+  const { id } = req.body;
+
+  try {
+    await prisma.itemList.delete({
+      where: {
+        Id: id,
+      },
+    });
+    res.status(200).send("Item deleted successfully");
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 module.exports = router;

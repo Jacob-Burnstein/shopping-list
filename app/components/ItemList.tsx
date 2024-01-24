@@ -44,6 +44,10 @@ const ItemList = () => {
     setListItems((prevList) => [newItem, ...(prevList || [])]);
   };
 
+  const deleteItem = (itemId: number) => {
+    setListItems((prevList) => prevList?.filter((item) => itemId !== item.Id));
+  };
+
   useEffect(() => {
     const getList = async () => {
       try {
@@ -71,7 +75,7 @@ const ItemList = () => {
                 }}
               />
               <p>{item.ItemName}</p>
-              <DeleteButton id={item.Id} />
+              <DeleteButton id={item.Id} deleteItem={deleteItem} />
             </div>
           </section>
         ) : null
@@ -88,7 +92,7 @@ const ItemList = () => {
                 }}
               />
               <p>{item.ItemName}</p>
-              <DeleteButton id={item.Id} />
+              <DeleteButton id={item.Id} deleteItem={deleteItem} />
             </div>
           </section>
         ) : null

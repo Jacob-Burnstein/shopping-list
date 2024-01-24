@@ -3,12 +3,6 @@
 import React, { useState } from "react";
 import { ListItem } from "./ItemList";
 
-// interface NewItem {
-//   ItemName: string;
-//   UserId: number;
-//   StoreId: number;
-// }
-
 interface AddItemProps {
   addNewItem: (newItem: ListItem) => void;
 }
@@ -22,7 +16,6 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
   };
 
   const handleSubmit = async () => {
-    console.log("submit");
     const itemToAdd: ListItem = {
       ItemName: itemName,
       UserId: 1,
@@ -31,6 +24,7 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
       Id: 0,
     };
 
+    addNewItem(itemToAdd);
     try {
       await fetch("http://localhost:3000/api/list/", {
         method: "POST",
@@ -39,7 +33,6 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
         },
         body: JSON.stringify(itemToAdd),
       });
-      addNewItem(itemToAdd);
     } catch (err) {
       console.error(err);
     }
@@ -47,7 +40,7 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={() => handleSubmit()}>
         <label>Add Item:</label>
         <input type="text" value={itemName || ""} onChange={handleChange} />
       </form>
