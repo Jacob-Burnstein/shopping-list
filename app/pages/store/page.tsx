@@ -10,7 +10,6 @@ const StorePage = () => {
       <main>
         <h1>Store Name</h1>
         <ItemList />
-        <AddItem />
       </main>
       <footer>
         <HomeLink /> <LogOutLink />

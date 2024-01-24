@@ -1,14 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
+import { ListItem } from "./ItemList";
 
-interface NewItem {
-  ItemName: string;
-  UserId: number;
-  StoreId: number;
+// interface NewItem {
+//   ItemName: string;
+//   UserId: number;
+//   StoreId: number;
+// }
+
+interface AddItemProps {
+  addNewItem: (newItem: ListItem) => void;
 }
 
-const AddItem = () => {
+const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
   const [itemName, setItemName] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,19 +23,23 @@ const AddItem = () => {
 
   const handleSubmit = async () => {
     console.log("submit");
-    const itemToAdd: NewItem = { ItemName: itemName, UserId: 1, StoreId: 1 };
-    console.log("item to add: ", itemToAdd);
-    console.log("item name: ", itemName);
+    const itemToAdd: ListItem = {
+      ItemName: itemName,
+      UserId: 1,
+      StoreId: 1,
+      Checked: false,
+      Id: 0,
+    };
 
     try {
-      const response = await fetch("http://localhost:3000/api/list/", {
+      await fetch("http://localhost:3000/api/list/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(itemToAdd),
       });
-      // Add action here
+      addNewItem(itemToAdd);
     } catch (err) {
       console.error(err);
     }

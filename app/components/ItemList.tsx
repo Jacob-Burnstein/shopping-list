@@ -2,8 +2,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import DeleteButton from "./DeleteButton";
+import AddItem from "./AddItem";
 
-interface ListItem {
+export interface ListItem {
   Id: number;
   ItemName: string;
   Checked: boolean;
@@ -37,6 +38,10 @@ const ItemList = () => {
       }
     };
     setChecked();
+  };
+
+  const addNewItem = (newItem: ListItem) => {
+    setListItems((prevList) => [newItem, ...(prevList || [])]);
   };
 
   useEffect(() => {
@@ -88,6 +93,7 @@ const ItemList = () => {
           </section>
         ) : null
       )}
+      <AddItem addNewItem={addNewItem} />
     </>
   );
 };
