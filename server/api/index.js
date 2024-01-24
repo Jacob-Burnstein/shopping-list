@@ -129,4 +129,30 @@ router.delete("/store/:id", async (req, res) => {
   }
 });
 
+// ///////// AUTH
+router.post("/users", async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const userExists = await prisma.user.findUnique({
+      where: {
+        UserName: username,
+      },
+    });
+    if (userExists) {
+      res.status(409).send("A user with that name already exists.");
+    } else {
+      await prisma.user.create({
+        data: {
+          UserName: username,
+          Password: password,
+        },
+      });
+      res.status(201).send("User created!");
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal server error.");
+  }
+});
+
 module.exports = router;

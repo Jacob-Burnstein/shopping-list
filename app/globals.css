@@ -16,6 +16,9 @@ body {
   color: rgb(var(--foreground-rgb));
   padding: 1rem;
 }
+input {
+  border: solid;
+}
 
 .listItemCard {
   display: flex;
@@ -23,4 +26,9 @@ body {
 
 .storeCard {
   display: flex;
+}
+
+.loginRegisterForm {
+  display: flex;
+  flex-direction: column;
 }

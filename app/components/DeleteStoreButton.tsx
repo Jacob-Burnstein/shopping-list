@@ -7,7 +7,7 @@ interface DeleteStoreProps {
   deleteStore: (id: number) => void;
 }
 
-const DeleteStore: React.FC<DeleteStoreProps> = ({ id, deleteStore }) => {
+const DeleteStoreButton: React.FC<DeleteStoreProps> = ({ id, deleteStore }) => {
   const handleDelete = async () => {
     deleteStore(id);
     try {
@@ -26,4 +26,4 @@ const DeleteStore: React.FC<DeleteStoreProps> = ({ id, deleteStore }) => {
   return <button onClick={() => handleDelete()}>DELETE STORE</button>;
 };
 
-export default DeleteStore;
+export default DeleteStoreButton;

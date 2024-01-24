@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import AddStore from "./AddStore";
-import DeleteStore from "./DeleteStore";
+import DeleteStore from "./DeleteStoreButton";
 
 export interface Store {
   Id: number;

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useEffect, useState } from "react";
-import DeleteButton from "./DeleteButton";
+import DeleteButton from "./DeleteItemButton";
 import AddItem from "./AddItem";
 
 export interface ListItem {

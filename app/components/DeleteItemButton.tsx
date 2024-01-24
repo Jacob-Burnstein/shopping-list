@@ -7,7 +7,7 @@ interface DeleteButtonProps {
   deleteItem: (id: number) => void;
 }
 
-const DeleteButton: React.FC<DeleteButtonProps> = ({ id, deleteItem }) => {
+const DeleteItemButton: React.FC<DeleteButtonProps> = ({ id, deleteItem }) => {
   const handleDelete = async () => {
     deleteItem(id);
     try {
@@ -30,4 +30,4 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ id, deleteItem }) => {
   );
 };
 
-export default DeleteButton;
+export default DeleteItemButton;
