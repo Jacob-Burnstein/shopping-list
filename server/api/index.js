@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const { PrismaClient } = require("@prisma/client");
 
+const jwt = require("jsonwebtoken");
+
 const prisma = new PrismaClient();
 
 // Gets all users
@@ -172,12 +174,14 @@ router.post("/users/login", async (req, res) => {
     });
     if (!userExists) {
       res.status(404).send("Username not found");
-    }
-    if (!correctPassword) {
+    } else if (!correctPassword) {
       res.status(401).send("Incorrect password");
     } else {
-      res.status(200).send("Login successful!");
+      return res.json({
+        token: jwt.sign({ id: userExists.Id }, process.env.JWT),
+      });
     }
+    res.status(200).json({ token });
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal server error.");
