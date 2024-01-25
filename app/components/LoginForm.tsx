@@ -37,6 +37,8 @@ const LoginForm = () => {
         });
         if (response.ok) {
           setMessage("Successful Login!");
+          const { token } = await response.json();
+          localStorage.setItem("token", token);
         } else setMessage(await response.text());
       } catch (err) {
         console.error(err);

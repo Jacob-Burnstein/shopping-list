@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import AddStore from "./AddStore";
 import DeleteStore from "./DeleteStoreButton";
+const jwt = require("jsonwebtoken");
 
 export interface Store {
   Id: number;
@@ -24,9 +25,18 @@ const StoreList = () => {
   useEffect(() => {
     const getStores = async () => {
       try {
-        const query = await fetch("http://localhost:3000/api/users/stores");
-        const response = await query.json();
-        setStores(response);
+        const token = localStorage.getItem("token");
+        if (token) {
+          const query = await fetch("http://localhost:3000/api/users/stores", {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          });
+          const response = await query.json();
+          setStores(response);
+        }
       } catch (err) {
         console.error(err);
       }
@@ -38,8 +48,8 @@ const StoreList = () => {
     <>
       <div>
         {stores?.map((store: Store) => (
-          <section className="storeCard">
-            <p key={store.Id}>{store.StoreName}</p>
+          <section key={store.Id} className="storeCard">
+            <p>{store.StoreName}</p>
             <DeleteStore id={store.Id} deleteStore={deleteStore} />
           </section>
         ))}

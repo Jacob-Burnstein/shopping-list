@@ -16,18 +16,22 @@ const AddStore: React.FC<AddStoreProps> = ({ addNewStore }) => {
   const handleSubmit = async () => {
     const storeToAdd: Store = {
       StoreName: storeName,
-      UserId: 1,
+      UserId: 0,
       Id: 0,
     };
     addNewStore(storeToAdd);
     try {
-      await fetch("http://localhost:3000/api/users/store", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(storeToAdd),
-      });
+      const token = localStorage.getItem("token");
+      if (token) {
+        await fetch("http://localhost:3000/api/users/store", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(storeToAdd),
+        });
+      }
     } catch (err) {
       console.error(err);
     }

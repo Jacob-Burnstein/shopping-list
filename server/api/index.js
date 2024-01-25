@@ -18,9 +18,14 @@ router.get("/users", async (req, res) => {
 
 // // Gets stores by UserId
 router.get("/users/stores", async (req, res) => {
+  const token =
+    req.headers.authorization && req.headers.authorization.split(" ")[1];
+
+  if (!token) res.status(401).send("Unauthorized");
+  const payload = jwt.verify(token, process.env.JWT);
   try {
     const stores = await prisma.store.findMany({
-      where: { UserId: 1 },
+      where: { UserId: payload.id },
     });
     res.json(stores);
   } catch (err) {
@@ -88,10 +93,14 @@ router.post("/list", async (req, res) => {
 
 // Adds store to list
 router.post("/users/store", async (req, res) => {
-  const { UserId, StoreName } = req.body;
+  const { StoreName } = req.body;
+  const token =
+    req.headers.authorization && req.headers.authorization.split(" ")[1];
+  if (!token) res.status(401).send("Unauthorized");
+  const payload = jwt.verify(token, process.env.JWT);
   try {
     await prisma.store.create({
-      data: { StoreName: StoreName, UserId: UserId },
+      data: { StoreName: StoreName, UserId: payload.id },
     });
     res.status(200).send("Store added successfully");
   } catch (err) {
