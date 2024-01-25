@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import apiClient from "../api/utils/apiClient";
+import axios, { isAxiosError } from "axios";
 
 interface FormData {
   username: string;
@@ -27,21 +29,20 @@ const LoginForm = () => {
       setMessage("Please fill out both fields");
     } else {
       try {
-        const response = await fetch("http://localhost:3000/api/users/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          // credentials: "include",
-          body: JSON.stringify(formData),
-        });
-        if (response.ok) {
-          setMessage("Successful Login!");
-          const { token } = await response.json();
+        const response = await apiClient.post("/users/login", formData);
+        if (response.data) {
+          console.log(response.data);
+          const { token, message } = await response.data;
           localStorage.setItem("token", token);
-        } else setMessage(await response.text());
+          setMessage(message);
+        } else {
+          console.log("No");
+          setMessage("Invalid Credentials");
+        }
       } catch (err) {
-        console.error(err);
+        if (axios.isAxiosError(err)) {
+          setMessage(err.response?.data.message);
+        } else setMessage("Invalid Credentials");
       }
     }
   };

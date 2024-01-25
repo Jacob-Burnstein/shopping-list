@@ -201,18 +201,19 @@ router.post("/users/login", async (req, res) => {
       },
     });
     if (!userExists) {
-      res.status(404).send("Username not found");
+      res.status(404);
+      return res.json({ message: "Username not found" });
     } else if (!correctPassword) {
-      res.status(401).send("Incorrect password");
+      return res.status(401).json({ message: "Incorrect password" });
     } else {
       return res.json({
         token: jwt.sign({ id: userExists.Id }, process.env.JWT),
+        message: "Successful Login!!",
       });
     }
-    res.status(200).json({ token });
   } catch (err) {
     console.error(err);
-    res.status(500).send("Internal server error.");
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
