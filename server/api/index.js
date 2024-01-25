@@ -34,11 +34,18 @@ router.get("/users/stores", async (req, res) => {
 });
 
 // Gets list by store
-router.get("/list", async (req, res) => {
-  const { UserId, StoreId } = req.body;
+router.get("/list/:id", async (req, res) => {
+  const { id } = +req.params;
+  const StoreId = id;
+  const token =
+    req.headers.authorization && req.headers.authorization.split(" ")[1];
+
+  if (!token) res.status(401).send("Unauthorized");
+  const payload = jwt.verify(token, process.env.JWT);
+
   try {
     const itemList = await prisma.itemList.findMany({
-      where: { UserId: { UserId }, StoreId: { StoreId } },
+      where: { UserId: payload.id, StoreId: StoreId },
       orderBy: { Id: "desc" },
     });
     res.json(itemList);

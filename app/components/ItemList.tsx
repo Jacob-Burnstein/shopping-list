@@ -1,8 +1,11 @@
 "use client";
 import React from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import DeleteButton from "./DeleteItemButton";
 import AddItem from "./AddItem";
+import { split } from "postcss/lib/list";
 
 export interface ListItem {
   Id: number;
@@ -12,6 +15,12 @@ export interface ListItem {
   UserId: number;
 }
 const ItemList = () => {
+  const pathname = usePathname();
+  const splitPathname = pathname.split("/");
+  const storeIdToUse: number = parseInt(
+    splitPathname[splitPathname.length - 1]
+  );
+
   const [listItems, setListItems] = useState<ListItem[] | undefined>(undefined);
 
   const handleCheckBoxChange = (item: ListItem) => {
@@ -51,9 +60,21 @@ const ItemList = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const query = await fetch("http://localhost:3000/api/list");
-        const response = await query.json();
-        setListItems(response);
+        const token = localStorage.getItem("token");
+        if (token) {
+          const query = await fetch(
+            `http://localhost:3000/api/list/${storeIdToUse}`,
+            {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          const response = await query.json();
+          setListItems(response);
+        }
       } catch (err) {
         console.error(err);
       }
