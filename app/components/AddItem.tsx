@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 import { ListItem } from "./ItemList";
+import apiClient from "../api/utils/apiClient";
 
 interface AddItemProps {
   addNewItem: (newItem: ListItem) => void;
@@ -34,17 +35,7 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
 
     addNewItem(itemToAdd);
     try {
-      const token = localStorage.getItem("token");
-      if (token) {
-        await fetch(`http://localhost:3000/api/list/${storeIdToUse}`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(itemToAdd),
-        });
-      }
+      await apiClient.post(`/list/${storeIdToUse}`, itemToAdd);
     } catch (err) {
       console.error(err);
     }
