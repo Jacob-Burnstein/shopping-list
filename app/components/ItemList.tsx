@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import DeleteButton from "./DeleteItemButton";
 import AddItem from "./AddItem";
-import { split } from "postcss/lib/list";
+import apiClient from "../api/utils/apiClient";
 
 export interface ListItem {
   Id: number;
@@ -25,13 +25,7 @@ const ItemList = () => {
   const handleCheckBoxChange = (item: ListItem) => {
     const setChecked = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/list/check", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(item),
-        });
+        const response = await apiClient.post("/list/check", item);
         if (response.status === 200) {
           setListItems((prevList) =>
             prevList?.map((prevItem) =>
