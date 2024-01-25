@@ -86,11 +86,23 @@ router.post("/list/check", async (req, res) => {
 });
 
 // Adds item to list
-router.post("/list", async (req, res) => {
-  const { StoreId, UserId, ItemName } = req.body;
+router.post("/list/:id", async (req, res) => {
+  const { id } = req.params;
+  const StoreId = +id;
+  const { ItemName } = req.body;
+
+  const token =
+    req.headers.authorization && req.headers.authorization.split(" ")[1];
+
+  if (!token) res.status(401).send("Unauthorized");
+  const payload = jwt.verify(token, process.env.JWT);
   try {
     await prisma.itemList.create({
-      data: { ItemName: ItemName, StoreId: StoreId, UserId: UserId },
+      data: {
+        ItemName: ItemName,
+        StoreId: StoreId,
+        UserId: payload.id,
+      },
     });
     res.status(200).send("Item added successfully");
   } catch (err) {

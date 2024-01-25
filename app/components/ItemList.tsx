@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import DeleteButton from "./DeleteItemButton";
 import AddItem from "./AddItem";

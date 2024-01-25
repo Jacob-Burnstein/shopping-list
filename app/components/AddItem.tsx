@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { usePathname } from "next/navigation";
 import { ListItem } from "./ItemList";
 
 interface AddItemProps {
@@ -8,6 +9,12 @@ interface AddItemProps {
 }
 
 const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
+  const pathname = usePathname();
+  const splitPathname = pathname.split("/");
+  const storeIdToUse: number = parseInt(
+    splitPathname[splitPathname.length - 1]
+  );
+
   const [itemName, setItemName] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,24 +22,29 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
     setItemName(e.target.value);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     const itemToAdd: ListItem = {
       ItemName: itemName,
-      UserId: 1,
-      StoreId: 1,
+      UserId: 0,
+      StoreId: 0,
       Checked: false,
       Id: 0,
     };
 
     addNewItem(itemToAdd);
     try {
-      await fetch("http://localhost:3000/api/list/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(itemToAdd),
-      });
+      const token = localStorage.getItem("token");
+      if (token) {
+        await fetch(`http://localhost:3000/api/list/${storeIdToUse}`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(itemToAdd),
+        });
+      }
     } catch (err) {
       console.error(err);
     }
@@ -40,7 +52,7 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
 
   return (
     <>
-      <form onSubmit={() => handleSubmit()}>
+      <form onSubmit={handleSubmit}>
         <label>Add Item:</label>
         <input type="text" value={itemName || ""} onChange={handleChange} />
       </form>
