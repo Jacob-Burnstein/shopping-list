@@ -53,21 +53,8 @@ const ItemList = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const token = localStorage.getItem("token");
-        if (token) {
-          const query = await fetch(
-            `http://localhost:3000/api/list/${storeIdToUse}`,
-            {
-              method: "GET",
-              headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-              },
-            }
-          );
-          const response = await query.json();
-          setListItems(response);
-        }
+        const response = await apiClient.get(`/list/${storeIdToUse}`);
+        setListItems(response.data);
       } catch (err) {
         console.error(err);
       }
