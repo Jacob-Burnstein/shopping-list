@@ -36,10 +36,10 @@ const LoginForm = () => {
       try {
         const { data } = await apiClient.post("/users/login", formData);
         if (data) {
-          const { token } = await data;
+          const { token, username } = await data;
           localStorage.setItem("token", token);
-          localStorage.setItem("username: ", username);
-          router.push("/pages/user");
+
+          router.push(`/pages/user/${username}`);
         } else {
           setMessage("Invalid Credentials");
         }

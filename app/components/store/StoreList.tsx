@@ -40,7 +40,7 @@ const StoreList = () => {
       <div>
         {stores?.map((store: Store) => (
           <section key={store.Id} className="storeCard">
-            <Link href={`/pages/${store.Id}`}>{store.StoreName}</Link>
+            <Link href={`/pages/store/${store.Id}`}>{store.StoreName}</Link>
             <DeleteStore id={store.Id} deleteStore={deleteStore} />
           </section>
         ))}

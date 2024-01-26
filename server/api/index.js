@@ -65,6 +65,17 @@ router.get("/list/:id", async (req, res) => {
   }
 });
 
+// Gets store details
+router.get("/stores/:storeId", async (req, res) => {
+  const { storeId } = req.params;
+  try {
+    const response = await prisma.store.findUnique({ where: { Id: +storeId } });
+    res.json(response);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
 // Checks or unchecks items
 router.post("/list/check", async (req, res) => {
   const { Id, Checked } = req.body;
@@ -222,6 +233,7 @@ router.post("/users/login", async (req, res) => {
       return res.json({
         token: jwt.sign({ id: userExists.Id }, process.env.JWT),
         message: "Successful Login!!",
+        username: userExists.UserName,
       });
     }
   } catch (err) {
