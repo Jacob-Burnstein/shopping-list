@@ -2,31 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-}
-
-@media (-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-  }
+* {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  background-color: #192655;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+@layer components {
+  .listContainer {
+    background-color: #f3f0ca;
+  }
+  header {
+    background-color: #f3f0ca;
+  }
+
+  footer {
+    background-color: #f3f0ca;
+  }
 }
 input {
   border: solid;
 }
 
-.listItemCard {
+.card {
   display: flex;
+  justify-content: space-between;
+  margin-left: 2em;
+  margin-right: 2em;
+  padding: 1em;
+}
+.checkboxContainer {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-.storeCard {
-  display: flex;
+.checkboxContainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
 }
+.checkboxContainer input:checked ~ .checkmark {
+  background-color: #3876bf;
+}
+.checkboxContainer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* .checkboxContainer .checkmark:after {
+  left: 8px;
+  top: 3px;
+  width: 6px;
+  height: 15px;
+  border: solid #f3f0ca;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+} */
+
+.checkmark {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: 20px;
+  width: 20px;
+  background-color: #e1aa74;
+  border-radius: 50%;
+}
+
+/* .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+} */
 
 .loginRegisterForm {
   display: flex;

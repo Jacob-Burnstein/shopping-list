@@ -37,15 +37,17 @@ const StoreList = () => {
 
   return (
     <>
-      <div>
-        {stores?.map((store: Store) => (
-          <section key={store.Id} className="storeCard">
-            <Link href={`/pages/store/${store.Id}`}>{store.StoreName}</Link>
-            <DeleteStore id={store.Id} deleteStore={deleteStore} />
-          </section>
-        ))}
-      </div>
-      <AddStore addNewStore={addNewStore} />
+      <section className="listContainer h-screen">
+        <div>
+          {stores?.map((store: Store) => (
+            <section key={store.Id} className="storeCard card">
+              <Link href={`/pages/store/${store.Id}`}>{store.StoreName}</Link>
+              <DeleteStore id={store.Id} deleteStore={deleteStore} />
+            </section>
+          ))}
+        </div>
+        <AddStore addNewStore={addNewStore} />
+      </section>
     </>
   );
 };

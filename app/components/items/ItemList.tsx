@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import DeleteButton from "./DeleteItemButton";
 import AddItem from "./AddItem";
 import apiClient from "../../api/utils/apiClient";
+import "../../globals.css";
 
 export interface ListItem {
   Id: number;
@@ -62,20 +63,23 @@ const ItemList = () => {
 
   return (
     <>
-      <section>
+      <section className="listContainer h-screen">
         {Array.isArray(listItems) &&
           listItems
             .sort((a, b) => (a.Checked === b.Checked ? 0 : a.Checked ? 1 : -1))
             .map((item: ListItem) => (
               <section key={item.Id}>
-                <div className="listItemCard">
-                  <input
-                    type="checkbox"
-                    checked={item.Checked}
-                    onChange={() => {
-                      handleCheckBoxChange(item);
-                    }}
-                  />
+                <div className="listItemCard card">
+                  <label className="checkboxContainer">
+                    <input
+                      type="checkbox"
+                      checked={item.Checked}
+                      onChange={() => {
+                        handleCheckBoxChange(item);
+                      }}
+                    />
+                    <span className="checkmark"></span>
+                  </label>
                   <p>{item.ItemName}</p>
                   <DeleteButton id={item.Id} deleteItem={deleteItem} />
                 </div>

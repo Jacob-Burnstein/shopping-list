@@ -6,8 +6,10 @@ import RegisterForm from "../../components/auth/RegisterForm";
 const RegisterPage = () => {
   return (
     <>
-      <main>
+      <header>
         <h1>Create Account</h1>
+      </header>
+      <main>
         <RegisterForm />
       </main>
       <footer>

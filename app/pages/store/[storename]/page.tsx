@@ -7,7 +7,6 @@ import StorePageHeader from "../../../components/header/StorePageHeader";
 const StorePage = () => {
   return (
     <>
-      {" "}
       <header>
         <StorePageHeader />
       </header>
