@@ -3,12 +3,16 @@
 import React from "react";
 import Link from "next/link";
 
-// handle logout function
+const handleLogout = () => {
+  localStorage.removeItem("token");
+};
 
 const LogOutLink = () => {
   return (
     <div>
-      <Link href="/">Log Out</Link>
+      <Link href="/" onClick={handleLogout}>
+        Log Out
+      </Link>
     </div>
   );
 };

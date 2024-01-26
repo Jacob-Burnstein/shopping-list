@@ -64,43 +64,26 @@ const ItemList = () => {
     <>
       <section>
         {Array.isArray(listItems) &&
-          listItems.map(
-            (item: ListItem) =>
-              !item.Checked && (
-                <section key={item.Id}>
-                  <div className="listItemCard">
-                    <input
-                      type="checkbox"
-                      checked={item.Checked}
-                      onChange={() => {
-                        handleCheckBoxChange(item);
-                      }}
-                    />
-                    <p>{item.ItemName}</p>
-                    <DeleteButton id={item.Id} deleteItem={deleteItem} />
-                  </div>
-                </section>
-              )
-          )}
-        {Array.isArray(listItems) &&
-          listItems.map(
-            (item: ListItem) =>
-              item.Checked && (
-                <section key={item.Id}>
-                  <div className="listItemCard">
-                    <input
-                      type="checkbox"
-                      checked={item.Checked}
-                      onChange={() => {
-                        handleCheckBoxChange(item);
-                      }}
-                    />
-                    <p>{item.ItemName}</p>
-                    <DeleteButton id={item.Id} deleteItem={deleteItem} />
-                  </div>
-                </section>
-              )
-          )}
+          listItems
+            .sort((a, b) => (a.Checked === b.Checked ? 0 : a.Checked ? 1 : -1))
+            .map(
+              (item: ListItem) =>
+                !item.Checked && (
+                  <section key={item.Id}>
+                    <div className="listItemCard">
+                      <input
+                        type="checkbox"
+                        checked={item.Checked}
+                        onChange={() => {
+                          handleCheckBoxChange(item);
+                        }}
+                      />
+                      <p>{item.ItemName}</p>
+                      <DeleteButton id={item.Id} deleteItem={deleteItem} />
+                    </div>
+                  </section>
+                )
+            )}
         <AddItem addNewItem={addNewItem} />
       </section>
     </>
