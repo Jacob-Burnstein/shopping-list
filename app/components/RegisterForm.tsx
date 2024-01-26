@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import apiClient from "../api/utils/apiClient";
+import axios, { isAxiosError } from "axios";
 
 interface FormData {
   username: string;
@@ -14,6 +16,8 @@ const RegisterForm = () => {
     password: "",
     confirmedPassword: "",
   });
+  const { username, password, confirmedPassword } = formData;
+
   const [message, setMessage] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,25 +26,36 @@ const RegisterForm = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  const confirmFormValidity = (): boolean => {
+    if (username === "" || password === "" || confirmedPassword === "") {
+      setMessage("Please fill out all fields");
+      return false;
+    }
+    if (password !== confirmedPassword) {
+      setMessage("Your passwords do not match");
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmedPassword) {
-      setMessage("Your passwords do not match");
-      // add barrier if all fields not filled out
-    } else {
+    if (confirmFormValidity()) {
       try {
-        const response = await fetch("http://localhost:3000/api/users", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        });
-        if (response.ok) {
-          setMessage("Success!");
-        } else setMessage(await response.text());
+        const { data } = await apiClient.post("/users", formData);
+        if (data) {
+          setMessage(data);
+        } else {
+          setMessage("Something went wrong");
+          return;
+        }
       } catch (err) {
-        console.error(err);
+        if (axios.isAxiosError(err)) {
+          setMessage(err.response?.data.message);
+        }
       }
     }
+    setMessage("Something went wrong");
   };
 
   return (
@@ -49,21 +64,21 @@ const RegisterForm = () => {
       <input
         type="text"
         name="username"
-        value={formData.username}
+        value={username}
         onChange={handleChange}
       />
       <label>Password: </label>
       <input
         type="text"
         name="password"
-        value={formData.password}
+        value={password}
         onChange={handleChange}
       />
       <label>Confirm Password: </label>
       <input
         type="text"
         name="confirmedPassword"
-        value={formData.confirmedPassword}
+        value={confirmedPassword}
         onChange={handleChange}
       />
       {message && <p>{message}</p>}

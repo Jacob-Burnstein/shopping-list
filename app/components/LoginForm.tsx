@@ -15,6 +15,8 @@ const LoginForm = () => {
     password: "",
   });
 
+  const { username, password } = formData;
+
   const [message, setMessage] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,14 +31,12 @@ const LoginForm = () => {
       setMessage("Please fill out both fields");
     } else {
       try {
-        const response = await apiClient.post("/users/login", formData);
-        if (response.data) {
-          console.log(response.data);
-          const { token, message } = await response.data;
+        const { data } = await apiClient.post("/users/login", formData);
+        if (data) {
+          const { token, message } = await data;
           localStorage.setItem("token", token);
           setMessage(message);
         } else {
-          console.log("No");
           setMessage("Invalid Credentials");
         }
       } catch (err) {
@@ -53,14 +53,14 @@ const LoginForm = () => {
       <input
         type="text"
         name="username"
-        value={formData.username}
+        value={username}
         onChange={handleChange}
       />
       <label>Password: </label>
       <input
         type="text"
         name="password"
-        value={formData.password}
+        value={password}
         onChange={handleChange}
       />
       {message && <p>{message}</p>}

@@ -160,6 +160,7 @@ router.delete("/store/:id", async (req, res) => {
 });
 
 // ///////// AUTH
+// Register
 router.post("/users", async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -169,7 +170,9 @@ router.post("/users", async (req, res) => {
       },
     });
     if (userExists) {
-      res.status(409).send("A user with that name already exists.");
+      return res
+        .status(409)
+        .send({ message: "A user with that name already exists." });
     } else {
       await prisma.user.create({
         data: {
@@ -201,8 +204,7 @@ router.post("/users/login", async (req, res) => {
       },
     });
     if (!userExists) {
-      res.status(404);
-      return res.json({ message: "Username not found" });
+      return res.status(404).json({ message: "Username not found" });
     } else if (!correctPassword) {
       return res.status(401).json({ message: "Incorrect password" });
     } else {
