@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import apiClient from "../api/utils/apiClient";
 import axios, { isAxiosError } from "axios";
+import { useRouter } from "next/navigation";
 
 interface FormData {
   username: string;
@@ -10,6 +11,8 @@ interface FormData {
 }
 
 const LoginForm = () => {
+  const router = useRouter();
+
   const [formData, setFormData] = useState<FormData>({
     username: "",
     password: "",
@@ -33,9 +36,9 @@ const LoginForm = () => {
       try {
         const { data } = await apiClient.post("/users/login", formData);
         if (data) {
-          const { token, message } = await data;
+          const { token } = await data;
           localStorage.setItem("token", token);
-          setMessage(message);
+          router.push("/pages/user");
         } else {
           setMessage("Invalid Credentials");
         }

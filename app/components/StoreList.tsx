@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import AddStore from "./AddStore";
 import DeleteStore from "./DeleteStoreButton";
 import apiClient from "../api/utils/apiClient";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export interface Store {
   Id: number;
@@ -12,6 +14,8 @@ export interface Store {
 }
 
 const StoreList = () => {
+  const router = useRouter();
+
   const [stores, setStores] = useState<Store[] | undefined>(undefined);
 
   const addNewStore = (newStore: Store) => {
@@ -39,7 +43,7 @@ const StoreList = () => {
       <div>
         {stores?.map((store: Store) => (
           <section key={store.Id} className="storeCard">
-            <p>{store.StoreName}</p>
+            <Link href={`/pages/${store.Id}`}>{store.StoreName}</Link>
             <DeleteStore id={store.Id} deleteStore={deleteStore} />
           </section>
         ))}
