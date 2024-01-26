@@ -44,7 +44,8 @@ router.get("/list/:id", async (req, res) => {
     const itemList = await prisma.itemList.findMany({
       where: { UserId: payload.id, StoreId: +id },
     });
-    res.json(itemList);
+    const sortedItemList = itemList.sort((a, b) => a.Id - b.Id);
+    res.json(sortedItemList);
   } catch (err) {
     console.error(err);
   }
