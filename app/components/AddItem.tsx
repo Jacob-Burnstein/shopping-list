@@ -33,9 +33,12 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
       Id: 0,
     };
 
-    addNewItem(itemToAdd);
     try {
       await apiClient.post(`/list/${storeIdToUse}`, itemToAdd);
+      const { data } = await apiClient.get(`/list/${storeIdToUse}`);
+      const updatedItemDetails = data[data.length - 1];
+      addNewItem(updatedItemDetails);
+      console.log(updatedItemDetails);
     } catch (err) {
       console.error(err);
     }

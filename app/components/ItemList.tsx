@@ -22,27 +22,25 @@ const ItemList = () => {
 
   const [listItems, setListItems] = useState<ListItem[] | undefined>(undefined);
 
-  const handleCheckBoxChange = (item: ListItem) => {
-    const setChecked = async () => {
-      try {
-        const response = await apiClient.post("/list/check", item);
-        if (response.status === 200) {
-          setListItems((prevList) =>
-            prevList?.map((prevItem) =>
-              prevItem.Id === item.Id
-                ? { ...prevItem, Checked: !item.Checked }
-                : prevItem
-            )
-          );
-        }
-      } catch (err) {
-        console.error(err);
+  const handleCheckBoxChange = async (item: ListItem) => {
+    try {
+      const response = await apiClient.post("/list/check", item);
+      if (response.status === 200) {
+        setListItems((prevList) =>
+          prevList?.map((prevItem) =>
+            prevItem.Id === item.Id
+              ? { ...prevItem, Checked: !item.Checked }
+              : prevItem
+          )
+        );
       }
-    };
-    setChecked();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const addNewItem = (newItem: ListItem) => {
+  const addNewItem = async (newItem: ListItem) => {
+    // const repsonse = await apiClient.post("/list", newItem);
     setListItems((prevList) => [newItem, ...(prevList || [])]);
   };
 
@@ -64,43 +62,47 @@ const ItemList = () => {
 
   return (
     <>
-      {listItems?.map(
-        (item: ListItem) =>
-          !item.Checked && (
-            <section key={item.Id}>
-              <div className="listItemCard">
-                <input
-                  type="checkbox"
-                  checked={item.Checked}
-                  onChange={() => {
-                    handleCheckBoxChange(item);
-                  }}
-                />
-                <p>{item.ItemName}</p>
-                <DeleteButton id={item.Id} deleteItem={deleteItem} />
-              </div>
-            </section>
-          )
-      )}
-      {listItems?.map(
-        (item: ListItem) =>
-          item.Checked && (
-            <section key={item.Id}>
-              <div className="listItemCard">
-                <input
-                  type="checkbox"
-                  checked={item.Checked}
-                  onChange={() => {
-                    handleCheckBoxChange(item);
-                  }}
-                />
-                <p>{item.ItemName}</p>
-                <DeleteButton id={item.Id} deleteItem={deleteItem} />
-              </div>
-            </section>
-          )
-      )}
-      <AddItem addNewItem={addNewItem} />
+      <section>
+        {Array.isArray(listItems) &&
+          listItems.map(
+            (item: ListItem) =>
+              !item.Checked && (
+                <section key={item.Id}>
+                  <div className="listItemCard">
+                    <input
+                      type="checkbox"
+                      checked={item.Checked}
+                      onChange={() => {
+                        handleCheckBoxChange(item);
+                      }}
+                    />
+                    <p>{item.ItemName}</p>
+                    <DeleteButton id={item.Id} deleteItem={deleteItem} />
+                  </div>
+                </section>
+              )
+          )}
+        {Array.isArray(listItems) &&
+          listItems.map(
+            (item: ListItem) =>
+              item.Checked && (
+                <section key={item.Id}>
+                  <div className="listItemCard">
+                    <input
+                      type="checkbox"
+                      checked={item.Checked}
+                      onChange={() => {
+                        handleCheckBoxChange(item);
+                      }}
+                    />
+                    <p>{item.ItemName}</p>
+                    <DeleteButton id={item.Id} deleteItem={deleteItem} />
+                  </div>
+                </section>
+              )
+          )}
+        <AddItem addNewItem={addNewItem} />
+      </section>
     </>
   );
 };

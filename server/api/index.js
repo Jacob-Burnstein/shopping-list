@@ -35,18 +35,14 @@ router.get("/users/stores", async (req, res) => {
 
 // Gets list by store
 router.get("/list/:id", async (req, res) => {
-  const { id } = +req.params;
-  const StoreId = id;
+  const { id } = req.params;
   const token =
     req.headers.authorization && req.headers.authorization.split(" ")[1];
-
   if (!token) res.status(401).send("Unauthorized");
   const payload = jwt.verify(token, process.env.JWT);
-
   try {
     const itemList = await prisma.itemList.findMany({
-      where: { UserId: payload.id, StoreId: StoreId },
-      orderBy: { Id: "desc" },
+      where: { UserId: payload.id, StoreId: +id },
     });
     res.json(itemList);
   } catch (err) {
@@ -129,12 +125,12 @@ router.post("/users/store", async (req, res) => {
 
 //Deletes item from list
 router.delete("/list/:id", async (req, res) => {
-  const { id } = +req.params;
+  const { id } = req.params;
 
   try {
     await prisma.itemList.delete({
       where: {
-        Id: id,
+        Id: +id,
       },
     });
     res.status(200).send("Item deleted successfully");
