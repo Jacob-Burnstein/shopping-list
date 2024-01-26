@@ -1,7 +1,7 @@
 import React from "react";
 import LoginLink from "./components/footerLinks/LoginLink";
 import RegisterLink from "./components/footerLinks/RegisterLink";
-import StoreList from "./components/ItemList";
+import StoreList from "./components/items/ItemList";
 
 export default function Home() {
   return (

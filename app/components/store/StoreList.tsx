@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import AddStore from "./AddStore";
 import DeleteStore from "./DeleteStoreButton";
-import apiClient from "../api/utils/apiClient";
+import apiClient from "../../api/utils/apiClient";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 

@@ -1,8 +1,7 @@
 import React from "react";
 import HomeLink from "../../components/footerLinks/HomeLink";
 import LogOutLink from "../../components/footerLinks/LogOutLink";
-import ItemList from "../../components/ItemList";
-import AddItem from "../../components/AddItem";
+import ItemList from "../../components/items/ItemList";
 
 const StorePage = () => {
   return (

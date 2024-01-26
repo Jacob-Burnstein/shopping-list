@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import apiClient from "../api/utils/apiClient";
+import apiClient from "../../api/utils/apiClient";
 import axios, { isAxiosError } from "axios";
 import { useRouter } from "next/navigation";
 

@@ -1,5 +1,5 @@
 import LogOutLink from "../../components/footerLinks/LogOutLink";
-import StoreList from "../../components/StoreList";
+import StoreList from "../../components//store/StoreList";
 
 const UserPage = () => {
   return (

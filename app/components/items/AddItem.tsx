@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 import { ListItem } from "./ItemList";
-import apiClient from "../api/utils/apiClient";
+import apiClient from "../../api/utils/apiClient";
 
 interface AddItemProps {
   addNewItem: (newItem: ListItem) => void;

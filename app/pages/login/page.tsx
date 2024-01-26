@@ -1,7 +1,7 @@
 import React from "react";
 import RegisterLink from "../../components/footerLinks/RegisterLink";
 import HomeLink from "../../components/footerLinks/HomeLink";
-import LoginForm from "@/app/components/LoginForm";
+import LoginForm from "../../components/auth/LoginForm";
 
 const LoginPage = () => {
   return (
