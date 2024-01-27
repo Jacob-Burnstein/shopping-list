@@ -26,7 +26,20 @@ const StorePageHeader = () => {
     getStoreName();
   }, []);
 
-  return <>{token ? <h1>{storeName}</h1> : <h1>Welcome</h1>}</>;
+  return (
+    <>
+      {token ? (
+        <h1
+          className="underline underline-offset-8 p-2 text-xl
+        "
+        >
+          {storeName}
+        </h1>
+      ) : (
+        <h1 className="underline underline-offset-4 p-2 text-xl">Welcome</h1>
+      )}
+    </>
+  );
 };
 
 export default StorePageHeader;

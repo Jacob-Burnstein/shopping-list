@@ -40,8 +40,10 @@ const StoreList = () => {
       <section className="listContainer h-screen">
         <div>
           {stores?.map((store: Store) => (
-            <section key={store.Id} className="storeCard card">
-              <Link href={`/pages/store/${store.Id}`}>{store.StoreName}</Link>
+            <section key={store.Id} className="storeCard card ">
+              <Link href={`/pages/store/${store.Id}`} className="font-semibold">
+                {store.StoreName}
+              </Link>
               <DeleteStore id={store.Id} deleteStore={deleteStore} />
             </section>
           ))}

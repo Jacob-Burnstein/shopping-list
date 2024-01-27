@@ -17,6 +17,7 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
   );
 
   const [itemName, setItemName] = useState<string>("");
+  const [clicked, setClicked] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -47,9 +48,21 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label>Add Item:</label>
-        <input type="text" value={itemName || ""} onChange={handleChange} />
+      <form onSubmit={handleSubmit} className="flex flex-col items-center p-3">
+        <button
+          type="submit"
+          onClick={() => setClicked(true)}
+          className="text-4xl addButton"
+        >
+          +
+        </button>
+        <input
+          type="text"
+          value={itemName || ""}
+          className={clicked ? "showInput p-1 m mb-1" : "hideInput"}
+          onChange={handleChange}
+        />
+        {clicked && <p onClick={() => setClicked(false)}>Hide</p>}
       </form>
     </>
   );

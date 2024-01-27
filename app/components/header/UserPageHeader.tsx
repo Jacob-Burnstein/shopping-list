@@ -10,7 +10,20 @@ const UserPageHeader = () => {
 
   const token = localStorage.getItem("token");
 
-  return <>{token ? <h1>{username}'s Stores</h1> : <h1>Welcome</h1>}</>;
+  return (
+    <>
+      {token ? (
+        <h1
+          className="underline underline-offset-8 p-2 text-xl
+  "
+        >
+          {username}
+        </h1>
+      ) : (
+        <h1>Welcome</h1>
+      )}
+    </>
+  );
 };
 
 export default UserPageHeader;

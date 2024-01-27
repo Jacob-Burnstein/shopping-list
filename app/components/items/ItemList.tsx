@@ -80,7 +80,16 @@ const ItemList = () => {
                     />
                     <span className="checkmark"></span>
                   </label>
-                  <p>{item.ItemName}</p>
+                  <p
+                    onClick={() => {
+                      handleCheckBoxChange(item);
+                    }}
+                    className={
+                      item.Checked ? "checkedItem itemName" : "itemName"
+                    }
+                  >
+                    {item.ItemName}
+                  </p>
                   <DeleteButton id={item.Id} deleteItem={deleteItem} />
                 </div>
               </section>

@@ -3,42 +3,67 @@
 @tailwind utilities;
 
 * {
+  font-family: var(--font-quicksand);
 }
 
 body {
-  background-color: #192655;
-  padding: 1rem;
+  background-color: #45474b;
+  padding: 0.5rem;
   display: flex;
   flex-direction: column;
+  color: #45474b;
+  font-weight: medium;
+  /* align-items: center; */
+
+  /* justify-content: center; */
 }
 
 @layer components {
   .listContainer {
-    background-color: #f3f0ca;
+    justify-content: center;
+    background-color: #f5f7f8;
+    max-width: 480px;
   }
   header {
-    background-color: #f3f0ca;
+    background-color: #f5f7f8;
+    padding-bottom: 1em;
+    padding-left: 1em;
+    padding-top: 0.5em;
+    max-width: 480px;
   }
 
   footer {
-    background-color: #f3f0ca;
+    background-color: #f5f7f8;
+    max-width: 480px;
   }
-}
-input {
-  border: solid;
+
+  .addButton {
+    color: #45474b;
+  }
 }
 
 .card {
   display: flex;
   justify-content: space-between;
-  margin-left: 2em;
-  margin-right: 2em;
+  margin-left: 4em;
+  margin-right: 4em;
   padding: 1em;
 }
+
+.storeCard {
+  border-radius: 5px;
+  border-color: #495e57;
+  box-shadow: 1px 2px 2px#45474B;
+  margin-bottom: 1em;
+}
+
+.itemName {
+  font-size: larger;
+}
+
 .checkboxContainer {
   display: block;
   position: relative;
-  padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
   font-size: 22px;
@@ -56,23 +81,11 @@ input {
   width: 0;
 }
 .checkboxContainer input:checked ~ .checkmark {
-  background-color: #3876bf;
+  background-color: #495e57;
 }
 .checkboxContainer input:checked ~ .checkmark:after {
   display: block;
 }
-
-/* .checkboxContainer .checkmark:after {
-  left: 8px;
-  top: 3px;
-  width: 6px;
-  height: 15px;
-  border: solid #f3f0ca;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-} */
 
 .checkmark {
   position: absolute;
@@ -80,15 +93,22 @@ input {
   left: 2px;
   height: 20px;
   width: 20px;
-  background-color: #e1aa74;
+  background-color: #f4ce14;
   border-radius: 50%;
 }
 
-/* .checkmark:after {
-  content: "";
-  position: absolute;
+.checkedItem {
+  text-decoration: line-through;
+}
+
+.hideInput {
   display: none;
-} */
+}
+
+.showInput {
+  width: 10em;
+  font-weight: bolder;
+}
 
 .loginRegisterForm {
   display: flex;
