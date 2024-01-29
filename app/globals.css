@@ -44,8 +44,7 @@ body {
 
   .addButton:hover {
     border-radius: 50%;
-    background-color: #45474b;
-    color: #f5f7f8;
+    background-color: #dce4e7;
     display: flex;
     justify-content: center;
   }
@@ -73,7 +72,7 @@ body {
 
 .itemAndDelete {
   border-bottom: solid 0.5px;
-  border-color: lightgrey;
+  border-color: #dce4e7;
   display: flex;
   justify-content: space-between;
   width: 82%;
@@ -82,11 +81,11 @@ body {
 }
 
 .itemAndDelete:hover {
-  background-color: lightgrey;
+  background-color: #dce4e7;
 }
 
 .deleteButton {
-  font-size: medium;
+  font-weight: bold;
   background-color: #f5f7f8;
   border: solid 0.5px #45474b;
   border-radius: 50%;
@@ -140,6 +139,10 @@ body {
   width: 25px;
   background-color: #f4ce14;
   border-radius: 50%;
+}
+
+.checkmark:hover {
+  background-color: #dce4e7;
 }
 
 .checkedItem {

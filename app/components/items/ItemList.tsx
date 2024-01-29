@@ -22,6 +22,8 @@ const ItemList = () => {
   );
 
   const [listItems, setListItems] = useState<ListItem[] | undefined>(undefined);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [mouseHeld, setMouseHeld] = useState(false);
 
   const handleCheckBoxChange = async (item: ListItem) => {
     try {
@@ -61,6 +63,13 @@ const ItemList = () => {
     getList();
   }, []);
 
+  const handleMouseDown = (itemId: number) => {
+    setSelectedId(itemId);
+    setTimeout(() => {
+      setSelectedId(null);
+    }, 5000);
+  };
+
   return (
     <>
       <section className="listContainer h-screen">
@@ -69,7 +78,10 @@ const ItemList = () => {
             .sort((a, b) => (a.Checked === b.Checked ? 0 : a.Checked ? 1 : -1))
             .map((item: ListItem) => (
               <section key={item.Id}>
-                <div className="listItemCard card">
+                <div
+                  className="listItemCard card"
+                  onMouseDown={() => handleMouseDown(item.Id)}
+                >
                   <label className="checkboxContainer">
                     <input
                       type="checkbox"
@@ -91,7 +103,9 @@ const ItemList = () => {
                     >
                       {item.ItemName}
                     </p>
-                    <DeleteButton id={item.Id} deleteItem={deleteItem} />
+                    {selectedId === item.Id && (
+                      <DeleteButton id={item.Id} deleteItem={deleteItem} />
+                    )}
                   </div>
                 </div>
               </section>
