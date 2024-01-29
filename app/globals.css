@@ -13,9 +13,6 @@ body {
   flex-direction: column;
   color: #45474b;
   font-weight: medium;
-  /* align-items: center; */
-
-  /* justify-content: center; */
 }
 
 @layer components {
@@ -39,6 +36,18 @@ body {
 
   .addButton {
     color: #45474b;
+    height: 36px;
+    width: 36px;
+    align-items: center;
+    margin-top: 1em;
+  }
+
+  .addButton:hover {
+    border-radius: 50%;
+    background-color: #45474b;
+    color: #f5f7f8;
+    display: flex;
+    justify-content: center;
   }
 }
 
@@ -47,7 +56,7 @@ body {
   justify-content: space-between;
   margin-left: 4em;
   margin-right: 4em;
-  padding: 1em;
+  padding: 0.5sem;
 }
 
 .storeCard {
@@ -59,14 +68,48 @@ body {
 
 .itemName {
   font-size: larger;
+  /* padding-bottom: 0.5em; */
+}
+
+.itemAndDelete {
+  border-bottom: solid 0.5px;
+  border-color: lightgrey;
+  display: flex;
+  justify-content: space-between;
+  width: 82%;
+  min-width: fit-content;
+  padding: 1em;
+}
+
+.itemAndDelete:hover {
+  background-color: lightgrey;
+}
+
+.deleteButton {
+  font-size: medium;
+  background-color: #f5f7f8;
+  border: solid 0.5px #45474b;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  margin-top: 2px;
+}
+
+.deleteButton:hover {
+  background-color: #45474b;
+  color: #f5f7f8;
 }
 
 .checkboxContainer {
   display: block;
   position: relative;
-  margin-bottom: 12px;
+  padding-right: 1em;
+  margin-top: 3px;
+  /* margin-bottom: 2px; */
+  /* border: solid; */
+  /* justify-self: center; */
   cursor: pointer;
-  font-size: 22px;
+  /* font-size: 22px; */
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -89,10 +132,12 @@ body {
 
 .checkmark {
   position: absolute;
-  top: 2px;
-  left: 2px;
-  height: 20px;
-  width: 20px;
+  /* top: 2px;
+  left: 2px; */
+  /* align-self: center; */
+  margin-top: 0.95em;
+  height: 25px;
+  width: 25px;
   background-color: #f4ce14;
   border-radius: 50%;
 }
@@ -109,6 +154,9 @@ body {
   width: 10em;
   font-weight: medium;
   text-align: center;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  border-radius: 5px;
 }
 
 .loginRegisterForm {

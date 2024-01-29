@@ -44,6 +44,14 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
         console.error(err);
       }
     }
+    setItemName("");
+  };
+
+  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!clicked) setClicked(true);
+    else {
+      handleSubmit(e);
+    }
   };
 
   return (
@@ -51,7 +59,7 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
       <form onSubmit={handleSubmit} className="flex flex-col items-center p-3">
         <button
           type="submit"
-          onClick={() => setClicked(true)}
+          onClick={handleButtonClick}
           className="text-4xl addButton"
         >
           +

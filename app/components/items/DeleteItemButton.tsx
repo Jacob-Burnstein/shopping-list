@@ -25,7 +25,9 @@ const DeleteItemButton: React.FC<DeleteButtonProps> = ({ id, deleteItem }) => {
 
   return (
     <div>
-      <button onClick={() => handleDelete()}>X</button>
+      <button className="deleteButton" onClick={() => handleDelete()}>
+        -
+      </button>
     </div>
   );
 };
