@@ -23,7 +23,6 @@ const ItemList = () => {
 
   const [listItems, setListItems] = useState<ListItem[] | undefined>(undefined);
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  const [mouseHeld, setMouseHeld] = useState(false);
 
   const handleCheckBoxChange = async (item: ListItem) => {
     try {
@@ -92,7 +91,7 @@ const ItemList = () => {
                     />
                     <span className="checkmark"></span>
                   </label>
-                  <div className="itemAndDelete">
+                  <div className="nameAndDelete">
                     <p
                       onClick={() => {
                         handleCheckBoxChange(item);

@@ -15,6 +15,16 @@ export interface Store {
 const StoreList = () => {
   const [stores, setStores] = useState<Store[] | undefined>(undefined);
 
+  const getStoreInitials = (store: string) => {
+    const initials: string[] = [];
+    const splitArray = store.split(" ");
+    for (const word of splitArray) {
+      const characters = word.split("");
+      initials.push(characters[0]);
+    }
+    return initials.join("");
+  };
+
   const addNewStore = (newStore: Store) => {
     setStores((prevStores) => [...(prevStores || []), newStore]);
   };
@@ -40,11 +50,17 @@ const StoreList = () => {
       <section className="listContainer h-screen">
         <div>
           {stores?.map((store: Store) => (
-            <section key={store.Id} className="storeCard card ">
-              <Link href={`/pages/store/${store.Id}`} className="font-semibold">
-                {store.StoreName}
-              </Link>
-              <DeleteStore id={store.Id} deleteStore={deleteStore} />
+            <section key={store.Id} className="storeCard card">
+              <div className="icon">{getStoreInitials(store.StoreName)}</div>
+              <div className="nameAndDelete">
+                <Link
+                  href={`/pages/store/${store.Id}`}
+                  className="font-semibold text-lg "
+                >
+                  {store.StoreName}
+                </Link>
+                <DeleteStore id={store.Id} deleteStore={deleteStore} />
+              </div>
             </section>
           ))}
         </div>
