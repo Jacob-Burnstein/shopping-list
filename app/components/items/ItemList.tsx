@@ -42,7 +42,6 @@ const ItemList = () => {
   };
 
   const addNewItem = async (newItem: ListItem) => {
-    // const repsonse = await apiClient.post("/list", newItem);
     setListItems((prevList) => [newItem, ...(prevList || [])]);
   };
 

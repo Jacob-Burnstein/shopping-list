@@ -6,9 +6,6 @@ import LoginForm from "../../components/auth/LoginForm";
 const LoginPage = () => {
   return (
     <>
-      <header>
-        <h1>Log In Page</h1>
-      </header>
       <main>
         <LoginForm />
       </main>

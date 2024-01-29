@@ -5,6 +5,7 @@ import Link from "next/link";
 
 const handleLogout = () => {
   localStorage.removeItem("token");
+  localStorage.removeItem("username");
 };
 
 const LogOutLink = () => {

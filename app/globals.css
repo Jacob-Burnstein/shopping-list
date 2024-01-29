@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: #45474b;
+  background-color: white;
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -39,6 +39,7 @@ body {
     height: 36px;
     width: 36px;
     align-items: center;
+    padding: 0;
     margin-top: 1em;
   }
 
@@ -60,12 +61,32 @@ body {
 .icon {
   width: 50px;
   height: 50px;
-  background-color: #495e57;
   margin-top: 0.25em;
   color: #f5f7f8;
   font-weight: 800;
   padding-left: 0.5em;
   padding-top: 0.5em;
+  transition: all 0.5s ease;
+}
+
+.icon:hover {
+  border-radius: 10px;
+}
+
+.green {
+  background-color: #495e57;
+}
+
+.yellow {
+  background-color: #f4ce14;
+}
+
+.darkGrey {
+  background-color: #45474b;
+}
+
+.greyBlue {
+  background-color: #6c8280;
 }
 
 .storeCard {
@@ -80,6 +101,7 @@ body {
   width: 82%;
   min-width: fit-content;
   padding: 1em;
+  transition: all 0.5s ease;
 }
 
 .itemName {
@@ -89,6 +111,7 @@ body {
 
 .nameAndDelete:hover {
   background-color: #dce4e7;
+  border-radius: 5px;
 }
 
 .deleteButton {
@@ -99,6 +122,7 @@ body {
   height: 25px;
   width: 25px;
   margin-top: 2px;
+  transition: all 0.5s ease;
 }
 
 .deleteButton:hover {
@@ -162,7 +186,7 @@ body {
 
 .showInput {
   width: 10em;
-  font-weight: medium;
+  font-weight: 500;
   text-align: center;
   margin-top: 0.5em;
   margin-bottom: 0.5em;

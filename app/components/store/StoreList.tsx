@@ -5,6 +5,7 @@ import AddStore from "./AddStore";
 import DeleteStore from "./DeleteStoreButton";
 import apiClient from "../../api/utils/apiClient";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export interface Store {
   Id: number;
@@ -13,7 +14,9 @@ export interface Store {
 }
 
 const StoreList = () => {
+  const router = useRouter();
   const [stores, setStores] = useState<Store[] | undefined>(undefined);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const getStoreInitials = (store: string) => {
     const initials: string[] = [];
@@ -23,6 +26,16 @@ const StoreList = () => {
       initials.push(characters[0]);
     }
     return initials.join("");
+  };
+
+  const determineStoreColor = (index: number): string => {
+    let color: string | null = "";
+    let num: number = index + 1;
+    if (num % 4 === 0) color = "greyBlue";
+    else if (num % 3 === 0) color = "darkGrey";
+    else if (num % 2 === 0) color = "yellow";
+    else color = "green";
+    return color;
   };
 
   const addNewStore = (newStore: Store) => {
@@ -45,13 +58,31 @@ const StoreList = () => {
     getStores();
   }, []);
 
+  const handleMouseDown = (itemId: number) => {
+    setSelectedId(itemId);
+    setTimeout(() => {
+      setSelectedId(null);
+    }, 5000);
+  };
+
+  const handleClick = (id: number) => {
+    router.push(`/pages/store/${id}`);
+  };
+
   return (
     <>
       <section className="listContainer h-screen">
         <div>
-          {stores?.map((store: Store) => (
-            <section key={store.Id} className="storeCard card">
-              <div className="icon">{getStoreInitials(store.StoreName)}</div>
+          {stores?.map((store: Store, index: number) => (
+            <section
+              key={store.Id}
+              className="storeCard card"
+              onMouseDown={() => handleMouseDown(store.Id)}
+              onClick={() => handleClick(store.Id)}
+            >
+              <div className={`${determineStoreColor(index)} icon`}>
+                {getStoreInitials(store.StoreName)}
+              </div>
               <div className="nameAndDelete">
                 <Link
                   href={`/pages/store/${store.Id}`}
@@ -59,7 +90,9 @@ const StoreList = () => {
                 >
                   {store.StoreName}
                 </Link>
-                <DeleteStore id={store.Id} deleteStore={deleteStore} />
+                {selectedId === store.Id && (
+                  <DeleteStore id={store.Id} deleteStore={deleteStore} />
+                )}
               </div>
             </section>
           ))}

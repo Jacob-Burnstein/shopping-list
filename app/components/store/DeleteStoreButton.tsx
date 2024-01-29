@@ -23,7 +23,11 @@ const DeleteStoreButton: React.FC<DeleteStoreProps> = ({ id, deleteStore }) => {
     }
   };
 
-  return <button onClick={() => handleDelete()}>X</button>;
+  return (
+    <button className="deleteButton" onClick={() => handleDelete()}>
+      -
+    </button>
+  );
 };
 
 export default DeleteStoreButton;

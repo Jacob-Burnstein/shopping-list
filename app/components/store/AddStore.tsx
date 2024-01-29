@@ -30,6 +30,7 @@ const AddStore: React.FC<AddStoreProps> = ({ addNewStore }) => {
         console.error(err);
       }
     }
+    setStoreName("");
   };
 
   return (
