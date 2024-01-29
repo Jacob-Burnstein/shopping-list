@@ -107,7 +107,8 @@ body {
 
 .showInput {
   width: 10em;
-  font-weight: bolder;
+  font-weight: medium;
+  text-align: center;
 }
 
 .loginRegisterForm {

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import apiClient from "../../api/utils/apiClient";
+import Link from "next/link";
 
 const StorePageHeader = () => {
   const [storeName, setStoreName] = useState();
@@ -13,6 +14,7 @@ const StorePageHeader = () => {
   );
 
   const token = localStorage.getItem("token");
+  const username = localStorage.getItem("username");
 
   useEffect(() => {
     const getStoreName = async () => {
@@ -29,12 +31,17 @@ const StorePageHeader = () => {
   return (
     <>
       {token ? (
-        <h1
-          className="underline underline-offset-8 p-2 text-xl
+        <>
+          <Link href={`/pages/user/${username}`}>
+            {" "}
+            <h1
+              className="underline underline-offset-8 p-2 text-xl
         "
-        >
-          {storeName}
-        </h1>
+            >
+              {storeName}
+            </h1>{" "}
+          </Link>
+        </>
       ) : (
         <h1 className="underline underline-offset-4 p-2 text-xl">Welcome</h1>
       )}

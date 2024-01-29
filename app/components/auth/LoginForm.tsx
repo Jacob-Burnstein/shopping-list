@@ -38,7 +38,7 @@ const LoginForm = () => {
         if (data) {
           const { token, username } = await data;
           localStorage.setItem("token", token);
-
+          localStorage.setItem("username", username);
           router.push(`/pages/user/${username}`);
         } else {
           setMessage("Invalid Credentials");

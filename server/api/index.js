@@ -16,16 +16,16 @@ router.get("/users", async (req, res) => {
   }
 });
 
-// Gets user by id
+// Gets user by userId
 router.get("/users/account/:userId", async (req, res) => {
   const { userId } = req.params;
   try {
-    const userInfo = await prisma.user.findUnique({
+    const userDetails = await prisma.user.findUnique({
       where: { Id: +userId },
     });
-    res.json(userInfo);
+    res.json(userDetails);
   } catch (err) {
-    console.error("error fetching user: ", err);
+    console.error("Error fetching user: ", err);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
