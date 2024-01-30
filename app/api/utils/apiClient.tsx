@@ -3,7 +3,9 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useContext } from "react";
 import { getAuthToken } from "../../contexts/AuthUtils";
 
-const baseURL = "http://localhost:3000/api";
+const isDevelopment = process.env.NODE_ENV === "development";
+
+const baseURL = isDevelopment ? "http://localhost:3000/api" : "/api";
 
 const apiClient = axios.create({
   baseURL,
