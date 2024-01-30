@@ -1,4 +1,7 @@
 import axios from "axios";
+import { useAuth } from "../../contexts/AuthContext";
+import { useContext } from "react";
+import { getAuthToken } from "../../contexts/AuthUtils";
 
 const baseURL = "http://localhost:3000/api";
 
@@ -11,10 +14,14 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const authContext = useAuth();
+    const token = getAuthToken(authContext);
+    console.log("Token from APICLIENT:", token);
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
     return config;
   },
   (error) => {

@@ -2,15 +2,16 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useAuth } from "../../contexts/AuthContext";
 
 const NavBar = () => {
-  const token = localStorage.getItem("token");
-  const username = localStorage.getItem("username");
+  const { token, logout, username } = useAuth();
+  console.log("token from nav:", token);
+
   const [navClick, setNavClick] = useState<boolean>(false);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
+    logout();
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLElement>) => {

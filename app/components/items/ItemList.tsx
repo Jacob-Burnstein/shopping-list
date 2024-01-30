@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import DeleteButton from "./DeleteItemButton";
 import AddItem from "./AddItem";
-import apiClient from "../../api/utils/apiClient";
+import createAuthenticatedApiClient from "../../api/utils/authenticatedApiClient";
 import "../../globals.css";
 
 export interface ListItem {
@@ -15,6 +15,7 @@ export interface ListItem {
   UserId: number;
 }
 const ItemList = () => {
+  const apiClient = createAuthenticatedApiClient();
   const pathname = usePathname();
   const splitPathname = pathname.split("/");
   const storeIdToUse: number = parseInt(

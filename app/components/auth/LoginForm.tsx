@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import apiClient from "../../api/utils/apiClient";
+// import apiClient from "../../api/utils/apiClient";
+import createAuthenticatedApiClient from "../../api/utils/authenticatedApiClient";
 import axios, { isAxiosError } from "axios";
 import { useRouter } from "next/navigation";
+import { useAuth } from "../../contexts/AuthContext";
 
 interface FormData {
   username: string;
@@ -12,6 +14,8 @@ interface FormData {
 
 const LoginForm = () => {
   const router = useRouter();
+  const apiClient = createAuthenticatedApiClient();
+  const { login, logUsername } = useAuth();
 
   const [formData, setFormData] = useState<FormData>({
     username: "",
@@ -28,17 +32,22 @@ const LoginForm = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (formData.username.length < 1 && formData.password.length < 1) {
       setMessage("Please fill out both fields");
     } else {
       try {
-        const { data } = await apiClient.post("/users/login", formData);
+        const { data } = await apiClient.post(
+          "http://localhost:3000/api/users/login",
+          formData
+        );
+
         if (data) {
           const { token, username } = await data;
-          localStorage.setItem("token", token);
-          localStorage.setItem("username", username);
+          login(token);
+          logUsername(username);
           router.push(`/pages/user/${username}`);
         } else {
           setMessage("Invalid Credentials");
@@ -52,7 +61,7 @@ const LoginForm = () => {
   };
 
   return (
-    <form className="loginRegisterForm">
+    <form className="loginRegisterForm" onSubmit={handleSubmit}>
       <label>Username: </label>
       <input
         type="text"
@@ -68,7 +77,7 @@ const LoginForm = () => {
         onChange={handleChange}
       />
       {message && <p>{message}</p>}
-      <button onClick={handleSubmit}>Log In</button>
+      <button type="submit">Log In</button>
     </form>
   );
 };
