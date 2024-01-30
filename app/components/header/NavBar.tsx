@@ -2,15 +2,17 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useAuth } from "../../contexts/AuthContext";
 
 const NavBar = () => {
-  const token = localStorage.getItem("token");
-  const username = localStorage.getItem("username");
+  const { token, login, logout } = useAuth();
+  console.log("token: ", token);
+  // const username = localStorage.getItem("username");
+
   const [navClick, setNavClick] = useState<boolean>(false);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
+    logout();
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -35,7 +37,7 @@ const NavBar = () => {
             </nav>
           ) : (
             <nav className="linksContainer flex flex-col">
-              <Link href={`/pages/user/${username}`}>My Stores</Link>
+              {/* <Link href={`/pages/user/${username}`}>My Stores</Link> */}
               <Link href="/" onClick={handleLogout}>
                 Log Out
               </Link>
