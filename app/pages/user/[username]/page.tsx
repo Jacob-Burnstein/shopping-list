@@ -1,5 +1,3 @@
-import NavBar from "../../../components/header/NavBar";
-import LogOutLink from "../../../components/footerLinks/LogOutLink";
 import StoreList from "../../../components/store/StoreList";
 
 const UserPage = () => {
@@ -8,9 +6,6 @@ const UserPage = () => {
       <main>
         <StoreList />
       </main>
-      <footer>
-        <LogOutLink />
-      </footer>
     </>
   );
 };
