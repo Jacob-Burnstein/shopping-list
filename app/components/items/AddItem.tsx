@@ -3,13 +3,15 @@
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 import { ListItem } from "./ItemList";
-import apiClient from "../../api/utils/apiClient";
+// import apiClient from "../../api/utils/apiClient";
+import createAuthenticatedApiClient from "../../api/utils/authenticatedApiClient";
 
 interface AddItemProps {
   addNewItem: (newItem: ListItem) => void;
 }
 
 const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
+  const apiClient = createAuthenticatedApiClient();
   const pathname = usePathname();
   const splitPathname = pathname.split("/");
   const storeIdToUse: number = parseInt(

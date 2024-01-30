@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import createAuthenticatedApiClient from "../../api/utils/authenticatedApiClient";
 
 interface DeleteButtonProps {
   id: number;
@@ -8,16 +9,11 @@ interface DeleteButtonProps {
 }
 
 const DeleteItemButton: React.FC<DeleteButtonProps> = ({ id, deleteItem }) => {
+  const apiClient = createAuthenticatedApiClient();
   const handleDelete = async () => {
     deleteItem(id);
     try {
-      await fetch(`http://localhost:3000/api/list/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id }),
-      });
+      await apiClient.delete(`/list/${id}`);
     } catch (err) {
       console.error(err);
     }

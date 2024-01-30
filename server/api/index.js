@@ -76,25 +76,12 @@ const authenticateToken = (req, res, next) => {
       return res.status(403).send("Forbidden");
     }
     req.user = user;
+    console.log("user after authentication: ", user);
     next();
   });
 };
 
 router.use(authenticateToken);
-
-// // Gets user by userId
-// router.get("/users/account/:userId", async (req, res) => {
-//   const { userId } = req.params;
-//   try {
-//     const userDetails = await prisma.user.findUnique({
-//       where: { Id: +userId },
-//     });
-//     res.json(userDetails);
-//   } catch (err) {
-//     console.error("Error fetching user: ", err);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// });
 
 // // Gets stores by UserId
 router.get("/users/stores", async (req, res) => {
@@ -169,17 +156,17 @@ router.post("/list/:id", async (req, res) => {
   const { id } = req.params;
   const StoreId = +id;
   const { ItemName } = req.body;
-
   try {
     await prisma.itemList.create({
       data: {
         ItemName: ItemName,
-        UserId: req.user.Id,
+        UserId: req.user.id,
         StoreId: StoreId,
       },
     });
     res.status(200).send("Item added successfully");
   } catch (err) {
+    res.send("Error adding Item");
     console.error(err);
   }
 });

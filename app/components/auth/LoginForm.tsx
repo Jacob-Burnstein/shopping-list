@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import apiClient from "../../api/utils/apiClient";
+// import apiClient from "../../api/utils/apiClient";
+import createAuthenticatedApiClient from "../../api/utils/authenticatedApiClient";
 import axios, { isAxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../contexts/AuthContext";
@@ -13,6 +14,7 @@ interface FormData {
 
 const LoginForm = () => {
   const router = useRouter();
+  const apiClient = createAuthenticatedApiClient();
   const { login, logUsername } = useAuth();
 
   const [formData, setFormData] = useState<FormData>({
@@ -37,7 +39,10 @@ const LoginForm = () => {
       setMessage("Please fill out both fields");
     } else {
       try {
-        const { data } = await apiClient.post("/users/login", formData);
+        const { data } = await apiClient.post(
+          "http://localhost:3000/api/users/login",
+          formData
+        );
 
         if (data) {
           const { token, username } = await data;

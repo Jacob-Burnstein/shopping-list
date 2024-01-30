@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode } from "react";
 
-interface AuthContextProps {
+export interface AuthContextProps {
   token: string | null;
   username: string | null;
   logUsername: (newUsername: string) => void;
