@@ -5,9 +5,8 @@ import Link from "next/link";
 import { useAuth } from "../../contexts/AuthContext";
 
 const NavBar = () => {
-  const { token, login, logout } = useAuth();
-  console.log("token: ", token);
-  // const username = localStorage.getItem("username");
+  const { token, logout, username } = useAuth();
+  console.log("token from nav:", token);
 
   const [navClick, setNavClick] = useState<boolean>(false);
 
@@ -37,7 +36,7 @@ const NavBar = () => {
             </nav>
           ) : (
             <nav className="linksContainer flex flex-col">
-              {/* <Link href={`/pages/user/${username}`}>My Stores</Link> */}
+              <Link href={`/pages/user/${username}`}>My Stores</Link>
               <Link href="/" onClick={handleLogout}>
                 Log Out
               </Link>

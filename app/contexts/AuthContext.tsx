@@ -4,6 +4,8 @@ import { createContext, useContext, useState, ReactNode } from "react";
 
 interface AuthContextProps {
   token: string | null;
+  username: string | null;
+  logUsername: (newUsername: string) => void;
   login: (newToken: string) => void;
   logout: () => void;
 }
@@ -16,6 +18,11 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
+  const [username, setUsername] = useState<string | null>(null);
+
+  const logUsername = (newUsername: string) => {
+    setUsername(newUsername);
+  };
 
   const login = (newToken: string) => {
     setToken(newToken);
@@ -27,6 +34,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const value: AuthContextProps = {
     token,
+    username,
+    logUsername,
     login,
     logout,
   };

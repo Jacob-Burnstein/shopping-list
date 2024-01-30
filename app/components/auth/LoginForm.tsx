@@ -13,7 +13,7 @@ interface FormData {
 
 const LoginForm = () => {
   const router = useRouter();
-  const { login } = useAuth();
+  const { login, logUsername } = useAuth();
 
   const [formData, setFormData] = useState<FormData>({
     username: "",
@@ -42,7 +42,7 @@ const LoginForm = () => {
         if (data) {
           const { token, username } = await data;
           login(token);
-
+          logUsername(username);
           router.push(`/pages/user/${username}`);
         } else {
           setMessage("Invalid Credentials");
