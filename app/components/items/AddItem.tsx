@@ -5,13 +5,15 @@ import { usePathname } from "next/navigation";
 import { ListItem } from "./ItemList";
 // import apiClient from "../../api/utils/apiClient";
 import createAuthenticatedApiClient from "../../api/utils/authenticatedApiClient";
+import { useAuth } from "../../contexts/AuthContext";
 
 interface AddItemProps {
   addNewItem: (newItem: ListItem) => void;
 }
 
 const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
-  const apiClient = createAuthenticatedApiClient();
+  const authContext = useAuth();
+  const apiClient = createAuthenticatedApiClient(authContext);
   const pathname = usePathname();
   const splitPathname = pathname.split("/");
   const storeIdToUse: number = parseInt(

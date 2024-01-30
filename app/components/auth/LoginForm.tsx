@@ -14,7 +14,8 @@ interface FormData {
 
 const LoginForm = () => {
   const router = useRouter();
-  const apiClient = createAuthenticatedApiClient();
+  const authContext = useAuth();
+  const apiClient = createAuthenticatedApiClient(authContext);
   const { login, logUsername } = useAuth();
 
   const [formData, setFormData] = useState<FormData>({

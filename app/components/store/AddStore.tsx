@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { Store } from "./StoreList";
 import createAuthenticatedApiClient from "../../api/utils/authenticatedApiClient";
+import { useAuth } from "../../contexts/AuthContext";
 
 interface AddStoreProps {
   addNewStore: (newStore: Store) => void;
 }
 
 const AddStore: React.FC<AddStoreProps> = ({ addNewStore }) => {
-  const apiClient = createAuthenticatedApiClient;
+  const authContext = useAuth();
+  const apiClient = createAuthenticatedApiClient(authContext);
   const [storeName, setStoreName] = useState<string>("");
   const [clicked, setClicked] = useState<boolean>(false);
 

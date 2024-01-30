@@ -1,8 +1,9 @@
 import axios from "axios";
-import { useAuth } from "../../contexts/AuthContext";
+import { getAuthToken } from "../../contexts/AuthUtils";
+import { AuthContextProps } from "../../contexts/AuthContext";
 
-const createAuthenticatedApiClient = () => {
-  const { token } = useAuth();
+const createAuthenticatedApiClient = (authContext: AuthContextProps) => {
+  const token = getAuthToken(authContext);
 
   const baseURL = "http://localhost:3000/api";
 

@@ -5,6 +5,7 @@ import AddStore from "./AddStore";
 import DeleteStore from "./DeleteStoreButton";
 // import apiClient from "../../api/utils/apiClient";
 import createAuthenticatedApiClient from "../../api/utils/authenticatedApiClient";
+import { useAuth } from "../../contexts/AuthContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -16,7 +17,8 @@ export interface Store {
 
 const StoreList = () => {
   const router = useRouter();
-  const apiClient = createAuthenticatedApiClient();
+  const authContext = useAuth();
+  const apiClient = createAuthenticatedApiClient(authContext);
   const [stores, setStores] = useState<Store[] | undefined>(undefined);
   const [selectedId, setSelectedId] = useState<number | null>(null);
 

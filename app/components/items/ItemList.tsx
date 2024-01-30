@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import DeleteButton from "./DeleteItemButton";
 import AddItem from "./AddItem";
 import createAuthenticatedApiClient from "../../api/utils/authenticatedApiClient";
+import { useAuth } from "../../contexts/AuthContext";
 import "../../globals.css";
 
 export interface ListItem {
@@ -15,7 +16,8 @@ export interface ListItem {
   UserId: number;
 }
 const ItemList = () => {
-  const apiClient = createAuthenticatedApiClient();
+  const authContext = useAuth();
+  const apiClient = createAuthenticatedApiClient(authContext);
   const pathname = usePathname();
   const splitPathname = pathname.split("/");
   const storeIdToUse: number = parseInt(
