@@ -20,24 +20,34 @@ const NavBar = () => {
 
   return (
     <>
-      <section className="navBar cursor-pointer z-10 border">
-        <span
-          className="material-symbols-outlined transform scale-150 relative"
-          onClick={handleNavClick}
-        >
-          menu
-        </span>
+      <div className="menu-icon" onClick={handleNavClick}>
+        <div className="bar"></div>
+        <div className="bar"></div>
+        <div className="bar"></div>
+      </div>
+      <section
+        className="navBar cursor-pointer flex flex-col"
+        onClick={handleNavClick}
+      >
         <nav className={navClick ? "z-20" : "hidden"}>
           {!token ? (
-            <nav className="linksContainer">
-              <Link href="/">Home</Link>
-              <Link href="/pages/login">Log In</Link>
-              <Link href="/pages/register">Create Account</Link>
+            <nav className="linksContainer flex flex-col text-right">
+              <Link className="navLink" href="/">
+                Home
+              </Link>
+              <Link className="navLink" href="/pages/login">
+                Log In
+              </Link>
+              <Link className="navLink" href="/pages/register">
+                Create Account
+              </Link>
             </nav>
           ) : (
-            <nav className="linksContainer flex flex-col">
-              <Link href={`/pages/user/${username}`}>My Stores</Link>
-              <Link href="/" onClick={handleLogout}>
+            <nav className="linksContainer flex flex-col text-right">
+              <Link className="navLink" href={`/pages/user/${username}`}>
+                My Stores
+              </Link>
+              <Link className="navLink" href="/" onClick={handleLogout}>
                 Log Out
               </Link>
             </nav>

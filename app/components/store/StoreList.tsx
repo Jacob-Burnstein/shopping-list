@@ -53,7 +53,7 @@ const StoreList = () => {
   useEffect(() => {
     const getStores = async () => {
       try {
-        const response = await apiClient.get("/users/stores");
+        const response = await apiClient.get("/stores/getStores");
         setStores(response.data);
       } catch (err) {
         console.error(err);
