@@ -77,6 +77,21 @@ body {
   }
 }
 
+.homeIcon {
+  width: 10em;
+  height: 10em;
+  background-color: #6c8280;
+  margin: 1em;
+  color: #dce4e7;
+  font-weight: 800;
+  font-size: 15px;
+  /* text-align: center; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
 .card {
   display: flex;
   justify-content: space-between;
