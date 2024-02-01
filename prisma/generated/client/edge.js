@@ -32,11 +32,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.8.1
- * Query Engine version: 78caf6feeaed953168c64e15a249c3e9a033ebe2
+ * Query Engine version: 23fdc5965b1e05fc54e5f26ed3de66776b93de64
  */
 Prisma.prismaVersion = {
   client: "5.8.1",
-  engine: "78caf6feeaed953168c64e15a249c3e9a033ebe2"
+  engine: "23fdc5965b1e05fc54e5f26ed3de66776b93de64"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -145,23 +145,27 @@ const config = {
         "fromEnvVar": null,
         "value": "darwin-arm64",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "rhel-openssl-1.0.x"
       }
     ],
     "previewFeatures": [],
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../..",
   "clientVersion": "5.8.1",
-  "engineVersion": "78caf6feeaed953168c64e15a249c3e9a033ebe2",
+  "engineVersion": "23fdc5965b1e05fc54e5f26ed3de66776b93de64",
   "datasourceNames": [
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -170,8 +174,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "Ly8gVGhpcyBpcyB5b3VyIFByaXNtYSBzY2hlbWEgZmlsZSwKLy8gbGVhcm4gbW9yZSBhYm91dCBpdCBpbiB0aGUgZG9jczogaHR0cHM6Ly9wcmlzLmx5L2QvcHJpc21hLXNjaGVtYQoKCmdlbmVyYXRvciBjbGllbnQgewogIHByb3ZpZGVyID0gInByaXNtYS1jbGllbnQtanMiCiAgb3V0cHV0ICAgPSAiLi9nZW5lcmF0ZWQvY2xpZW50Igp9CgpkYXRhc291cmNlIGRiIHsKICBwcm92aWRlciA9ICJwb3N0Z3Jlc3FsIgogIHVybCA9IGVudigiUE9TVEdSRVNfUFJJU01BX1VSTCIpIAogIGRpcmVjdFVybCA9IGVudigiUE9TVEdSRVNfVVJMX05PTl9QT09MSU5HIikgCn0KCgptb2RlbCBVc2VyIHsKICBJZCBJbnQgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkKICBVc2VyTmFtZSBTdHJpbmcgQHVuaXF1ZQogIFBhc3N3b3JkIFN0cmluZwogIFN0b3JlcyBTdG9yZVtdCiAgSXRlbUxpc3RzIEl0ZW1MaXN0W10KICBAQG1hcCgiVXNlcnMiKQp9Cgptb2RlbCBTdG9yZSB7CiAgSWQgSW50IEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkgQHVuaXF1ZQogIFN0b3JlTmFtZSBTdHJpbmcKICBVc2VyIFVzZXIgQHJlbGF0aW9uKGZpZWxkczogW1VzZXJJZF0scmVmZXJlbmNlczogW0lkXSApCiAgVXNlcklkIEludAogIEl0ZW1MaXN0cyBJdGVtTGlzdFtdCiAgQEBtYXAoIlN0b3JlcyIpCn0KCm1vZGVsIEl0ZW1MaXN0IHsKICBJZCBJbnQgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkKICBJdGVtTmFtZSBTdHJpbmcKICBTdG9yZUlkIEludAogIENoZWNrZWQgQm9vbGVhbiBAZGVmYXVsdChmYWxzZSkKICBVc2VyIFVzZXIgQHJlbGF0aW9uKGZpZWxkczogW1VzZXJJZF0sIHJlZmVyZW5jZXM6IFtJZF0pCiAgVXNlcklkIEludAogIFN0b3JlIFN0b3JlIEByZWxhdGlvbihmaWVsZHM6IFtTdG9yZUlkXSwgcmVmZXJlbmNlczogW0lkXSkKfQ==",
-  "inlineSchemaHash": "3d5a20b70249ef6b1d3cf6430b5ddbdc270cfd604c5f15766e51baa76c0e3a44",
+  "inlineSchema": "Ly8gVGhpcyBpcyB5b3VyIFByaXNtYSBzY2hlbWEgZmlsZSwKLy8gbGVhcm4gbW9yZSBhYm91dCBpdCBpbiB0aGUgZG9jczogaHR0cHM6Ly9wcmlzLmx5L2QvcHJpc21hLXNjaGVtYQoKCmdlbmVyYXRvciBjbGllbnQgewogIHByb3ZpZGVyID0gInByaXNtYS1jbGllbnQtanMiCiAgYmluYXJ5VGFyZ2V0cyA9IFsibmF0aXZlIiwgInJoZWwtb3BlbnNzbC0xLjAueCJdCiAgb3V0cHV0ICAgPSAiLi9nZW5lcmF0ZWQvY2xpZW50Igp9CgpkYXRhc291cmNlIGRiIHsKICBwcm92aWRlciA9ICJwb3N0Z3Jlc3FsIgogIHVybCA9IGVudigiUE9TVEdSRVNfUFJJU01BX1VSTCIpIAogIGRpcmVjdFVybCA9IGVudigiUE9TVEdSRVNfVVJMX05PTl9QT09MSU5HIikgCn0KCgptb2RlbCBVc2VyIHsKICBJZCBJbnQgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkKICBVc2VyTmFtZSBTdHJpbmcgQHVuaXF1ZQogIFBhc3N3b3JkIFN0cmluZwogIFN0b3JlcyBTdG9yZVtdCiAgSXRlbUxpc3RzIEl0ZW1MaXN0W10KICBAQG1hcCgiVXNlcnMiKQp9Cgptb2RlbCBTdG9yZSB7CiAgSWQgSW50IEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkgQHVuaXF1ZQogIFN0b3JlTmFtZSBTdHJpbmcKICBVc2VyIFVzZXIgQHJlbGF0aW9uKGZpZWxkczogW1VzZXJJZF0scmVmZXJlbmNlczogW0lkXSApCiAgVXNlcklkIEludAogIEl0ZW1MaXN0cyBJdGVtTGlzdFtdCiAgQEBtYXAoIlN0b3JlcyIpCn0KCm1vZGVsIEl0ZW1MaXN0IHsKICBJZCBJbnQgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkKICBJdGVtTmFtZSBTdHJpbmcKICBTdG9yZUlkIEludAogIENoZWNrZWQgQm9vbGVhbiBAZGVmYXVsdChmYWxzZSkKICBVc2VyIFVzZXIgQHJlbGF0aW9uKGZpZWxkczogW1VzZXJJZF0sIHJlZmVyZW5jZXM6IFtJZF0pCiAgVXNlcklkIEludAogIFN0b3JlIFN0b3JlIEByZWxhdGlvbihmaWVsZHM6IFtTdG9yZUlkXSwgcmVmZXJlbmNlczogW0lkXSkKfQ==",
+  "inlineSchemaHash": "bd43969a89a57f293ece43b7f33df0d0fe5499ea95d0474ce92b9df31d45d1af",
   "noEngine": false
 }
 config.dirname = '/'
