@@ -40,7 +40,7 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (confirmFormValidity()) {
+    if (confirmFormValidity())
       try {
         const { data } = await apiClient.post("/auth/register", {
           username,
@@ -57,7 +57,6 @@ const RegisterForm = () => {
           setMessage(err.response?.data.message);
         }
       }
-    } else setMessage("Something went wrong");
   };
 
   return (
