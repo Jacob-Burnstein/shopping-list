@@ -11,20 +11,12 @@ const createAuthenticatedApiClient = (authContext: AuthContextProps) => {
 
   const apiClient = axios.create({
     baseURL,
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: token ? `Bearer ${token}` : "",
+    },
   });
 
-  apiClient.interceptors.request.use(
-    (config) => {
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
-      return config;
-    },
-    (err) => {
-      return Promise.reject(err);
-    }
-  );
   return apiClient;
 };
 

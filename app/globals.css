@@ -25,10 +25,38 @@ body {
     background-color: #f5f7f8;
     width: 20em;
   }
+
+  .menu-icon {
+    align-self: flex-end;
+  }
+
   .navBar {
     max-width: 20em;
     align-self: flex-end;
     color: #45474b;
+  }
+
+  .bar {
+    background-color: #45474b;
+    width: 25px;
+    height: 3px;
+    margin: 5px 0;
+  }
+
+  .bar:hover {
+    background-color: #f4ce14;
+  }
+
+  .navLink {
+    /* border: solid; */
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    font-weight: bolder;
+    color: #6c8280;
+  }
+
+  .navLink:hover {
+    color: #f4ce14;
   }
 
   .addButton {

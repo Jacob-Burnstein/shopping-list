@@ -18,6 +18,8 @@ export interface Store {
 const StoreList = () => {
   const router = useRouter();
   const authContext = useAuth();
+  const { token } = useAuth();
+  console.log("token frmo stores:", token);
   const apiClient = createAuthenticatedApiClient(authContext);
   const [stores, setStores] = useState<Store[] | undefined>(undefined);
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -53,7 +55,7 @@ const StoreList = () => {
   useEffect(() => {
     const getStores = async () => {
       try {
-        const response = await apiClient.get("/users/stores");
+        const response = await apiClient.get("/stores");
         setStores(response.data);
       } catch (err) {
         console.error(err);

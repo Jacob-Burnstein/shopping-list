@@ -29,7 +29,7 @@ const ItemList = () => {
 
   const handleCheckBoxChange = async (item: ListItem) => {
     try {
-      const response = await apiClient.post("/list/check", item);
+      const response = await apiClient.post("/items/check", item);
       if (response.status === 200) {
         setListItems((prevList) =>
           prevList?.map((prevItem) =>
@@ -55,7 +55,7 @@ const ItemList = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const response = await apiClient.get(`/list/${storeIdToUse}`);
+        const response = await apiClient.get(`/items/${storeIdToUse}`);
         setListItems(response.data);
       } catch (err) {
         console.error(err);
