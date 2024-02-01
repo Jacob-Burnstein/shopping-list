@@ -1,13 +1,9 @@
 import { NextResponse, NextRequest } from "next/server";
 import prisma from "../../../../prisma/index";
-import { useParams } from "next/navigation";
+import getId from "../../../utils/";
 
 export async function DELETE(req: NextRequest, res: NextResponse) {
-  const splitUrl = req.url.split("");
-  const storeId: number = parseInt(splitUrl[splitUrl.length - 1]);
-
-  console.log("Id: ", storeId);
-
+  const storeId = getId(req.url);
   try {
     await prisma.store.delete({
       where: {
