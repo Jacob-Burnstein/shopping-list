@@ -23,8 +23,6 @@ const LoginForm = () => {
     password: "",
   });
 
-  console.log("form data: ", formData);
-
   const { username, password } = formData;
 
   const [message, setMessage] = useState("");

@@ -1,12 +1,16 @@
 import { NextResponse, NextRequest } from "next/server";
 import prisma from "../../../../prisma/index";
 const jwt = require("jsonwebtoken");
+import { cookies } from "next/headers";
 
 export async function POST(
   req: Request | NextRequest,
   res: Response | NextResponse
 ) {
+  const cookieStore = cookies();
+
   const formData = await req.formData();
+
   const username = formData.get("username");
   const password = formData.get("password");
   if (
@@ -38,8 +42,10 @@ export async function POST(
           { status: 401 }
         );
       } else {
+        const tokenValue = jwt.sign({ id: userExists.Id }, process.env.JWT);
+        cookieStore.set("token", tokenValue);
         return NextResponse.json({
-          token: jwt.sign({ id: userExists.Id }, process.env.JWT),
+          token: tokenValue,
           message: "Successful Login!!",
           username: userExists.UserName,
         });
@@ -48,4 +54,5 @@ export async function POST(
       console.error(err);
       return NextResponse.json({ message: "Internal Server Error" });
     }
+  return NextResponse.json({ message: "Internal Server Error" });
 }

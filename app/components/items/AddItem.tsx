@@ -31,16 +31,8 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (itemName.length > 0) {
-      const itemToAdd: ListItem = {
-        ItemName: itemName,
-        UserId: 0,
-        StoreId: 0,
-        Checked: false,
-        Id: 0,
-      };
       try {
-        console.log("item to add: ", itemToAdd);
-        await apiClient.post(`/items/${storeIdToUse}`, itemToAdd);
+        await apiClient.post(`/items/${storeIdToUse}`, { itemName });
         const { data } = await apiClient.get(`/items/${storeIdToUse}`);
         const updatedItemDetails = data[data.length - 1];
         addNewItem(updatedItemDetails);

@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import prisma from "../../../../prisma/index";
-import getId from "../../../utils/";
+import getId from "../../../utils/getIdFromUrl";
 
 export async function DELETE(req: NextRequest, res: NextResponse) {
   const storeId = getId(req.url);

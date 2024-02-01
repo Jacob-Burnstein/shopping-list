@@ -1,13 +1,25 @@
+import { getAuthToken } from "./../../contexts/AuthUtils";
 import { NextResponse, NextRequest } from "next/server";
+import { cookies } from "next/headers";
 import prisma from "../../../prisma/index";
+import getIdFromToken from "../../utils/getIdFromToken";
+
+interface TokenInfo {
+  name?: string;
+  value?: string;
+  path?: string;
+}
 
 export async function GET(
   req: Request | NextRequest,
   res: Response | NextResponse
 ) {
   try {
+    const cookieStore = cookies();
+    const tokenInfo: TokenInfo | undefined = cookieStore.get("token");
+    const userId = getIdFromToken(tokenInfo);
     const stores = await prisma.store.findMany({
-      where: { UserId: 1 },
+      where: { UserId: userId },
     });
     return NextResponse.json(stores);
   } catch (err) {
