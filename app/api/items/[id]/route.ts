@@ -37,3 +37,16 @@ export async function POST(
     }
   } else return NextResponse.json({ error: "Invalid Item Name" });
 }
+
+export async function DELETE(req: NextRequest, res: NextResponse) {
+  const itemId = getId(req.url);
+  try {
+    await prisma.itemList.delete({
+      where: { Id: itemId },
+    });
+    return NextResponse.json("Item deleted successfully");
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json(err);
+  }
+}
