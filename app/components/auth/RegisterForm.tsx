@@ -42,9 +42,12 @@ const RegisterForm = () => {
     e.preventDefault();
     if (confirmFormValidity()) {
       try {
-        const { data } = await apiClient.post("/users", formData);
+        const { data } = await apiClient.post("/auth/register", {
+          username,
+          password,
+        });
         if (data) {
-          setMessage(data);
+          setMessage(data.message);
         } else {
           setMessage("Something went wrong");
           return;
@@ -54,8 +57,7 @@ const RegisterForm = () => {
           setMessage(err.response?.data.message);
         }
       }
-    }
-    setMessage("Something went wrong");
+    } else setMessage("Something went wrong");
   };
 
   return (
