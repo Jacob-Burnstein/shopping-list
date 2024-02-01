@@ -1,89 +1,89 @@
-// // const router = require("express").Router();
-// // const { PrismaClient } = require("@prisma/client");
-// // const jwt = require("jsonwebtoken");
+// const router = require("express").Router();
+// const { PrismaClient } = require("@prisma/client");
+// const jwt = require("jsonwebtoken");
 
-// // const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
-// // ///////// AUTH
-// // Register
-// router.post("/users", async (req, res) => {
-//   const { username, password } = req.body;
-//   try {
-//     const userExists = await prisma.user.findUnique({
-//       where: {
-//         UserName: username,
-//       },
-//     });
-//     if (userExists) {
-//       return res
-//         .status(409)
-//         .send({ message: "A user with that name already exists." });
-//     } else {
-//       await prisma.user.create({
-//         data: {
-//           UserName: username,
-//           Password: password,
-//         },
-//       });
-//       res.status(201).send("User created!");
-//     }
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).send("Internal server error.");
+// ///////// AUTH
+// Register
+router.post("/users", async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const userExists = await prisma.user.findUnique({
+      where: {
+        UserName: username,
+      },
+    });
+    if (userExists) {
+      return res
+        .status(409)
+        .send({ message: "A user with that name already exists." });
+    } else {
+      await prisma.user.create({
+        data: {
+          UserName: username,
+          Password: password,
+        },
+      });
+      res.status(201).send("User created!");
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal server error.");
+  }
+});
+
+// User login
+router.post("/users/login", async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const userExists = await prisma.user.findUnique({
+      where: {
+        UserName: username,
+      },
+    });
+    const correctPassword = await prisma.user.findUnique({
+      where: {
+        UserName: username,
+        Password: password,
+      },
+    });
+    if (!userExists) {
+      return res.status(404).json({ message: "Username not found" });
+    } else if (!correctPassword) {
+      return res.status(401).json({ message: "Incorrect password" });
+    } else {
+      return res.json({
+        token: jwt.sign({ id: userExists.Id }, process.env.JWT),
+        message: "Successful Login!!",
+        username: userExists.UserName,
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// const authenticateToken = (req, res, next) => {
+//   const token =
+//     req.headers.authorization && req.headers.authorization.split(" ")[1];
+//   if (!token) {
+//     return res.status(401).send("Unauthorized");
 //   }
-// });
-
-// // User login
-// router.post("/users/login", async (req, res) => {
-//   const { username, password } = req.body;
-//   try {
-//     const userExists = await prisma.user.findUnique({
-//       where: {
-//         UserName: username,
-//       },
-//     });
-//     const correctPassword = await prisma.user.findUnique({
-//       where: {
-//         UserName: username,
-//         Password: password,
-//       },
-//     });
-//     if (!userExists) {
-//       return res.status(404).json({ message: "Username not found" });
-//     } else if (!correctPassword) {
-//       return res.status(401).json({ message: "Incorrect password" });
-//     } else {
-//       return res.json({
-//         token: jwt.sign({ id: userExists.Id }, process.env.JWT),
-//         message: "Successful Login!!",
-//         username: userExists.UserName,
-//       });
+//   jwt.verify(token, process.env.JWT, (err, user) => {
+//     if (err) {
+//       return res.status(403).send("Forbidden");
 //     }
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: "Internal server error" });
-//   }
-// });
+//     req.user = user;
+//     console.log("user after authentication: ", user);
+//     next();
+//   });
+// };
 
-// // const authenticateToken = (req, res, next) => {
-// //   const token =
-// //     req.headers.authorization && req.headers.authorization.split(" ")[1];
-// //   if (!token) {
-// //     return res.status(401).send("Unauthorized");
-// //   }
-// //   jwt.verify(token, process.env.JWT, (err, user) => {
-// //     if (err) {
-// //       return res.status(403).send("Forbidden");
-// //     }
-// //     req.user = user;
-// //     console.log("user after authentication: ", user);
-// //     next();
-// //   });
-// // };
+// router.use(authenticateToken);
 
-// // router.use(authenticateToken);
-
-// // // Gets stores by UserId
+// // Gets stores by UserId
 // router.get("/users/stores", async (req, res) => {
 //   try {
 //     const stores = await prisma.store.findMany({
@@ -95,7 +95,7 @@
 //   }
 // });
 
-// // Gets list by store
+// Gets list by store
 // router.get("/list/:id", async (req, res) => {
 //   const { id } = req.params;
 //   try {
@@ -109,18 +109,18 @@
 //   }
 // });
 
-// // Gets store details
-// // router.get("/stores/:storeId", async (req, res) => {
-// //   const { storeId } = req.params;
-// //   try {
-// //     const response = await prisma.store.findUnique({ where: { Id: +storeId } });
-// //     res.json(response);
-// //   } catch (err) {
-// //     console.error(err);
-// //   }
-// // });
+// Gets store details
+// router.get("/stores/:storeId", async (req, res) => {
+//   const { storeId } = req.params;
+//   try {
+//     const response = await prisma.store.findUnique({ where: { Id: +storeId } });
+//     res.json(response);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// });
 
-// // Checks or unchecks items
+// Checks or unchecks items
 // router.post("/list/check", async (req, res) => {
 //   const { Id, Checked } = req.body;
 //   if (!Checked) {
@@ -151,7 +151,7 @@
 //     }
 // });
 
-// // Adds item to list
+// Adds item to list
 // router.post("/list/:id", async (req, res) => {
 //   const { id } = req.params;
 //   const StoreId = +id;
@@ -171,7 +171,7 @@
 //   }
 // });
 
-// // Adds store to list
+// Adds store to list
 // router.post("/users/store", async (req, res) => {
 //   const { StoreName } = req.body;
 //   try {
@@ -184,7 +184,7 @@
 //   }
 // });
 
-// //Deletes item from list
+//Deletes item from list
 // router.delete("/list/:id", async (req, res) => {
 //   const { id } = req.params;
 
@@ -200,7 +200,7 @@
 //   }
 // });
 
-// // Deletes store from list
+// Deletes store from list
 // router.delete("/store/:id", async (req, res) => {
 //   const { id } = req.params;
 //   const storeId = parseInt(id);
@@ -216,4 +216,4 @@
 //   }
 // });
 
-// module.exports = router;
+module.exports = router;
