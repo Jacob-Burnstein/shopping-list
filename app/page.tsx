@@ -1,11 +1,11 @@
 import React from "react";
-import StoreList from "./components/items/ItemList";
+import TrialItemList from "./components/home/TrialItemList";
 
 export default function Home() {
   return (
     <>
       <main>
-        <StoreList />
+        <TrialItemList />
       </main>
     </>
   );
