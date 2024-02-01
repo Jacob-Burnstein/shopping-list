@@ -56,6 +56,7 @@ body {
   }
 
   .navLink:hover {
+    transition: 0.3s ease;
     color: #f4ce14;
   }
 
@@ -84,11 +85,11 @@ body {
 }
 
 .icon {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   margin-top: 0.25em;
   color: #f5f7f8;
-  font-weight: 800;
+  font-weight: 1000;
   padding-left: 0.5em;
   padding-top: 0.5em;
   transition: all 0.5s ease;
@@ -163,11 +164,7 @@ body {
   position: relative;
   padding-right: 1em;
   margin-top: 3px;
-  /* margin-bottom: 2px; */
-  /* border: solid; */
-  /* justify-self: center; */
   cursor: pointer;
-  /* font-size: 22px; */
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -190,9 +187,6 @@ body {
 
 .checkmark {
   position: absolute;
-  /* top: 2px;
-  left: 2px; */
-  /* align-self: center; */
   margin-top: 0.95em;
   height: 25px;
   width: 25px;
@@ -222,6 +216,34 @@ body {
 }
 
 .loginRegisterForm {
+  background-color: #dce4e7;
   display: flex;
   flex-direction: column;
+  padding: 4em;
+  padding-top: 2em;
+  border: solid #495e57;
+  border-radius: 15px;
+  font-size: large;
+
+  input {
+    height: 2em;
+    margin-bottom: 1em;
+    background-color: #f5f7f8;
+    border: solid #495e57;
+    border-radius: 5px;
+  }
+
+  button {
+    margin-top: 1em;
+    border: solid #495e57;
+    border-radius: 5px;
+    background-color: #f4ce14;
+  }
+
+  button:hover {
+    transition: 0.5s ease;
+    border-radius: 10px;
+    background-color: #495e57;
+    color: #f5f7f8;
+  }
 }
