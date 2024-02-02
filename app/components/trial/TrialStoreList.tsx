@@ -87,12 +87,13 @@ const TrialStoreList = () => {
           className={clicked ? "showInput p-1 m mb-1" : "hideInput"}
           onChange={handleChange}
         />
+
         <button
           type="submit"
-          className="text-4xl addButton"
+          className={clicked ? "text-base hover:text-lg" : "text-4xl addButton"}
           onClick={() => (clicked ? setClicked(false) : setClicked(true))}
         >
-          {!clicked ? "+" : "-"}
+          {!clicked ? "+" : "Add"}
         </button>
       </form>
     </>
