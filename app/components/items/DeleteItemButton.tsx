@@ -14,7 +14,7 @@ const DeleteItemButton: React.FC<DeleteButtonProps> = ({ id, deleteItem }) => {
   const handleDelete = async () => {
     deleteItem(id);
     try {
-      await apiClient.delete(`/list/${id}`);
+      await apiClient.delete(`/items/${id}`);
     } catch (err) {
       console.error(err);
     }
