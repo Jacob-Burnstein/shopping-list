@@ -6,6 +6,7 @@ import { ListItem } from "./ItemList";
 // import apiClient from "../../api/utils/apiClient";
 import createAuthenticatedApiClient from "../../api/utils/authenticatedApiClient";
 import { useAuth } from "../../contexts/AuthContext";
+import getIdFromUrl from "../../utils/getIdFromUrl";
 
 interface AddItemProps {
   addNewItem: (newItem: ListItem) => void;
@@ -15,10 +16,7 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
   const authContext = useAuth();
   const apiClient = createAuthenticatedApiClient(authContext);
   const pathname = usePathname();
-  const splitPathname = pathname.split("/");
-  const storeIdToUse: number = parseInt(
-    splitPathname[splitPathname.length - 1]
-  );
+  const storeIdToUse = getIdFromUrl(pathname);
 
   const [itemName, setItemName] = useState<string>("");
   const [clicked, setClicked] = useState<boolean>(false);
