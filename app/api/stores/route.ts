@@ -10,6 +10,7 @@ interface TokenInfo {
   path?: string;
 }
 
+// Gets Stores by UserId
 export async function GET(
   req: Request | NextRequest,
   res: Response | NextResponse
@@ -28,6 +29,7 @@ export async function GET(
   }
 }
 
+// Adds store
 export async function POST(
   req: Request | NextRequest,
   res: Response | NextResponse
