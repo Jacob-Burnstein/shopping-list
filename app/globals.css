@@ -272,3 +272,8 @@ body {
   background-color: #495e57;
   color: #f5f7f8;
 }
+
+.trialHeader {
+  color: #f5f7f8;
+  width: 100vw;
+}
