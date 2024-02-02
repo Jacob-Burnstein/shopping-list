@@ -16,7 +16,7 @@ const DeleteStoreButton: React.FC<DeleteStoreProps> = ({ id, deleteStore }) => {
   const handleDelete = async () => {
     deleteStore(id);
     try {
-      await apiClient.delete(`/api/store/${id}`);
+      await apiClient.delete(`/stores/${id}`);
     } catch (err) {
       console.error(err);
     }

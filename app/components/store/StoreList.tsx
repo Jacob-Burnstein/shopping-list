@@ -89,7 +89,6 @@ const StoreList = () => {
               className="storeCard card"
               onMouseEnter={() => handleMouseEnter(store.Id)}
               onMouseLeave={() => handleMouseLeave(store.Id)}
-              onClick={() => handleClick(store.Id)}
             >
               <div className={`${determineStoreColor(index)} icon`}>
                 {getStoreInitials(store.StoreName)}
@@ -98,6 +97,7 @@ const StoreList = () => {
                 <Link
                   href={`/pages/store/${store.Id}`}
                   className="font-semibold text-lg "
+                  onClick={() => handleClick(store.Id)}
                 >
                   {store.StoreName}
                 </Link>

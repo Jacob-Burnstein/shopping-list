@@ -27,7 +27,7 @@ model User {
 model Store {
   Id Int @default(autoincrement()) @unique
   StoreName String
-  User User @relation(fields: [UserId],references: [Id] )
+  User User @relation(fields: [UserId],references: [Id], onDelete: Cascade )
   UserId Int
   ItemLists ItemList[]
   @@map("Stores")
@@ -40,5 +40,5 @@ model ItemList {
   Checked Boolean @default(false)
   User User @relation(fields: [UserId], references: [Id])
   UserId Int
-  Store Store @relation(fields: [StoreId], references: [Id])
+  Store Store @relation(fields: [StoreId], references: [Id], onDelete: Cascade)
 }
