@@ -40,20 +40,20 @@ const AddStore: React.FC<AddStoreProps> = ({ addNewStore }) => {
   return (
     <>
       <form onSubmit={handleSubmit} className="flex flex-col items-center p-3">
-        <button
-          type="submit"
-          onClick={() => setClicked(true)}
-          className="text-4xl addButton"
-        >
-          +
-        </button>
+        {" "}
         <input
           type="text"
           value={storeName || ""}
           onChange={handleChange}
           className={clicked ? "showInput p-1 m mb-1" : "hideInput"}
         />
-        {clicked && <p onClick={() => setClicked(false)}>Hide</p>}
+        <button
+          type="submit"
+          className="text-4xl addButton"
+          onClick={() => (clicked ? setClicked(false) : setClicked(true))}
+        >
+          {!clicked ? "+" : "-"}
+        </button>
       </form>
     </>
   );

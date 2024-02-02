@@ -62,7 +62,10 @@ const TrialItemList = () => {
 
   return (
     <>
-      <section className="listContainer h-screen">
+      <section className="listContainer">
+        {listItems.length < 1 && (
+          <p className="text-center text-xl">Add items here!</p>
+        )}
         {listItems
           ?.sort((a, b) => (a.Checked === b.Checked ? 0 : a.Checked ? 1 : -1))
           .map((item: TrialListItem) => (
@@ -90,7 +93,6 @@ const TrialItemList = () => {
                       item.Checked ? "checkedItem itemName" : "itemName"
                     }
                   >
-                    {" "}
                     {item.ItemName}
                   </p>
                   {selectedName === item.ItemName && (
@@ -107,20 +109,19 @@ const TrialItemList = () => {
           ))}
       </section>
       <form onSubmit={handleSubmit} className="flex flex-col items-center p-3">
-        <button
-          type="submit"
-          onClick={handleButtonClick}
-          className="text-4xl addButton"
-        >
-          +
-        </button>
         <input
           type="text"
           value={itemName || ""}
           className={clicked ? "showInput p-1 m mb-1" : "hideInput"}
           onChange={handleChange}
         />
-        {clicked && <p onClick={() => setClicked(false)}>Hide</p>}
+        <button
+          type="submit"
+          className="text-4xl addButton"
+          onClick={() => (clicked ? setClicked(false) : setClicked(true))}
+        >
+          {!clicked ? "+" : "-"}
+        </button>
       </form>
     </>
   );

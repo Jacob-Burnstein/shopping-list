@@ -7,6 +7,7 @@ const TrialPage = () => {
     <>
       <header>
         <TrialMessage />
+        <h1 className="text-center text-xl pt-3 font-medium">Your List</h1>
       </header>
       <main>
         <TrialItemList />
