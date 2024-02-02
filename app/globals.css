@@ -53,10 +53,10 @@ body {
     padding-bottom: 0.25em;
     font-weight: bolder;
     color: #6c8280;
+    transition: all 0.3s ease;
   }
 
   .navLink:hover {
-    transition: 0.3s ease;
     color: #f4ce14;
   }
 
@@ -80,7 +80,6 @@ body {
 .homeIcon {
   width: 10em;
   height: 10em;
-  background-color: #6c8280;
   margin: 1em;
   color: #dce4e7;
   font-weight: 800;
@@ -90,6 +89,12 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.homeIcon:hover {
+  border-radius: 10px;
 }
 
 .card {
@@ -101,12 +106,13 @@ body {
 
 .icon {
   width: 60px;
-  height: 60px;
-  margin-top: 0.25em;
+  height: 55px;
+  /* margin-top: 0.25em; */
   color: #f5f7f8;
   font-weight: 1000;
   padding-left: 0.5em;
   padding-top: 0.5em;
+  margin: 0.25em;
   transition: all 0.5s ease;
 }
 
@@ -130,9 +136,13 @@ body {
   background-color: #6c8280;
 }
 
+.lightBlue {
+  background-color: #dce4e7;
+}
 .storeCard {
   padding: 0.5em;
   z-index: 0;
+  /* flex-wrap: wrap; */
 }
 
 .nameAndDelete {
@@ -239,26 +249,26 @@ body {
   border: solid #495e57;
   border-radius: 15px;
   font-size: large;
+}
 
-  input {
-    height: 2em;
-    margin-bottom: 1em;
-    background-color: #f5f7f8;
-    border: solid #495e57;
-    border-radius: 5px;
-  }
+.loginRegisterInput {
+  height: 2em;
+  margin-bottom: 1em;
+  background-color: #f5f7f8;
+  border: solid #495e57;
+  border-radius: 5px;
+}
 
-  button {
-    margin-top: 1em;
-    border: solid #495e57;
-    border-radius: 5px;
-    background-color: #f4ce14;
-  }
+.loginRegisterButton {
+  margin-top: 1em;
+  border: solid #495e57;
+  border-radius: 5px;
+  background-color: #f4ce14;
+  transition: all 0.5s ease;
+}
 
-  button:hover {
-    transition: 0.5s ease;
-    border-radius: 10px;
-    background-color: #495e57;
-    color: #f5f7f8;
-  }
+.loginRegisterButton:hover {
+  border-radius: 10px;
+  background-color: #495e57;
+  color: #f5f7f8;
 }

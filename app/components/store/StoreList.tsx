@@ -64,11 +64,15 @@ const StoreList = () => {
     getStores();
   }, []);
 
-  const handleMouseDown = (itemId: number) => {
-    setSelectedId(itemId);
+  const handleMouseEnter = (itemId: number) => {
+    setTimeout(() => {
+      setSelectedId(itemId);
+    }, 100);
+  };
+  const handleMouseLeave = (itemId: number) => {
     setTimeout(() => {
       setSelectedId(null);
-    }, 5000);
+    }, 100);
   };
 
   const handleClick = (id: number) => {
@@ -83,7 +87,8 @@ const StoreList = () => {
             <section
               key={store.Id}
               className="storeCard card"
-              onMouseDown={() => handleMouseDown(store.Id)}
+              onMouseEnter={() => handleMouseEnter(store.Id)}
+              onMouseLeave={() => handleMouseLeave(store.Id)}
               onClick={() => handleClick(store.Id)}
             >
               <div className={`${determineStoreColor(index)} icon`}>

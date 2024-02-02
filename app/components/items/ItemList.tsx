@@ -64,11 +64,15 @@ const ItemList = () => {
     getList();
   }, []);
 
-  const handleMouseDown = (itemId: number) => {
-    setSelectedId(itemId);
+  const handleMouseEnter = (itemId: number) => {
+    setTimeout(() => {
+      setSelectedId(itemId);
+    }, 100);
+  };
+  const handleMouseLeave = (itemId: number) => {
     setTimeout(() => {
       setSelectedId(null);
-    }, 5000);
+    }, 100);
   };
 
   return (
@@ -81,7 +85,8 @@ const ItemList = () => {
               <section key={item.Id}>
                 <div
                   className="listItemCard card"
-                  onMouseDown={() => handleMouseDown(item.Id)}
+                  onMouseEnter={() => handleMouseEnter(item.Id)}
+                  onMouseLeave={() => handleMouseLeave(item.Id)}
                 >
                   <label className="checkboxContainer">
                     <input

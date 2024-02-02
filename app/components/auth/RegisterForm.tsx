@@ -67,6 +67,7 @@ const RegisterForm = () => {
         name="username"
         value={username}
         onChange={handleChange}
+        className="loginRegisterInput"
       />
       <label>Password: </label>
       <input
@@ -74,6 +75,7 @@ const RegisterForm = () => {
         name="password"
         value={password}
         onChange={handleChange}
+        className="loginRegisterInput"
       />
       <label>Confirm Password: </label>
       <input
@@ -81,9 +83,12 @@ const RegisterForm = () => {
         name="confirmedPassword"
         value={confirmedPassword}
         onChange={handleChange}
+        className="loginRegisterInput"
       />
       {message && <p>{message}</p>}
-      <button onClick={handleSubmit}>Create Account</button>
+      <button onClick={handleSubmit} className="loginRegisterButton">
+        Create Account
+      </button>
     </form>
   );
 };

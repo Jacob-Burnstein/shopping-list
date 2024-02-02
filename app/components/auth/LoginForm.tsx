@@ -71,6 +71,7 @@ const LoginForm = () => {
         name="username"
         value={username}
         onChange={handleChange}
+        className="loginRegisterInput"
       />
       <label>Password: </label>
       <input
@@ -78,9 +79,12 @@ const LoginForm = () => {
         name="password"
         value={password}
         onChange={handleChange}
+        className="loginRegisterInput"
       />
       {message && <p>{message}</p>}
-      <button type="submit">Log In</button>
+      <button className="loginRegisterButton" type="submit">
+        Log In
+      </button>
     </form>
   );
 };
