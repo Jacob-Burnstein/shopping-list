@@ -1,4 +1,4 @@
-import TrialItemList from "@/app/components/trial/TrialItemList";
+import TrialItemList from "../../components/trial/TrialItemList";
 import React from "react";
 
 const TrialPage = () => {
