@@ -17,7 +17,7 @@ export default function Home() {
             <p className="text-2xl text-center">Create Account</p>
           </div>
         </Link>
-        <Link href="/pages/trial">
+        <Link href="/pages/trialStore">
           <div className="homeIcon darkGrey">
             <p className="text-2xl bg-dce4e7 ">Try</p>
           </div>

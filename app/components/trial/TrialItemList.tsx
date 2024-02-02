@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { ListItem } from "../items/ItemList";
 
 interface TrialListItem {
   ItemName: string;
@@ -40,18 +39,15 @@ const TrialItemList = () => {
     setItemName("");
   };
 
-  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!clicked) setClicked(true);
-    else {
-      handleSubmit(e);
-    }
+  const handleMouseEnter = (itemName: string) => {
+    setTimeout(() => {
+      setSelectedName(itemName);
+    }, 100);
   };
-
-  const handleMouseDown = (itemName: string) => {
-    setSelectedName(itemName);
+  const handleMouseLeave = (itemName: string) => {
     setTimeout(() => {
       setSelectedName(null);
-    }, 5000);
+    }, 100);
   };
 
   const handleDelete = (itemName: string) => {
@@ -72,7 +68,8 @@ const TrialItemList = () => {
             <section key={item.ItemName}>
               <div
                 className="listItemCard card"
-                onMouseDown={() => handleMouseDown(item.ItemName)}
+                onMouseEnter={() => handleMouseEnter(item.ItemName)}
+                onMouseLeave={() => handleMouseLeave(item.ItemName)}
               >
                 <label className="checkboxContainer">
                   <input
