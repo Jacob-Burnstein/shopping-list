@@ -8,6 +8,8 @@ import createAuthenticatedApiClient from "../../api/utils/authenticatedApiClient
 import { useAuth } from "../../contexts/AuthContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import getStoreInitials from "../../utils/getStoreInitials";
+import determineStoreColor from "../../utils/determineStoreColor";
 
 export interface Store {
   Id: number;
@@ -16,33 +18,12 @@ export interface Store {
 }
 
 const StoreList = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const authContext = useAuth();
   const { token } = useAuth();
-  console.log("token frmo stores:", token);
   const apiClient = createAuthenticatedApiClient(authContext);
   const [stores, setStores] = useState<Store[] | undefined>(undefined);
   const [selectedId, setSelectedId] = useState<number | null>(null);
-
-  const getStoreInitials = (store: string) => {
-    const initials: string[] = [];
-    const splitArray = store.split(" ");
-    for (const word of splitArray) {
-      const characters = word.split("");
-      initials.push(characters[0]);
-    }
-    return initials.join("");
-  };
-
-  const determineStoreColor = (index: number): string => {
-    let color: string | null = "";
-    let num: number = index + 1;
-    if (num % 4 === 0) color = "greyBlue";
-    else if (num % 3 === 0) color = "darkGrey";
-    else if (num % 2 === 0) color = "yellow";
-    else color = "green";
-    return color;
-  };
 
   const addNewStore = (newStore: Store) => {
     setStores((prevStores) => [...(prevStores || []), newStore]);
@@ -75,13 +56,13 @@ const StoreList = () => {
     }, 100);
   };
 
-  const handleClick = (id: number) => {
-    router.push(`/pages/store/${id}`);
-  };
+  // const handleClick = (id: number) => {
+  //   router.push(`/pages/store/${id}`);
+  // };
 
   return (
     <>
-      <section className="listContainer h-screen">
+      <section className="listContainer">
         <div>
           {stores?.map((store: Store, index: number) => (
             <section
@@ -97,7 +78,7 @@ const StoreList = () => {
                 <Link
                   href={`/pages/store/${store.Id}`}
                   className="font-semibold text-lg "
-                  onClick={() => handleClick(store.Id)}
+                  // onClick={() => handleClick(store.Id)}
                 >
                   {store.StoreName}
                 </Link>

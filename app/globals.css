@@ -24,6 +24,7 @@ body {
     justify-content: center;
     background-color: #f5f7f8;
     width: 20em;
+    padding-top: 1em;
   }
 
   .menu-icon {
@@ -66,7 +67,6 @@ body {
     width: 36px;
     align-items: center;
     padding: 0;
-    margin-top: 1em;
   }
 
   .addButton:hover {
@@ -271,4 +271,9 @@ body {
   border-radius: 10px;
   background-color: #495e57;
   color: #f5f7f8;
+}
+
+.trialHeader {
+  color: #f5f7f8;
+  width: 100vw;
 }
