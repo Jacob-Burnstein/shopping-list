@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { Store } from "./StoreList";
-import createAuthenticatedApiClient from "../../api/utils/authenticatedApiClient";
-import { useAuth } from "../../contexts/AuthContext";
+import apiClient from "../../api/utils/apiClient";
 
 interface AddStoreProps {
   addNewStore: (newStore: Store) => void;
 }
 
 const AddStore: React.FC<AddStoreProps> = ({ addNewStore }) => {
-  const authContext = useAuth();
-  const apiClient = createAuthenticatedApiClient(authContext);
   const [storeName, setStoreName] = useState<string>("");
   const [clicked, setClicked] = useState<boolean>(false);
 
@@ -26,14 +23,17 @@ const AddStore: React.FC<AddStoreProps> = ({ addNewStore }) => {
         UserId: 0,
         Id: 0,
       };
-
-      addNewStore(storeToAdd);
       try {
-        await apiClient.post("/stores", { storeName: storeToAdd.StoreName });
+        const response = await apiClient.post("/stores", {
+          storeName: storeToAdd.StoreName,
+        });
+        const newStore: Store = response.data;
+        addNewStore(newStore);
       } catch (err) {
         console.error(err);
       }
     }
+
     setStoreName("");
   };
 

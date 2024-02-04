@@ -58,9 +58,11 @@ const TrialStoreList: React.FC<TrialStoreProps> = ({
 
   return (
     <>
-      <h1 className="text-xl text-center font-semibold pb-2">Your Stores</h1>
+      <h1 className="text-xl text-center font-semibold pb-2 pt-2">
+        Your Stores
+      </h1>
       {stores.length < 1 && (
-        <p className="text-center text-xl">
+        <p className="text-center text-lg">
           Click the "+" button to add a store, and then click the store to
           create a shopping list.
         </p>

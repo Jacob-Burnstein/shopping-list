@@ -150,6 +150,7 @@ body {
 
 .itemName {
   font-size: larger;
+  cursor: pointer;
   /* padding-bottom: 0.5em; */
 }
 

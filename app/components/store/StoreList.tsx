@@ -3,13 +3,11 @@
 import React, { useEffect, useState } from "react";
 import AddStore from "./AddStore";
 import DeleteStore from "./DeleteStoreButton";
-// import apiClient from "../../api/utils/apiClient";
-import createAuthenticatedApiClient from "../../api/utils/authenticatedApiClient";
-import { useAuth } from "../../contexts/AuthContext";
+import apiClient from "../../api/utils/apiClient";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import getStoreInitials from "../../utils/getStoreInitials";
 import determineStoreColor from "../../utils/determineStoreColor";
+import { getToken } from "../../utils/tokenStorage";
 
 export interface Store {
   Id: number;
@@ -18,10 +16,6 @@ export interface Store {
 }
 
 const StoreList = () => {
-  // const router = useRouter();
-  const authContext = useAuth();
-  const { token } = useAuth();
-  const apiClient = createAuthenticatedApiClient(authContext);
   const [stores, setStores] = useState<Store[] | undefined>(undefined);
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
@@ -55,10 +49,6 @@ const StoreList = () => {
       setSelectedId(null);
     }, 100);
   };
-
-  // const handleClick = (id: number) => {
-  //   router.push(`/pages/store/${id}`);
-  // };
 
   return (
     <>

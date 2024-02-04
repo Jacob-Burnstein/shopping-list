@@ -4,8 +4,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import DeleteButton from "./DeleteItemButton";
 import AddItem from "./AddItem";
-import createAuthenticatedApiClient from "../../api/utils/authenticatedApiClient";
-import { useAuth } from "../../contexts/AuthContext";
+import apiClient from "../../api/utils/apiClient";
+import getIdFromUrl from "../../utils/getIdFromUrl";
 import "../../globals.css";
 
 export interface ListItem {
@@ -16,16 +16,12 @@ export interface ListItem {
   UserId: number;
 }
 const ItemList = () => {
-  const authContext = useAuth();
-  const apiClient = createAuthenticatedApiClient(authContext);
   const pathname = usePathname();
-  const splitPathname = pathname.split("/");
-  const storeIdToUse: number = parseInt(
-    splitPathname[splitPathname.length - 1]
-  );
+  const storeIdToUse = getIdFromUrl(pathname);
 
   const [listItems, setListItems] = useState<ListItem[] | undefined>(undefined);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [storeName, setStoreName] = useState<string>();
 
   const handleCheckBoxChange = async (item: ListItem) => {
     try {
@@ -55,8 +51,12 @@ const ItemList = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const response = await apiClient.get(`/items/${storeIdToUse}`);
-        setListItems(response.data);
+        const itemsResponse = await apiClient.get(`/items/${storeIdToUse}`);
+        setListItems(itemsResponse.data);
+
+        const storeResponse = await apiClient.get(`stores/${storeIdToUse}`);
+        const storeName = storeResponse.data.StoreName;
+        setStoreName(storeName);
       } catch (err) {
         console.error(err);
       }
@@ -77,6 +77,7 @@ const ItemList = () => {
 
   return (
     <>
+      <h1 className="text-xl text-center font-semibold pb-2">{storeName}</h1>
       <section className="listContainer h-screen">
         {Array.isArray(listItems) &&
           listItems

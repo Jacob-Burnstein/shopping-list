@@ -2,10 +2,8 @@
 
 import React, { useState } from "react";
 import apiClient from "../../api/utils/apiClient";
-// import createAuthenticatedApiClient from "../../api/utils/authenticatedApiClient";
 import axios, { isAxiosError } from "axios";
 import { useRouter } from "next/navigation";
-import { useAuth } from "../../contexts/AuthContext";
 
 interface FormData {
   username: string;
@@ -14,9 +12,6 @@ interface FormData {
 
 const LoginForm = () => {
   const router = useRouter();
-  // const authContext = useAuth();
-  // const apiClient = createAuthenticatedApiClient(authContext);
-  const { login, logUsername } = useAuth();
 
   const [formData, setFormData] = useState<FormData>({
     username: "",
@@ -48,9 +43,6 @@ const LoginForm = () => {
         const data = response.data;
 
         if (data) {
-          const { token, username } = await data;
-          login(token);
-          logUsername(username);
           router.push(`/pages/user/${username}`);
         } else {
           setMessage("Invalid Credentials");

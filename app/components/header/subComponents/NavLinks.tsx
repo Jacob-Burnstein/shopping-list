@@ -1,6 +1,9 @@
-import React, { useState } from "react";
-import { useAuth } from "../../../contexts/AuthContext";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { removeToken, getToken } from "../../../utils/tokenStorage";
+import apiClient from "../../../api/utils/apiClient";
 
 interface NavLinksProps {
   clicked: boolean;
@@ -8,11 +11,26 @@ interface NavLinksProps {
 }
 
 const NavLinks: React.FC<NavLinksProps> = ({ clicked, setClicked }) => {
-  const { token, logout, username } = useAuth();
+  const [username, setUsername] = useState<string>("");
 
   const handleLogout = () => {
-    logout();
+    removeToken();
   };
+
+  const token = getToken();
+
+  useEffect(() => {
+    const getUsername = async () => {
+      try {
+        const response = await apiClient.get("users");
+        const username = response.data.UserName;
+        setUsername(username);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getUsername();
+  }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLElement>) => {
     setClicked(!clicked);
