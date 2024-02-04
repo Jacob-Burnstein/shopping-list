@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import createAuthenticatedApiClient from "../../api/utils/authenticatedApiClient";
+import apiClient from "../../api/utils/apiClient";
 import { useAuth } from "../../contexts/AuthContext";
 
 interface DeleteStoreProps {
@@ -10,9 +10,6 @@ interface DeleteStoreProps {
 }
 
 const DeleteStoreButton: React.FC<DeleteStoreProps> = ({ id, deleteStore }) => {
-  const authContext = useAuth();
-  const apiClient = createAuthenticatedApiClient(authContext);
-
   const handleDelete = async () => {
     deleteStore(id);
     try {
