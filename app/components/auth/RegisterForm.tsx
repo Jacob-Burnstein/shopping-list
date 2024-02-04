@@ -11,6 +11,7 @@ interface FormData {
 }
 
 const RegisterForm = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
     username: "",
     password: "",
@@ -40,6 +41,7 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     if (confirmFormValidity())
       try {
         const { data } = await apiClient.post("/auth/register", {
@@ -56,6 +58,8 @@ const RegisterForm = () => {
         if (axios.isAxiosError(err)) {
           setMessage(err.response?.data.message);
         }
+      } finally {
+        setIsLoading(false);
       }
   };
 
@@ -89,6 +93,7 @@ const RegisterForm = () => {
       <button onClick={handleSubmit} className="loginRegisterButton">
         Create Account
       </button>
+      {isLoading && <p className="loadingMessage">Creating your account...</p>}
     </form>
   );
 };

@@ -12,12 +12,11 @@ interface FormData {
 
 const LoginForm = () => {
   const router = useRouter();
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
     username: "",
     password: "",
   });
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { username, password } = formData;
 
