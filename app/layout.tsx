@@ -25,6 +25,10 @@ export default function RootLayout({
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
           />
+          <script
+            src="https://kit.fontawesome.com/367ff4af65.js"
+            // crossorigin="anonymous"
+          ></script>
         </head>
         <body className={` ${quicksand.className}`}>
           <NavBar />
