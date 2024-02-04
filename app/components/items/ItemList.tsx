@@ -16,6 +16,9 @@ export interface ListItem {
   UserId: number;
 }
 const ItemList = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [loadingMessage, setLoadingMessage] = useState<string>("");
+
   const pathname = usePathname();
   const storeIdToUse = getIdFromUrl(pathname);
 
@@ -51,6 +54,7 @@ const ItemList = () => {
   useEffect(() => {
     const getList = async () => {
       try {
+        setIsLoading(true);
         const itemsResponse = await apiClient.get(`/items/${storeIdToUse}`);
         setListItems(itemsResponse.data);
 
@@ -59,6 +63,8 @@ const ItemList = () => {
         setStoreName(storeName);
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     };
     getList();
@@ -77,6 +83,7 @@ const ItemList = () => {
 
   return (
     <>
+      {isLoading && <p className="loadingMessage">Gathering your list...</p>}
       <h1 className="text-xl text-center font-semibold pb-2">{storeName}</h1>
       <section className="listContainer h-screen">
         {Array.isArray(listItems) &&

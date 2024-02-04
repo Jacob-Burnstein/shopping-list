@@ -268,4 +268,5 @@ body {
 
 .loadingMessage {
   padding-top: 0.25em;
+  text-align: center;
 }
