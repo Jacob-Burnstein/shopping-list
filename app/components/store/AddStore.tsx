@@ -7,6 +7,7 @@ interface AddStoreProps {
 }
 
 const AddStore: React.FC<AddStoreProps> = ({ addNewStore }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [storeName, setStoreName] = useState<string>("");
   const [clicked, setClicked] = useState<boolean>(false);
 
@@ -18,6 +19,7 @@ const AddStore: React.FC<AddStoreProps> = ({ addNewStore }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (storeName.length > 0) {
+      setIsLoading(true);
       const storeToAdd: Store = {
         StoreName: storeName,
         UserId: 0,
@@ -31,10 +33,11 @@ const AddStore: React.FC<AddStoreProps> = ({ addNewStore }) => {
         addNewStore(newStore);
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
+        setStoreName("");
       }
     }
-
-    setStoreName("");
   };
 
   return (
@@ -54,6 +57,7 @@ const AddStore: React.FC<AddStoreProps> = ({ addNewStore }) => {
         >
           {!clicked ? "+" : "Add"}
         </button>
+        {isLoading && <p className="loadingMessage">Adding...</p>}
       </form>
     </>
   );
