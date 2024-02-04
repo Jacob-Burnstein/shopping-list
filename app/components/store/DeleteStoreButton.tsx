@@ -2,7 +2,6 @@
 
 import React from "react";
 import apiClient from "../../api/utils/apiClient";
-import { useAuth } from "../../contexts/AuthContext";
 
 interface DeleteStoreProps {
   id: number;

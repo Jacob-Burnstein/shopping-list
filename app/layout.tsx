@@ -1,10 +1,8 @@
-// import { AuthProvider } from "./contexts/AuthContext";
 import type { Metadata } from "next";
 import { Inter, Quicksand } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/header/NavBar";
 
-// const inter = Inter({ subsets: ["latin"] });
 const quicksand = Quicksand({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

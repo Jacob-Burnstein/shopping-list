@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Store } from "./StoreList";
 import apiClient from "../../api/utils/apiClient";
-import { useAuth } from "../../contexts/AuthContext";
 
 interface AddStoreProps {
   addNewStore: (newStore: Store) => void;
