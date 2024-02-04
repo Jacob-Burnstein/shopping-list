@@ -67,9 +67,13 @@ const TrialItemList: React.FC<TrialListProps> = ({
 
   return (
     <>
-      <p className="cursor-pointer" onClick={() => setPageToView(true)}>
-        Back
-      </p>
+      <p className="text-center">Click "{storeToView}" to go back </p>
+      <h1
+        className="text-xl text-center font-semibold pb-2 cursor-pointer"
+        onClick={() => setPageToView(true)}
+      >
+        {storeToView}
+      </h1>
       <section className="listContainer">
         {listToView.length < 1 && (
           <p className="text-center text-xl">Add items here.</p>
