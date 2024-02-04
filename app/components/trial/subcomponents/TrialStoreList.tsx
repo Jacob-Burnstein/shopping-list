@@ -1,17 +1,22 @@
 "use client";
 
 import React, { useState } from "react";
-import getStoreInitials from "../../utils/getStoreInitials";
-import determineStoreColor from "../../utils/determineStoreColor";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import getStoreInitials from "../../../utils/getStoreInitials";
+import determineStoreColor from "../../../utils/determineStoreColor";
 
-interface TrialStore {
-  StoreName: string;
+interface TrialStoreProps {
+  stores: string[];
+  setStores: React.Dispatch<React.SetStateAction<string[]>>;
+  setStoreToView: React.Dispatch<React.SetStateAction<string>>;
+  setPageToView: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TrialStoreList = () => {
-  const [stores, setStores] = useState<TrialStore[]>([]);
+const TrialStoreList: React.FC<TrialStoreProps> = ({
+  stores,
+  setStores,
+  setStoreToView,
+  setPageToView,
+}) => {
   const [selectedStore, setSelectedStore] = useState<string | null>(null);
   const [storeName, setStoreName] = useState<string>("");
   const [clicked, setClicked] = useState<boolean>(false);
@@ -24,14 +29,19 @@ const TrialStoreList = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (storeName.length > 0) {
-      setStores((prevStores) => [...prevStores, { StoreName: storeName }]);
+      setStores((prevStores) => [...prevStores, storeName]);
     }
     setStoreName("");
   };
 
-  const handleDelete = (storeName: string) => {
+  const handleStoreClick = (store: string) => {
+    setPageToView(false);
+    setStoreToView(store);
+  };
+
+  const handleDelete = (store: string) => {
     setStores((prevList) =>
-      prevList?.filter((store) => storeName != store.StoreName)
+      prevList?.filter((singleStore) => singleStore != store)
     );
   };
 
@@ -48,29 +58,36 @@ const TrialStoreList = () => {
 
   return (
     <>
+      <h1 className="text-center">Your Stores</h1>
+      {stores.length < 1 && (
+        <p className="text-center text-xl">
+          Click the "+" button to add a store, and then click the store to
+          create a shopping list.
+        </p>
+      )}
       <section className="listContainer">
         <div>
-          {stores?.map((store: TrialStore, index: number) => (
+          {stores?.map((store, index: number) => (
             <section
-              key={store.StoreName}
+              key={store}
               className="storeCard card"
-              onMouseEnter={() => handleMouseEnter(store.StoreName)}
-              onMouseLeave={() => handleMouseLeave(store.StoreName)}
+              onMouseEnter={() => handleMouseEnter(store)}
+              onMouseLeave={() => handleMouseLeave(store)}
             >
               <div className={`${determineStoreColor(index)} icon`}>
-                {getStoreInitials(store.StoreName)}
+                {getStoreInitials(store)}
               </div>
               <div className="nameAndDelete">
-                <Link
-                  href={`/pages/trialList`}
-                  className="font-semibold text-lg "
+                <p
+                  className="font-semibold text-lg cursor-pointer"
+                  onClick={() => handleStoreClick(store)}
                 >
-                  {store.StoreName}
-                </Link>
-                {selectedStore === store.StoreName && (
+                  {store}
+                </p>
+                {selectedStore === store && (
                   <button
                     className="deleteButton"
-                    onClick={() => handleDelete(store.StoreName)}
+                    onClick={() => handleDelete(store)}
                   >
                     -
                   </button>
@@ -80,6 +97,7 @@ const TrialStoreList = () => {
           ))}
         </div>
       </section>
+
       <form onSubmit={handleSubmit} className="flex flex-col items-center p-3">
         <input
           type="text"
@@ -87,12 +105,13 @@ const TrialStoreList = () => {
           className={clicked ? "showInput p-1 m mb-1" : "hideInput"}
           onChange={handleChange}
         />
+
         <button
           type="submit"
-          className="text-4xl addButton"
+          className={clicked ? "text-base hover:text-lg" : "text-4xl addButton"}
           onClick={() => (clicked ? setClicked(false) : setClicked(true))}
         >
-          {!clicked ? "+" : "-"}
+          {!clicked ? "+" : "Add"}
         </button>
       </form>
     </>
