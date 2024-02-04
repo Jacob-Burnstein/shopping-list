@@ -57,7 +57,6 @@ const ItemList = () => {
         setIsLoading(true);
         const itemsResponse = await apiClient.get(`/items/${storeIdToUse}`);
         setListItems(itemsResponse.data);
-
         const storeResponse = await apiClient.get(`stores/${storeIdToUse}`);
         const storeName = storeResponse.data.StoreName;
         setStoreName(storeName);

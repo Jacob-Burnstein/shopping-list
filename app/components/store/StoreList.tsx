@@ -7,7 +7,6 @@ import apiClient from "../../api/utils/apiClient";
 import Link from "next/link";
 import getStoreInitials from "../../utils/getStoreInitials";
 import determineStoreColor from "../../utils/determineStoreColor";
-import { getToken } from "../../utils/tokenStorage";
 
 export interface Store {
   Id: number;
@@ -16,6 +15,7 @@ export interface Store {
 }
 
 const StoreList = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [stores, setStores] = useState<Store[] | undefined>(undefined);
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
@@ -30,10 +30,13 @@ const StoreList = () => {
   useEffect(() => {
     const getStores = async () => {
       try {
+        setIsLoading(true);
         const response = await apiClient.get("/stores");
         setStores(response.data);
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     };
     getStores();
@@ -52,6 +55,7 @@ const StoreList = () => {
 
   return (
     <>
+      {isLoading && <p className="loadingMessage">Gathering your stores...</p>}
       <section className="listContainer">
         <div>
           {stores?.map((store: Store, index: number) => (
