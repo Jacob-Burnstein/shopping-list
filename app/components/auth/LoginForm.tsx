@@ -17,6 +17,7 @@ const LoginForm = () => {
     username: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { username, password } = formData;
 
@@ -30,7 +31,7 @@ const LoginForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    setIsLoading(true);
     if (formData.username.length < 1 && formData.password.length < 1) {
       setMessage("Please fill out both fields");
     } else {
@@ -39,9 +40,7 @@ const LoginForm = () => {
           username,
           password,
         });
-
         const data = response.data;
-
         if (data) {
           router.push(`/pages/user/${username}`);
         } else {
@@ -51,6 +50,8 @@ const LoginForm = () => {
         if (axios.isAxiosError(err)) {
           setMessage(err.response?.data.message);
         } else setMessage("Invalid Credentials");
+      } finally {
+        setIsLoading(false);
       }
     }
   };
@@ -77,6 +78,7 @@ const LoginForm = () => {
       <button className="loginRegisterButton" type="submit">
         Log In
       </button>
+      {isLoading && <p className="loadingMessage">Signing In...</p>}
     </form>
   );
 };
