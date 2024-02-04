@@ -26,14 +26,17 @@ const AddStore: React.FC<AddStoreProps> = ({ addNewStore }) => {
         UserId: 0,
         Id: 0,
       };
-
-      addNewStore(storeToAdd);
       try {
-        await apiClient.post("/stores", { storeName: storeToAdd.StoreName });
+        const response = await apiClient.post("/stores", {
+          storeName: storeToAdd.StoreName,
+        });
+        const newStore: Store = response.data;
+        addNewStore(newStore);
       } catch (err) {
         console.error(err);
       }
     }
+
     setStoreName("");
   };
 
