@@ -1,14 +1,17 @@
 import { NextResponse, NextRequest } from "next/server";
 import prisma from "../../../../prisma/index";
+import getIdFromToken from "../../../utils/getIdFromToken";
+import getTokenInfo from "../../../utils/getTokenInfo";
 
 export async function POST(
   req: Request | NextRequest,
   res: Response | NextResponse
 ) {
+  const tokenInfo = getTokenInfo();
   const formData = await req.formData();
   const itemId = formData.get("Id");
   const checkedString = formData.get("Checked");
-  if (itemId && typeof itemId === "string") {
+  if (tokenInfo && itemId && typeof itemId === "string") {
     const checked = checkedString === "true";
     try {
       await prisma.itemList.update({

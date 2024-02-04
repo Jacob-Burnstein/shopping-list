@@ -7,9 +7,9 @@ import DeleteStore from "./DeleteStoreButton";
 import createAuthenticatedApiClient from "../../api/utils/authenticatedApiClient";
 import { useAuth } from "../../contexts/AuthContext";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import getStoreInitials from "../../utils/getStoreInitials";
 import determineStoreColor from "../../utils/determineStoreColor";
+import { getToken } from "../../utils/tokenStorage";
 
 export interface Store {
   Id: number;
@@ -20,7 +20,8 @@ export interface Store {
 const StoreList = () => {
   // const router = useRouter();
   const authContext = useAuth();
-  const { token } = useAuth();
+  const token = getToken();
+  console.log("token: ", token);
   const apiClient = createAuthenticatedApiClient(authContext);
   const [stores, setStores] = useState<Store[] | undefined>(undefined);
   const [selectedId, setSelectedId] = useState<number | null>(null);
