@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import AddStore from "./AddStore";
 import DeleteStore from "./DeleteStoreButton";
 import apiClient from "../../api/utils/apiClient";
-import { useAuth } from "../../contexts/AuthContext";
 import Link from "next/link";
 import getStoreInitials from "../../utils/getStoreInitials";
 import determineStoreColor from "../../utils/determineStoreColor";
@@ -50,10 +49,6 @@ const StoreList = () => {
       setSelectedId(null);
     }, 100);
   };
-
-  // const handleClick = (id: number) => {
-  //   router.push(`/pages/store/${id}`);
-  // };
 
   return (
     <>

@@ -1,6 +1,4 @@
-import { getAuthToken } from "./../../contexts/AuthUtils";
 import { NextResponse, NextRequest } from "next/server";
-import { cookies } from "next/headers";
 import prisma from "../../../prisma/index";
 import getIdFromToken from "../../utils/getIdFromToken";
 import getTokenInfo from "../../utils/getTokenInfo";
