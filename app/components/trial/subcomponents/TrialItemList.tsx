@@ -1,28 +1,37 @@
 "use client";
 
 import React, { useState } from "react";
+import { Item } from "../TrialComponent";
 
-interface TrialListItem {
-  ItemName: string;
-  Checked: boolean;
+interface TrialListProps {
+  items: Item[];
+  setItems: React.Dispatch<React.SetStateAction<Item[]>>;
+  storeToView: string;
+  setPageToView: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TrialItemList = () => {
-  const [listItems, setListItems] = useState<TrialListItem[]>([]);
+const TrialItemList: React.FC<TrialListProps> = ({
+  items,
+  setItems,
+  storeToView,
+  setPageToView,
+}) => {
   const [selectedName, setSelectedName] = useState<string | null>(null);
-  const [itemName, setItemName] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const [clicked, setClicked] = useState<boolean>(false);
+
+  const listToView = items.filter((item) => item.storeName === storeToView);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setItemName(e.target.value);
+    setName(e.target.value);
   };
 
-  const handleCheckBoxChange = (item: TrialListItem) => {
-    setListItems((prevList) =>
-      prevList?.map((prevItem) =>
-        prevItem.ItemName === item.ItemName
-          ? { ...prevItem, Checked: !item.Checked }
+  const handleCheckBoxChange = (item: Item) => {
+    setItems((prevItems) =>
+      prevItems?.map((prevItem) =>
+        prevItem.itemName === item.itemName
+          ? { ...prevItem, checked: !item.checked }
           : prevItem
       )
     );
@@ -30,13 +39,13 @@ const TrialItemList = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (itemName.length > 0) {
-      setListItems((prevListItems) => [
-        ...prevListItems,
-        { ItemName: itemName, Checked: false },
+    if (name.length > 0) {
+      setItems((prevItems) => [
+        ...prevItems,
+        { itemName: name, checked: false, storeName: storeToView },
       ]);
     }
-    setItemName("");
+    setName("");
   };
 
   const handleMouseEnter = (itemName: string) => {
@@ -50,31 +59,34 @@ const TrialItemList = () => {
     }, 100);
   };
 
-  const handleDelete = (itemName: string) => {
-    setListItems((prevListItems) =>
-      prevListItems.filter((item) => item.ItemName !== itemName)
+  const handleDelete = (name: string) => {
+    setItems((prevListItems) =>
+      prevListItems.filter((item) => item.itemName !== name)
     );
   };
 
   return (
     <>
+      <p className="cursor-pointer" onClick={() => setPageToView(true)}>
+        Back
+      </p>
       <section className="listContainer">
-        {listItems.length < 1 && (
-          <p className="text-center text-xl">Add items here!</p>
+        {listToView.length < 1 && (
+          <p className="text-center text-xl">Add items here.</p>
         )}
-        {listItems
-          ?.sort((a, b) => (a.Checked === b.Checked ? 0 : a.Checked ? 1 : -1))
-          .map((item: TrialListItem) => (
-            <section key={item.ItemName}>
+        {listToView
+          ?.sort((a, b) => (a.checked === b.checked ? 0 : a.checked ? 1 : -1))
+          .map((item: Item) => (
+            <section key={item.itemName}>
               <div
                 className="listItemCard card"
-                onMouseEnter={() => handleMouseEnter(item.ItemName)}
-                onMouseLeave={() => handleMouseLeave(item.ItemName)}
+                onMouseEnter={() => handleMouseEnter(item.itemName)}
+                onMouseLeave={() => handleMouseLeave(item.itemName)}
               >
                 <label className="checkboxContainer">
                   <input
                     type="checkbox"
-                    checked={item.Checked}
+                    checked={item.checked}
                     onChange={() => {
                       handleCheckBoxChange(item);
                     }}
@@ -87,15 +99,17 @@ const TrialItemList = () => {
                       handleCheckBoxChange(item);
                     }}
                     className={
-                      item.Checked ? "checkedItem itemName" : "itemName"
+                      item.checked
+                        ? "checkedItem itemName cursor-pointer"
+                        : "itemName cursor-pointer"
                     }
                   >
-                    {item.ItemName}
+                    {item.itemName}
                   </p>
-                  {selectedName === item.ItemName && (
+                  {selectedName === item.itemName && (
                     <button
                       className="deleteButton"
-                      onClick={() => handleDelete(item.ItemName)}
+                      onClick={() => handleDelete(item.itemName)}
                     >
                       -
                     </button>
@@ -108,7 +122,7 @@ const TrialItemList = () => {
       <form onSubmit={handleSubmit} className="flex flex-col items-center p-3">
         <input
           type="text"
-          value={itemName || ""}
+          value={name || ""}
           className={clicked ? "showInput p-1 m mb-1" : "hideInput"}
           onChange={handleChange}
         />

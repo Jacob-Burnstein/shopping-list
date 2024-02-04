@@ -27,16 +27,6 @@ body {
     padding-top: 1em;
   }
 
-  /* .menu-icon {
-    align-self: flex-end;
-  } */
-
-  /* .navBar {
-    max-width: 20em;
-    align-self: flex-end;
-    color: #45474b;
-  } */
-
   .bar {
     background-color: #45474b;
     width: 25px;
@@ -99,6 +89,7 @@ body {
 
 .card {
   display: flex;
+  /* cursor: pointer; */
   justify-content: space-between;
   margin-left: 1em;
   margin-right: 1em;
@@ -217,10 +208,6 @@ body {
   width: 25px;
   background-color: #f4ce14;
   border-radius: 50%;
-}
-
-.checkmark:hover {
-  background-color: #dce4e7;
 }
 
 .checkedItem {
