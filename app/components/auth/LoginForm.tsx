@@ -46,6 +46,7 @@ const LoginForm = () => {
           setMessage("Invalid Credentials");
         }
       } catch (err) {
+        setMessage("Something went wrong");
         if (axios.isAxiosError(err)) {
           setMessage(err.response?.data.message);
         } else setMessage("Invalid Credentials");
