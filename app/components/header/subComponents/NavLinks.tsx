@@ -12,6 +12,8 @@ const NavLinks: React.FC<NavLinksProps> = ({ clicked, setClicked }) => {
   const token = getToken();
   const username = getUsername();
 
+  console.log("TOKEN: ", token);
+
   const handleLogout = () => {
     removeToken();
   };

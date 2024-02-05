@@ -22,7 +22,6 @@ const ItemList = () => {
   const pathname = usePathname();
   const storeIdToUse = getIdFromUrl(pathname);
   const username = getUsername();
-  console.log("username from items: ", username);
 
   const [listItems, setListItems] = useState<ListItem[] | undefined>(undefined);
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -91,6 +90,12 @@ const ItemList = () => {
         <h1 className="text-xl text-center font-semibold pb-2">{storeName}</h1>{" "}
       </Link>
       <section className="listContainer h-screen">
+        {listItems && listItems.length < 1 && (
+          <p className="text-center text-lg">
+            Click the "+" button to add a store, and then click the store to
+            create a shopping list.
+          </p>
+        )}
         {Array.isArray(listItems) &&
           listItems
             .sort((a, b) => (a.Checked === b.Checked ? 0 : a.Checked ? 1 : -1))

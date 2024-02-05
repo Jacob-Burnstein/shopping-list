@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import apiClient from "../../api/utils/apiClient";
 import axios, { isAxiosError } from "axios";
+import { useRouter } from "next/navigation";
 
 interface FormData {
   username: string;
@@ -11,6 +12,8 @@ interface FormData {
 }
 
 const RegisterForm = () => {
+  const router = useRouter();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
     username: "",
@@ -50,6 +53,16 @@ const RegisterForm = () => {
         });
         if (data) {
           setMessage(data.message);
+          setTimeout(() => {
+            setMessage("Logging you in...");
+          }, 1000);
+          const response = await apiClient.post("/auth/login", {
+            username,
+            password,
+          });
+          if (response) {
+            router.push(`/pages/user/${username}`);
+          }
         } else {
           setMessage("Something went wrong");
           return;
