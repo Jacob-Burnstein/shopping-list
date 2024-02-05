@@ -44,6 +44,7 @@ export async function POST(
       } else {
         const tokenValue = jwt.sign({ id: userExists.Id }, process.env.JWT);
         cookieStore.set("token", tokenValue);
+        cookieStore.set("username", userExists.UserName);
         return NextResponse.json({
           token: tokenValue,
           message: "Successful Login!!",

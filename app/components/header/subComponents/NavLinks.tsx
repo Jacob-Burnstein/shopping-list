@@ -1,9 +1,7 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { removeToken, getToken } from "../../../utils/tokenStorage";
-import apiClient from "../../../api/utils/apiClient";
+import { getUsername } from "../../../utils/getUsername";
 
 interface NavLinksProps {
   clicked: boolean;
@@ -11,26 +9,12 @@ interface NavLinksProps {
 }
 
 const NavLinks: React.FC<NavLinksProps> = ({ clicked, setClicked }) => {
-  const [username, setUsername] = useState<string>("");
+  const token = getToken();
+  const username = getUsername();
 
   const handleLogout = () => {
     removeToken();
   };
-
-  const token = getToken();
-
-  useEffect(() => {
-    const getUsername = async () => {
-      try {
-        const response = await apiClient.get("users");
-        const username = response.data.UserName;
-        setUsername(username);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    getUsername();
-  }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLElement>) => {
     setClicked(!clicked);
@@ -60,9 +44,11 @@ const NavLinks: React.FC<NavLinksProps> = ({ clicked, setClicked }) => {
             onClick={handleNavClick}
             className="linksContainer flex flex-col text-right"
           >
-            <Link className="navLink" href={`/pages/user/${username}`}>
-              My Stores
-            </Link>
+            {username && (
+              <Link className="navLink" href={`/pages/user/${username}`}>
+                My Stores
+              </Link>
+            )}
             <Link className="navLink" href="/" onClick={handleLogout}>
               Log Out
             </Link>
