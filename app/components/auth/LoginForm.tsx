@@ -75,7 +75,7 @@ const LoginForm = () => {
         className="loginRegisterInput"
       />
       {message && <p>{message}</p>}
-      <button className="loginRegisterButton" type="submit">
+      <button className="loginRegisterButton font-semibold" type="submit">
         Log In
       </button>
       {isLoading && <p className="loadingMessage">Signing In...</p>}

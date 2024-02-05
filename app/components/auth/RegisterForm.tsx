@@ -103,7 +103,10 @@ const RegisterForm = () => {
         className="loginRegisterInput"
       />
       {message && <p>{message}</p>}
-      <button onClick={handleSubmit} className="loginRegisterButton">
+      <button
+        onClick={handleSubmit}
+        className="loginRegisterButton font-semibold"
+      >
         Create Account
       </button>
       {isLoading && <p className="loadingMessage">Creating your account...</p>}
