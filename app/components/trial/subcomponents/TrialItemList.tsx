@@ -120,7 +120,9 @@ const TrialItemList: React.FC<TrialListProps> = ({
             </section>
           ))}
       </section>
-      <p className="text-center text-xl pt-2">Add items here.</p>
+      {listToView.length < 1 && (
+        <p className="text-center text-xl pt-2">Add items here.</p>
+      )}
       <form onSubmit={handleSubmit} className="flex flex-col items-center p-3">
         <input
           type="text"

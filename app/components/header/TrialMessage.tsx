@@ -18,10 +18,15 @@ const TrialMessage = () => {
         }
       >
         <Link href="/pages/register">
-          <p className="text-sm pr-10">Create an account to save your data</p>
+          <p className="text-sm pr-8 font-semibold">
+            Create an account to save your data
+          </p>
         </Link>
-        <button className="text-sm justify-end" onClick={handleClick}>
-          X
+        <button
+          className="text-sm justify-end font-semibold"
+          onClick={handleClick}
+        >
+          x
         </button>{" "}
       </div>
     </>
