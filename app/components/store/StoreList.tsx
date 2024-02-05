@@ -16,8 +16,9 @@ export interface Store {
 
 const StoreList = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [stores, setStores] = useState<Store[] | undefined>(undefined);
+  const [stores, setStores] = useState<Store[]>([]);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  console.log("stores: ", stores);
 
   const addNewStore = (newStore: Store) => {
     setStores((prevStores) => [...(prevStores || []), newStore]);
@@ -56,9 +57,17 @@ const StoreList = () => {
   return (
     <>
       {isLoading && <p className="loadingMessage">Gathering your stores...</p>}
+
       <section className="listContainer">
+        {" "}
+        {stores && stores.length < 1 && (
+          <p className="text-center text-lg">
+            Click the "+" button to add a store, and then click the store to
+            create a shopping list.
+          </p>
+        )}
         <div>
-          {stores?.map((store: Store, index: number) => (
+          {/* {stores.map((store: Store, index: number) => (
             <section
               key={store.Id}
               className="storeCard card"
@@ -81,7 +90,7 @@ const StoreList = () => {
                 )}
               </div>
             </section>
-          ))}
+          ))} */}
         </div>
         <AddStore addNewStore={addNewStore} />
       </section>

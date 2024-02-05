@@ -67,9 +67,9 @@ const TrialItemList: React.FC<TrialListProps> = ({
 
   return (
     <>
-      <p className="text-center">Click "{storeToView}" to go back </p>
+      <p className="text-center m-1">Click "{storeToView}" to go back </p>
       <h1
-        className="text-xl text-center font-semibold pb-2 cursor-pointer"
+        className="text-xl text-center font-semibold cursor-pointer"
         onClick={() => setPageToView(true)}
       >
         {storeToView}

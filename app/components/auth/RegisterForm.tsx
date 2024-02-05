@@ -53,7 +53,16 @@ const RegisterForm = () => {
         });
         if (data) {
           setMessage(data.message);
-          router.push(`/pages/user/${username}`);
+          setTimeout(() => {
+            setMessage("Logging you in...");
+          }, 1000);
+          const response = await apiClient.post("/auth/login", {
+            username,
+            password,
+          });
+          if (response) {
+            router.push(`/pages/user/${username}`);
+          }
         } else {
           setMessage("Something went wrong");
           return;

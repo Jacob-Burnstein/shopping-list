@@ -18,9 +18,11 @@ export async function GET(
       return NextResponse.json(stores);
     } catch (err) {
       console.error(err);
-      NextResponse.json({ err: "Internal Server Error" }), { status: 500 };
+      return (
+        NextResponse.json({ err: "Internal Server Error" }), { status: 500 }
+      );
     }
-  } else NextResponse.json({ err: "Unauthorized", status: 401 });
+  } else return NextResponse.json({ err: "Unauthorized", status: 401 });
 }
 
 // Adds store
