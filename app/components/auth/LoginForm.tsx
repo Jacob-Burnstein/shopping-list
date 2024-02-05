@@ -31,6 +31,7 @@ const LoginForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+    console.log("username: ", username);
     if (formData.username.length < 1 && formData.password.length < 1) {
       setMessage("Please fill out both fields");
     } else {

@@ -22,6 +22,7 @@ const ItemList = () => {
   const pathname = usePathname();
   const storeIdToUse = getIdFromUrl(pathname);
   const username = getUsername();
+  console.log("username from items: ", username);
 
   const [listItems, setListItems] = useState<ListItem[] | undefined>(undefined);
   const [selectedId, setSelectedId] = useState<number | null>(null);
