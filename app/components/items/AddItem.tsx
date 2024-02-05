@@ -15,6 +15,7 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
   const pathname = usePathname();
   const storeIdToUse = getIdFromUrl(pathname);
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [itemName, setItemName] = useState<string>("");
   const [clicked, setClicked] = useState<boolean>(false);
 
@@ -25,7 +26,9 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (itemName.length > 0) {
+      setIsLoading(true);
       try {
         await apiClient.post(`/items/${storeIdToUse}`, { itemName });
         const { data } = await apiClient.get(`/items/${storeIdToUse}`);
@@ -33,15 +36,10 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
         addNewItem(updatedItemDetails);
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
+        setItemName("");
       }
-    }
-    setItemName("");
-  };
-
-  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!clicked) setClicked(true);
-    else {
-      handleSubmit(e);
     }
   };
 
@@ -61,6 +59,7 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
         >
           {!clicked ? "+" : "Add"}
         </button>
+        {isLoading && <p className="loadingMessage">Adding...</p>}
       </form>
     </>
   );

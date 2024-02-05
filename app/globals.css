@@ -265,3 +265,8 @@ body {
   color: #f5f7f8;
   width: 100vw;
 }
+
+.loadingMessage {
+  padding-top: 0.25em;
+  text-align: center;
+}
