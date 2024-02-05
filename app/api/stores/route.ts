@@ -32,12 +32,13 @@ export async function POST(
   res: Response | NextResponse
 ) {
   const tokenInfo = getTokenInfo();
+  const userId = getIdFromToken(tokenInfo);
   const formData = await req.formData();
   const storeName = formData.get("storeName");
   if (tokenInfo && storeName && typeof storeName === "string") {
     try {
       const newStore = await prisma.store.create({
-        data: { StoreName: storeName, UserId: 1 },
+        data: { StoreName: storeName, UserId: userId },
       });
       return NextResponse.json(newStore);
     } catch (err) {
