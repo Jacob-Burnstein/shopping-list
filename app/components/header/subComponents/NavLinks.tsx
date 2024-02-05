@@ -12,8 +12,6 @@ const NavLinks: React.FC<NavLinksProps> = ({ clicked, setClicked }) => {
   const token = getToken();
   const username = getUsername();
 
-  console.log("TOKEN: ", token);
-
   const handleLogout = () => {
     removeToken();
   };
@@ -31,6 +29,9 @@ const NavLinks: React.FC<NavLinksProps> = ({ clicked, setClicked }) => {
       >
         {!token ? (
           <nav className="linksContainer flex flex-col text-right">
+            <p className="navLink cursor-pointer" onClick={handleNavClick}>
+              x
+            </p>
             <Link className="navLink" href="/">
               Home
             </Link>
@@ -42,19 +43,24 @@ const NavLinks: React.FC<NavLinksProps> = ({ clicked, setClicked }) => {
             </Link>
           </nav>
         ) : (
-          <nav
-            onClick={handleNavClick}
-            className="linksContainer flex flex-col text-right"
-          >
-            {username && (
-              <Link className="navLink" href={`/pages/user/${username}`}>
-                My Stores
+          <>
+            <p className="navLink cursor-pointer" onClick={handleNavClick}>
+              x
+            </p>
+            <nav
+              onClick={handleNavClick}
+              className="linksContainer flex flex-col text-right"
+            >
+              {username && (
+                <Link className="navLink" href={`/pages/user/${username}`}>
+                  My Stores
+                </Link>
+              )}
+              <Link className="navLink" href="/" onClick={handleLogout}>
+                Log Out
               </Link>
-            )}
-            <Link className="navLink" href="/" onClick={handleLogout}>
-              Log Out
-            </Link>
-          </nav>
+            </nav>
+          </>
         )}
       </nav>
     </div>

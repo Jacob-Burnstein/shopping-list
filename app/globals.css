@@ -8,7 +8,6 @@
 
 body {
   background-color: #f5f7f8;
-  padding: 1rem;
   display: flex;
   flex-direction: column;
   color: #45474b;
@@ -37,18 +36,31 @@ body {
   .bar:hover {
     background-color: #6c8280;
   }
+  .navBar {
+    background-color: #dce4e7;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    padding-top: 0.5em;
+  }
+
+  .navUnclicked {
+    background-color: #f5f7f8;
+  }
 
   .navLink {
-    /* border: solid; */
     padding-top: 0.25em;
     padding-bottom: 0.25em;
     font-weight: bolder;
     color: #6c8280;
-    transition: all 0.3s ease;
+    transition: all 0.7s ease;
   }
 
   .navLink:hover {
-    color: #f4ce14;
+    color: #6c8280;
+    background-color: #f4ce14;
+    padding-right: 1em;
+    padding-left: 1em;
+    border-radius: 5px;
   }
 
   .addButton {
@@ -80,7 +92,7 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 2px;
-  transition: all 0.3s ease;
+  transition: all 0.7s ease;
 }
 
 .homeIcon:hover {
