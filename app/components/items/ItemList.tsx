@@ -17,7 +17,6 @@ export interface ListItem {
 }
 const ItemList = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [loadingMessage, setLoadingMessage] = useState<string>("");
 
   const pathname = usePathname();
   const storeIdToUse = getIdFromUrl(pathname);
@@ -28,16 +27,8 @@ const ItemList = () => {
 
   const handleCheckBoxChange = async (item: ListItem) => {
     try {
-      const response = await apiClient.post("/items/check", item);
-      if (response.status === 200) {
-        setListItems((prevList) =>
-          prevList?.map((prevItem) =>
-            prevItem.Id === item.Id
-              ? { ...prevItem, Checked: !item.Checked }
-              : prevItem
-          )
-        );
-      }
+      await apiClient.post("/items/check", item);
+      reverseCheck(item);
     } catch (err) {
       console.error(err);
     }
@@ -45,6 +36,16 @@ const ItemList = () => {
 
   const addNewItem = async (newItem: ListItem) => {
     setListItems((prevList) => [newItem, ...(prevList || [])]);
+  };
+
+  const reverseCheck = async (item: ListItem) => {
+    setListItems((prevList) =>
+      prevList?.map((listItem) =>
+        listItem.Id === item.Id
+          ? { ...listItem, Checked: !item.Checked }
+          : listItem
+      )
+    );
   };
 
   const deleteItem = (itemId: number) => {
