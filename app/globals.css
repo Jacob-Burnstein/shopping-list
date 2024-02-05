@@ -230,7 +230,7 @@ body {
 
 .loginRegisterForm {
   background-color: #dce4e7;
-  width: 100%;
+  width: 80%m;
   margin: 1em;
   display: flex;
   flex-direction: column;
@@ -239,6 +239,7 @@ body {
   border: solid 2px #495e57;
   border-radius: 15px;
   font-size: large;
+  justify-content: center;
 }
 
 .loginRegisterInput {
