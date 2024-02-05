@@ -5,5 +5,5 @@ export default function getStoreInitials(store: string) {
     const characters = word.split("");
     initials.push(characters[0]);
   }
-  return initials.join("");
+  return initials.slice(0, 4).join("");
 }
