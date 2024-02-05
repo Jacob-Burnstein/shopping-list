@@ -230,11 +230,13 @@ body {
 
 .loginRegisterForm {
   background-color: #dce4e7;
+  width: 100%;
+  margin: 1em;
   display: flex;
   flex-direction: column;
   padding: 4em;
   padding-top: 2em;
-  border: solid #495e57;
+  border: solid 2px #495e57;
   border-radius: 15px;
   font-size: large;
 }
@@ -243,13 +245,13 @@ body {
   height: 2em;
   margin-bottom: 1em;
   background-color: #f5f7f8;
-  border: solid #495e57;
+  border: solid 2px #495e57;
   border-radius: 5px;
 }
 
 .loginRegisterButton {
   margin-top: 1em;
-  border: solid #495e57;
+  border: solid 2px #495e57;
   border-radius: 5px;
   background-color: #f4ce14;
   transition: all 0.5s ease;
