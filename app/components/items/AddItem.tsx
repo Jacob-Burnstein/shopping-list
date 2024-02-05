@@ -48,6 +48,7 @@ const AddItem: React.FC<AddItemProps> = ({ addNewItem }) => {
       <form onSubmit={handleSubmit} className="flex flex-col items-center p-3">
         <input
           type="text"
+          maxLength={50}
           value={itemName || ""}
           className={clicked ? "showInput p-1 m mb-1" : "hideInput"}
           onChange={handleChange}
