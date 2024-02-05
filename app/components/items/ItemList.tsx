@@ -6,7 +6,8 @@ import DeleteButton from "./DeleteItemButton";
 import AddItem from "./AddItem";
 import apiClient from "../../api/utils/apiClient";
 import getIdFromUrl from "../../utils/getIdFromUrl";
-import "../../globals.css";
+import { getUsername } from "../../utils/getUsername";
+import Link from "next/link";
 
 export interface ListItem {
   Id: number;
@@ -20,6 +21,7 @@ const ItemList = () => {
 
   const pathname = usePathname();
   const storeIdToUse = getIdFromUrl(pathname);
+  const username = getUsername();
 
   const [listItems, setListItems] = useState<ListItem[] | undefined>(undefined);
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -84,7 +86,9 @@ const ItemList = () => {
   return (
     <>
       {isLoading && <p className="loadingMessage">Gathering your list...</p>}
-      <h1 className="text-xl text-center font-semibold pb-2">{storeName}</h1>
+      <Link href={`/pages/user/${username}`}>
+        <h1 className="text-xl text-center font-semibold pb-2">{storeName}</h1>{" "}
+      </Link>
       <section className="listContainer h-screen">
         {Array.isArray(listItems) &&
           listItems
