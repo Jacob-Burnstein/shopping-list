@@ -1,4 +1,4 @@
-import TrialMessage from "@/app/components/header/TrialMessage";
+import TrialMessage from "../../components/header/TrialMessage";
 import React from "react";
 import TrialComponent from "../../components/trial/TrialComponent";
 

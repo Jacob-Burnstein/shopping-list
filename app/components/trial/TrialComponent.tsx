@@ -27,7 +27,6 @@ const TrialComponent: React.FC = () => {
         />
       ) : (
         <TrialItemList
-          // item={item}
           items={items}
           setItems={setItems}
           storeToView={storeToView}
