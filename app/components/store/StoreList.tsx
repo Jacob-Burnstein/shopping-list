@@ -18,7 +18,6 @@ const StoreList = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [stores, setStores] = useState<Store[]>([]);
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  console.log("stores: ", stores);
 
   const addNewStore = (newStore: Store) => {
     setStores((prevStores) => [...(prevStores || []), newStore]);
@@ -67,7 +66,7 @@ const StoreList = () => {
           </p>
         )}
         <div>
-          {/* {stores.map((store: Store, index: number) => (
+          {stores.map((store: Store, index: number) => (
             <section
               key={store.Id}
               className="storeCard card"
@@ -90,7 +89,7 @@ const StoreList = () => {
                 )}
               </div>
             </section>
-          ))} */}
+          ))}
         </div>
         <AddStore addNewStore={addNewStore} />
       </section>
