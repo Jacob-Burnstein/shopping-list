@@ -83,7 +83,7 @@ const RegisterForm = () => {
       />
       <label>Confirm Password: </label>
       <input
-        type="text"
+        type="password"
         name="confirmedPassword"
         value={confirmedPassword}
         onChange={handleChange}
