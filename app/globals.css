@@ -340,5 +340,6 @@ body {
 
   .loginRegisterForm {
     color: #45474b;
+    border: none;
   }
 }
