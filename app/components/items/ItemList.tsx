@@ -92,8 +92,7 @@ const ItemList = () => {
       <section className="listContainer h-screen">
         {listItems && listItems.length < 1 && (
           <p className="text-center text-lg">
-            Click the "+" button to add a store, and then click the store to
-            create a shopping list.
+            Click the "+" button to add items to your list.
           </p>
         )}
         {Array.isArray(listItems) &&
