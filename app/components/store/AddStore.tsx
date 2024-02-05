@@ -46,6 +46,7 @@ const AddStore: React.FC<AddStoreProps> = ({ addNewStore }) => {
         {" "}
         <input
           type="text"
+          maxLength={30}
           value={storeName || ""}
           onChange={handleChange}
           className={clicked ? "showInput p-1 m mb-1" : "hideInput"}
