@@ -6,7 +6,7 @@ import NavBar from "./components/header/NavBar";
 const quicksand = Quicksand({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Shopping List",
+  title: "CheckList Assist",
   description: "All of your lists in one place.",
 };
 
