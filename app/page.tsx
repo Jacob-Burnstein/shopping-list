@@ -7,7 +7,6 @@ export default function Home() {
       <h1 className="text-xl font-semibold pb-2">Home</h1>
       <main>
         <Link href="/pages/login">
-          {" "}
           <div className="homeIcon green">
             <p className="homeIconText text-2xl text-center">Log In</p>
           </div>
